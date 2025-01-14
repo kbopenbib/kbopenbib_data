@@ -58,11 +58,18 @@ class OpenBibDataRelease:
 
         if export_format == 'csv':
 
-            normalized_funding_information_export = pd.json_normalize(funding_information_export.to_dict(orient='records'),
-                                                            record_path='funding_id', meta=['doi', 'item_id_oal'])
-            normalized_funding_information_export.columns = ['funding_id', 'doi', 'item_id_oal']
-            normalized_funding_information_export = normalized_funding_information_export[['doi', 'funding_id', 'item_id_oal']]
-            normalized_funding_information_export.to_csv(path_or_buf=os.path.join(self.export_directory, 'funding_information.csv'), index=False)
+            normalized_funding_information_export = pd.json_normalize(
+                funding_information_export.to_dict(orient='records'),
+                record_path='funding_id',
+                meta=['doi', 'item_id_oal'])
+            normalized_funding_information_export.columns = ['funding_id',
+                                                             'doi',
+                                                             'item_id_oal']
+            normalized_funding_information_export = normalized_funding_information_export[['doi',
+                                                                                           'funding_id',
+                                                                                           'item_id_oal']]
+            normalized_funding_information_export.to_csv(path_or_buf=os.path.join(
+                self.export_directory, 'funding_information.csv'), index=False)
 
     def export_document_types(self, limit='NULL', export_format='csv'):
 
@@ -83,8 +90,11 @@ class OpenBibDataRelease:
                     f.write(line + '\n')
 
         if export_format == 'csv':
-            normalized_document_type_export = pd.json_normalize(document_type_export.to_dict(orient='records'))
-            normalized_document_type_export.to_csv(path_or_buf=os.path.join(self.export_directory, 'document_types.csv'), index=False)
+            normalized_document_type_export = pd.json_normalize(
+                document_type_export.to_dict(orient='records'))
+            normalized_document_type_export.to_csv(
+                path_or_buf=os.path.join(self.export_directory,
+                                         'document_types.csv'), index=False)
 
     def make_archive(self):
 
