@@ -1,0 +1,14 @@
+iniconfig==2.0.0
+numpy==2.2.1
+packaging==24.2
+pandas==2.2.3
+pluggy==1.5.0
+psycopg2-binary==2.9.10
+pytest==8.3.4
+python-dateutil==2.9.0.post0
+python-dotenv==1.0.1
+pytz==2024.2
+six==1.17.0
+SQLAlchemy==2.0.37
+typing_extensions==4.12.2
+tzdata==2024.2
