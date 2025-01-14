@@ -41,13 +41,13 @@ class OpenBibDataRelease:
 
     def export(self, limit='NULL'):
 
-        document_type_export = pd.read_sql(
+        document_type_export = pd.read_sql(sql=
                              f"""
-                                  SELECT *
-                                  FROM kb_project_openbib.classification_article_reviews_2014_2024_december24
-                                  LIMIT {limit}
-                                  """,
-                                  con=self.engine)
+                             SELECT *
+                             FROM kb_project_openbib.classification_article_reviews_2014_2024_december24
+                             LIMIT {limit}
+                             """,
+                             con=self.engine)
 
 
         with open(f'{self.export_directory}/document_types.jsonl', 'w') as f:
@@ -55,13 +55,13 @@ class OpenBibDataRelease:
             for line in result:
                 f.write(line + '\n')
 
-        funding_information_export = pd.read_sql(
+        funding_information_export = pd.read_sql(sql=
                                         f"""
-                                            SELECT *
-                                            FROM kb_project_openbib.dfg_oa
-                                            LIMIT {limit}
-                                            """,
-                                            con=self.engine)
+                                        SELECT *
+                                        FROM kb_project_openbib.dfg_oa
+                                        LIMIT {limit}
+                                        """,
+                                        con=self.engine)
 
         with open(f'{self.export_directory}/funding_information.jsonl', 'w') as f:
             result = [json.dumps(record, ensure_ascii=False) for record in funding_information_export.to_dict(orient='records')]
@@ -69,4 +69,6 @@ class OpenBibDataRelease:
                 f.write(line + '\n')
 
 
-        shutil.make_archive(self.export_file_name,'zip',self.export_directory)
+        shutil.make_archive(base_name=self.export_file_name,
+                            format='zip',
+                            root_dir=self.export_directory)
