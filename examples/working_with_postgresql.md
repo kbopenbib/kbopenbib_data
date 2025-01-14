@@ -20,9 +20,9 @@ Tools used:
 
 ```bash
 $ cat document_types.jsonl | \
-  jq -c '{openalex_id: .openalex_id, doi: .doi, label: .label, proba: .proba}' | \
+  jq -c '{openalex_id: .openalex_id, doi: .doi, is_research: .is_research, proba: .proba}' | \
   spyql -Otable=classification_article_reviews_december24 \
-  'IMPORT json AS js SELECT json->openalex_id, json->doi, json->label, json->proba FROM json TO sql' | \
+  'IMPORT json AS js SELECT json->openalex_id, json->doi, json->is_research, json->proba FROM json TO sql' | \
   psql postgresql://{NAME}:{PASSWORD}@{SERVER}:{PORT}/{DATABASE}
 ```
 
