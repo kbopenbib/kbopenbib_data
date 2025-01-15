@@ -11,7 +11,7 @@
 ```bash
 openalex_id: "W4361302015"
 doi: "10.3390/mti7040037"
-funding_id: "DFG 32955190"
+funding_id: ["DFG 32955190"]
 ```
 
 ### Fields
