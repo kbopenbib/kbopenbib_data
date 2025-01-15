@@ -8,11 +8,16 @@
 
 ## Funding information
 
+```sql
+SELECT doi, openalex_id, funding_id
+FROM kb_project_openbib.dfg_oa
+```
+
 ### Fields
 
-- openalex_id (STRING)
-- doi (STRING)
-- funding_id (TEXT)
+- openalex_id (STRING): The OpenAlex id of this work.
+- doi (STRING): The DOI of this work.
+- funding_id (TEXT): The grant id(s) we found for this work. 
 
 ## Document types
 The table <i>classification_article_reviews</i> contains articles
@@ -21,9 +26,9 @@ A machine learning classifier detects whether an article or review
 is actually a research contribution or not.
 
 ```sql
-SELECT COUNT(DISTINCT(doi)), is_research
+SELECT doi, openalex_id
 FROM kb_project_openbib.classification_article_reviews
-GROUP BY is_research
+WHERE is_research=TRUE
 ```
 
 Examples of works that are considered as non-research publications by the classifier:
