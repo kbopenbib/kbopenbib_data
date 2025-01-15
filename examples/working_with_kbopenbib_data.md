@@ -15,6 +15,10 @@
 - funding_id (TEXT)
 
 ## Document types
+The table <i>classification_article_reviews</i> contains articles
+and reviews with the source type journal from 2014 onwards.
+A machine learning classifier detects whether an article or review
+is actually a research contribution or not.
 
 ```sql
 SELECT COUNT(DISTINCT(doi)), is_research
