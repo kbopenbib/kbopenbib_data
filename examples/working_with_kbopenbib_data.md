@@ -8,9 +8,10 @@
 
 ## Funding information
 
-```sql
-SELECT doi, openalex_id, funding_id
-FROM kb_project_openbib.dfg_oa
+```bash
+openalex_id: "W4361302015"
+doi: "10.3390/mti7040037"
+funding_id: "DFG 32955190"
 ```
 
 ### Fields
@@ -25,10 +26,11 @@ and reviews with the source type journal from 2014 onwards.
 A machine learning classifier detects whether an article or review
 is actually a research contribution or not.
 
-```sql
-SELECT doi, openalex_id
-FROM kb_project_openbib.classification_article_reviews
-WHERE is_research=TRUE
+```bash
+openalex_id: "https://openalex.org/W4256503663"
+doi: "10.1016/s0099-2399(15)00667-6"
+is_research: False
+proba: 0.18
 ```
 
 Examples of works that are considered as non-research publications by the classifier:
