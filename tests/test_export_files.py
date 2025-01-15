@@ -1,6 +1,8 @@
 import pytest
 import os
 import shutil
+from dotenv import load_dotenv
+from pathlib import Path
 from scripts.export_files import OpenBibDataRelease
 
 
@@ -8,12 +10,25 @@ class TestOpenBibDataRelease:
 
     test_dir = os.path.abspath(os.path.dirname(__file__))
 
+    dotenv_path = Path('./../.env')
+    load_dotenv(dotenv_path=dotenv_path)
+
+    host = os.environ['KB_HOST']
+    database = os.environ['KB_DATABASE']
+    user = os.environ['KB_USER']
+    password = os.environ['KB_PASSWORD']
+    port = os.environ['KB_PORT']
+
     @pytest.fixture
     def openbib_snapshot(self):
         snapshot = OpenBibDataRelease(
             export_directory=os.path.join(self.test_dir, 'openbib_export'),
             export_file_name='kbopenbib_release',
-            env_file=os.path.join('./../.env'),
+            host=self.host,
+            database=self.database,
+            port=self.port,
+            user=self.user,
+            password=self.password
         )
         yield snapshot
         shutil.rmtree(os.path.join(self.test_dir, 'openbib_export'))

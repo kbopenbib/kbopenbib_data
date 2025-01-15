@@ -4,7 +4,6 @@ import json
 from sqlalchemy import create_engine
 import shutil
 from pathlib import Path
-from dotenv import load_dotenv
 
 
 class OpenBibDataRelease:
@@ -12,22 +11,22 @@ class OpenBibDataRelease:
     def __init__(self,
                  export_directory: str,
                  export_file_name: str,
-                 env_file: str,
+                 host: str,
+                 database: str,
+                 port: str,
+                 user: str,
+                 password: str,
                  overwrite_snapshot=True):
 
         self.export_directory = export_directory
         self.export_file_name = export_file_name
-        self.env_file = env_file
+        self.host = host
+        self.database = database
+        self.port = port
+        self.user = user
+        self.password = password
 
-        dotenv_path = Path(self.env_file)
-        load_dotenv(dotenv_path=dotenv_path)
-
-        host = os.environ['KB_HOST']
-        database = os.environ['KB_DATABASE']
-        user = os.environ['KB_USER']
-        pw = os.environ['KB_PASSWORD']
-        port = os.environ['KB_PORT']
-        self.engine = create_engine(f'postgresql://{user}:{pw}@{host}:{port}/{database}')
+        self.engine = create_engine(f'postgresql://{self.user}:{self.password}@{self.host}:{self.port}/{self.database}')
 
         if Path(self.export_directory).exists() and Path(self.export_directory).is_dir():
             shutil.rmtree(self.export_directory)
