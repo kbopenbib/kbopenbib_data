@@ -4,6 +4,7 @@ import shutil
 import pandas as pd
 from dotenv import load_dotenv
 from pathlib import Path
+import zipfile
 from scripts.export_files import OpenBibDataRelease
 
 
@@ -68,5 +69,9 @@ class TestOpenBibDataRelease:
         openbib_snapshot.make_archive()
 
         assert os.path.exists(os.path.join(self.test_dir, 'kbopenbib_release.zip'))
+
+        archive = zipfile.ZipFile(file=os.path.join(self.test_dir, 'kbopenbib_release.zip'), mode='r')
+
+        assert len(archive.infolist()) == 2
 
         os.remove(os.path.join(self.test_dir, 'kbopenbib_release.zip'))
