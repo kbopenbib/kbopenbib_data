@@ -38,6 +38,8 @@ class TestOpenBibDataRelease:
 
         openbib_snapshot.export_funding_information(limit=10, export_format='csv')
 
+        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/funding_information.csv'))
+
         pd.read_csv(
             filepath_or_buffer=os.path.join(self.test_dir, 'openbib_export/funding_information.csv'),
             sep=',',
@@ -45,11 +47,11 @@ class TestOpenBibDataRelease:
             header=0
         )
 
-        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/funding_information.csv'))
-
     def test_export_document_types(self, openbib_snapshot):
 
         openbib_snapshot.export_document_types(limit=10, export_format='csv')
+
+        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/document_types.csv'))
 
         pd.read_csv(
             filepath_or_buffer=os.path.join(self.test_dir, 'openbib_export/document_types.csv'),
@@ -57,8 +59,6 @@ class TestOpenBibDataRelease:
             quotechar='"',
             header=0
         )
-
-        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/document_types.csv'))
 
     def test_make_archive(self, openbib_snapshot):
 
