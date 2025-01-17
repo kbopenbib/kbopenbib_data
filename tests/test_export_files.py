@@ -1,6 +1,7 @@
 import pytest
 import os
 import shutil
+import pandas as pd
 from dotenv import load_dotenv
 from pathlib import Path
 from scripts.export_files import OpenBibDataRelease
@@ -37,11 +38,25 @@ class TestOpenBibDataRelease:
 
         openbib_snapshot.export_funding_information(limit=10, export_format='csv')
 
+        pd.read_csv(
+            filepath_or_buffer=os.path.join(self.test_dir, 'openbib_export/funding_information.csv'),
+            sep=',',
+            quotechar='"',
+            header=0
+        )
+
         assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/funding_information.csv'))
 
     def test_export_document_types(self, openbib_snapshot):
 
         openbib_snapshot.export_document_types(limit=10, export_format='csv')
+
+        pd.read_csv(
+            filepath_or_buffer=os.path.join(self.test_dir, 'openbib_export/document_types.csv'),
+            sep=',',
+            quotechar='"',
+            header=0
+        )
 
         assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/document_types.csv'))
 

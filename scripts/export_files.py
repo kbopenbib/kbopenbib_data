@@ -75,7 +75,7 @@ class OpenBibDataRelease:
         document_type_export = pd.read_sql(sql=
                                            f"""
                                            SELECT *
-                                           FROM kb_project_openbib.classification_article_reviews_2014_2024_december24
+                                           FROM kb_project_openbib.classification_article_reviews_2014_2024_august24
                                            LIMIT {limit}
                                            """,
                                            con=self.engine)

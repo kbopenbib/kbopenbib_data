@@ -1,8 +1,6 @@
 # Working with KBOpenBib data
 
-## Publishers 
-
-## Journals
+## Publishers
 
 ## Authors
 
@@ -11,7 +9,7 @@
 ```bash
 openalex_id: "W4361302015"
 doi: "10.3390/mti7040037"
-funding_id: ["DFG 32955190"]
+funding_id: [""]
 ```
 
 ### Fields
@@ -30,7 +28,7 @@ is actually a research contribution or not.
 openalex_id: "https://openalex.org/W4256503663"
 doi: "10.1016/s0099-2399(15)00667-6"
 is_research: False
-proba: 0.18
+proba: 0.16
 ```
 
 Examples of works that are considered as non-research publications by the classifier:
@@ -46,4 +44,132 @@ Examples of works that are considered as non-research publications by the classi
 - proba (FLOAT): The probability that this work is a research contribution.
 
 ## Address information
+
+### Modus A
+
+#### kb_a_addr_inst_sec_open_alex
+
+```bash
+kb_inst_id: 5617
+openalex_id: "W2074596230"
+aff_seq_nr: 1
+address_full: "Max-Plank-Institut für Biophysikalische Chemie, Göttingen, Germany, DE"
+kb_sector_id: ["mpg"]
+doi: "10.1007/S004310050674"
+id: "10.1007/S004310050674§5617"
+```
+
+#### Fields 
+
+- kb_inst_id (INTEGER): 
+- openalex_id (STRING):
+- aff_seq_nr (INTEGER):
+- address_full (TEXT):
+- kb_sector_id (STRING):
+- doi (STRING):
+- id (STRING): 
+
+#### kb_a_inst_sec_open_alex
+
+```bash
+kb_inst_id: 5617
+kb_sector_id: ["mpg"]
+```
+
+#### Fields
+
+- kb_inst_id (INTEGER): 
+- kb_sector_id (STRING):
+
+### Modus S
+
+#### kb_s_addr_inst_sec_open_alex
+
+```bash
+kb_inst_id: 142
+openalex_id: "W2097461905"
+address_full: "Department for Bioanalytics, Georg-August University Göttingen, Göttingen, Germany."
+kb_sector_id: ["uni"]
+doi: "10.1038/NMETH.3493"
+id: "10.1038/NMETH.3493§142"
+```
+
+#### Fields 
+
+- kb_inst_id (INTEGER): 
+- openalex_id (STRING):
+- address_full (TEXT):
+- kb_sector_id (STRING):
+- doi (STRING):
+- id (STRING): 
+
+#### kb_s_inst_sec_open_alex
+
+```bash
+kb_inst_id: 142
+kb_sector_id: ["uni"]
+first_year: 1000
+last_year: 9999
+```
+
+#### Fields 
+
+- kb_inst_id (INTEGER):
+- kb_sector_id (STRING):
+- first_year (INTEGER):
+- last_year (INTEGER): 
+
+### Institutions
+
+#### kb_inst_open_alex
+
+```bash
+kb_inst_id: 137
+name: "Universität Hamburg"
+first_year: 1000
+last_year: 9999
+ror: "https://ror.org/00g30e956"
+dfg_instituts_id: 10192
+```
+
+#### Fields 
+
+- kb_inst_id (INTEGER):
+- name (STRING):
+- first_year (INTEGER):
+- last_year (INTEGER):
+- ror (STRING):
+- dfg_instituts_id (INTEGER):
+
+#### kb_sectors_open_alex
+
+```bash
+kb_sectorgroup_id: "FHG"
+kb_sector_id: "fhg"
+sectorgroup_name: "Fraunhofer-Gesellschaft"
+sector_name: "Fraunhofer-Gesellschaft"
+remarks: ""
+```
+
+#### Fields 
+
+- kb_sectorgroup_id (STRING):
+- kb_sector_id (STRING): 
+- sectorgroup_name (STRING):
+- sector_name (STRING):
+- remarks (STRING):
+
+####  kb_inst_trans_open_alex
+
+```bash
+inst_ante: 854
+transition_date: "2008-01-01"
+inst_post: 801
+type: "fusion"
+```
+
+- inst_ante (INTEGER): 
+- transition_date (DATE):
+- inst_post (INTEGER):
+- type (STRING):
 
