@@ -7,9 +7,9 @@
 ## Funding information
 
 ```bash
-openalex_id: "W4361302015"
-doi: "10.3390/mti7040037"
-funding_id: [""]
+openalex_id: "W4321327768"
+doi: "10.1002/1873-3468.14601"
+funding_id: ["430651076"]
 ```
 
 ### Fields
@@ -34,7 +34,8 @@ proba: 0.16
 Examples of works that are considered as non-research publications by the classifier:
 - https://openalex.org/works/W2264593839 (Abstract)
 - https://openalex.org/works/W4256503663 (Table of Contents)
-- https://openalex.org/works/W4246924978 (Table of Contents)
+- https://openalex.org/works/W4400195825 (Book Review)
+- https://openalex.org/works/W4255159712 (Case Report)
 
 ### Fields
 
@@ -52,22 +53,20 @@ Examples of works that are considered as non-research publications by the classi
 ```bash
 kb_inst_id: 5617
 openalex_id: "W2074596230"
-aff_seq_nr: 1
 address_full: "Max-Plank-Institut für Biophysikalische Chemie, Göttingen, Germany, DE"
 kb_sector_id: ["mpg"]
 doi: "10.1007/S004310050674"
-id: "10.1007/S004310050674§5617"
+identifier: "10.1007/S004310050674§5617"
 ```
 
 #### Fields 
 
-- kb_inst_id (INTEGER): 
-- openalex_id (STRING):
-- aff_seq_nr (INTEGER):
-- address_full (TEXT):
-- kb_sector_id (STRING):
-- doi (STRING):
-- id (STRING): 
+- kb_inst_id (INTEGER): The institution id associated with this publication.
+- openalex_id (STRING): The OpenAlex id associated with this publication.
+- address_full (TEXT): 
+- kb_sector_id (STRING): 
+- doi (STRING): The DOI associated with this publication.
+- identifier (STRING): 
 
 #### kb_a_inst_sec_open_alex
 
@@ -91,7 +90,7 @@ openalex_id: "W2097461905"
 address_full: "Department for Bioanalytics, Georg-August University Göttingen, Göttingen, Germany."
 kb_sector_id: ["uni"]
 doi: "10.1038/NMETH.3493"
-id: "10.1038/NMETH.3493§142"
+identifier: "10.1038/NMETH.3493§142"
 ```
 
 #### Fields 
@@ -101,7 +100,7 @@ id: "10.1038/NMETH.3493§142"
 - address_full (TEXT):
 - kb_sector_id (STRING):
 - doi (STRING):
-- id (STRING): 
+- identifier (STRING): 
 
 #### kb_s_inst_sec_open_alex
 
