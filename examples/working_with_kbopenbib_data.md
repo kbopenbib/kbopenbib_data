@@ -63,8 +63,8 @@ identifier: "10.1007/S004310050674§5617"
 
 - kb_inst_id (INTEGER): The institution id associated with this publication.
 - openalex_id (STRING): The OpenAlex id associated with this publication.
-- address_full (TEXT): 
-- kb_sector_id (STRING): 
+- address_full (TEXT): The address string found for this publication in OpenAlex.
+- kb_sector_id (STRING): The sector id associated with this publication.
 - doi (STRING): The DOI associated with this publication.
 - identifier (STRING): 
 
@@ -77,10 +77,10 @@ kb_sector_id: ["mpg"]
 
 #### Fields
 
-- kb_inst_id (INTEGER): 
-- kb_sector_id (STRING):
+- kb_inst_id (INTEGER): The identifier for this institution.
+- kb_sector_id (STRING): The sector id for this institution.
 
-### Modus S
+### Modus S (Historic mode)
 
 #### kb_s_addr_inst_sec_open_alex
 
@@ -95,12 +95,12 @@ identifier: "10.1038/NMETH.3493§142"
 
 #### Fields 
 
-- kb_inst_id (INTEGER): 
-- openalex_id (STRING):
-- address_full (TEXT):
-- kb_sector_id (STRING):
-- doi (STRING):
-- identifier (STRING): 
+- kb_inst_id (INTEGER): The institution id associated with this publication.
+- openalex_id (STRING): The OpenAlex id associated with this publication.
+- address_full (TEXT): The address string found for this publication in OpenAlex.
+- kb_sector_id (STRING): The sector id associated with this publication.
+- doi (STRING): The DOI associated with this publication.
+- identifier (STRING):  
 
 #### kb_s_inst_sec_open_alex
 
@@ -113,10 +113,10 @@ last_year: 9999
 
 #### Fields 
 
-- kb_inst_id (INTEGER):
-- kb_sector_id (STRING):
-- first_year (INTEGER):
-- last_year (INTEGER): 
+- kb_inst_id (INTEGER): The identifier for this institution.
+- kb_sector_id (STRING): The sector id for this institution. 
+- first_year (INTEGER): Date of the foundation of this institution (if available).
+- last_year (INTEGER): Year of closure of an institution (9999 if currently existing).
 
 ### Institutions
 
@@ -133,12 +133,12 @@ dfg_instituts_id: 10192
 
 #### Fields 
 
-- kb_inst_id (INTEGER):
-- name (STRING):
-- first_year (INTEGER):
-- last_year (INTEGER):
-- ror (STRING):
-- dfg_instituts_id (INTEGER):
+- kb_inst_id (INTEGER): The id of this institution.
+- name (STRING): The name of this institution.
+- first_year (INTEGER): Date of the foundation of this institution (if available).
+- last_year (INTEGER): Year of closure of an institution (9999 if currently existing).
+- ror (STRING): The ROR-id of this institution.
+- dfg_instituts_id (INTEGER): The identifier for this institution that was given by the German Research Foundation.
 
 #### kb_sectors_open_alex
 
@@ -152,11 +152,11 @@ remarks: ""
 
 #### Fields 
 
-- kb_sectorgroup_id (STRING):
-- kb_sector_id (STRING): 
-- sectorgroup_name (STRING):
-- sector_name (STRING):
-- remarks (STRING):
+- kb_sectorgroup_id (STRING): The abbreviation for this sector group.
+- kb_sector_id (STRING): The id for this sector group.
+- sectorgroup_name (STRING): The name of this sector group.
+- sector_name (STRING): The name of this sector.
+- remarks (STRING): A description of this sector.
 
 ####  kb_inst_trans_open_alex
 
@@ -167,8 +167,8 @@ inst_post: 801
 type: "fusion"
 ```
 
-- inst_ante (INTEGER): 
-- transition_date (DATE):
-- inst_post (INTEGER):
-- type (STRING):
+- inst_ante (INTEGER): The institution id before the transition.
+- transition_date (DATE): The date of the merger, inclusion or exclusion.
+- inst_post (INTEGER): The institution id after the transition. 
+- type (STRING): The type of structural change (merger, inclusion, exclusion).
 
