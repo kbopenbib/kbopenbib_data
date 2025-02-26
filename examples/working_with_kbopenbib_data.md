@@ -116,7 +116,7 @@ last_year: 9999
 - kb_inst_id (INTEGER): The identifier for this institution.
 - kb_sector_id (STRING): The sector id for this institution. 
 - first_year (INTEGER): Date of the foundation of this institution (if available).
-- last_year (INTEGER): Year of closure of an institution (9999 if currently existing).
+- last_year (INTEGER): Year of closure of this institution (9999 if currently existing).
 
 ### Institutions
 
@@ -136,9 +136,9 @@ dfg_instituts_id: 10192
 - kb_inst_id (INTEGER): The id of this institution.
 - name (STRING): The name of this institution.
 - first_year (INTEGER): Date of the foundation of this institution (if available).
-- last_year (INTEGER): Year of closure of an institution (9999 if currently existing).
+- last_year (INTEGER): Year of closure of this institution (9999 if currently existing).
 - ror (STRING): The ROR-id of this institution.
-- dfg_instituts_id (INTEGER): The identifier for this institution that was given by the German Research Foundation.
+- dfg_instituts_id (INTEGER): The identifier assigned to this institution by the German Research Foundation.
 
 #### kb_sectors_open_alex
 
