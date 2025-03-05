@@ -2,6 +2,36 @@
 
 ## Publishers
 
+```bash
+publisher_id: 13711
+publisher_id_orig: "P4310320330"
+publisher_name: "Adis, Springer Healthcare"
+standard_name: "Springer Healthcare"
+unit_pk: 249
+other_name: "Adis, Springer Healthcare"
+wikidata: "Q52636673"
+ror: ""
+url: "https://springerhealthcare.com/"
+parent_name: "Springer Nature"
+parent_id: "P4310319965"
+parent_unit: 220
+```
+
+### Fields
+
+- publisher_id (INTEGER): The id for this publisher.
+- publisher_id_orig (STRING): The OpenAlex id for this publisher.
+- publisher_name (STRING): The name for this publisher.
+- standard_name (STRING): The standardised name for this publisher.
+- unit_pk (INTEGER): 
+- other_name (STRING): Other names for this publisher.
+- wikidata (STRING): The Wikidata id for this publisher.
+- ror (STRING): The ROR-id for this publisher.
+- url (STRING): The URL for this publisher.
+- parent_name (STRING): The name for the parent organisation of this publisher.
+- parent_id (STRING): The OpenAlex id for the parent organisation of this publisher.
+- parent_unit (INTEGER):
+
 ## Authors
 
 ## Funding information
@@ -25,7 +55,7 @@ A machine learning classifier detects whether an article or review
 is actually a research contribution or not.
 
 ```bash
-openalex_id: "https://openalex.org/W4256503663"
+openalex_id: "W4256503663"
 doi: "10.1016/s0099-2399(15)00667-6"
 is_research: False
 proba: 0.16
