@@ -4,6 +4,9 @@ import json
 from sqlalchemy import create_engine
 import shutil
 from pathlib import Path
+from models.document_type import document_type_schema
+from models.funding_information import funding_information_schema_nested
+from models.publisher import publisher_schema
 
 
 class OpenBibDataRelease:
@@ -47,6 +50,8 @@ class OpenBibDataRelease:
                                            """,
                                            con=self.engine)
 
+        publisher_schema.validate(publishers_export)
+
         if export_format == 'jsonl':
 
             with open(f'{self.export_directory}/publishers.jsonl', 'w') as f:
@@ -66,11 +71,13 @@ class OpenBibDataRelease:
 
         funding_information_export = pd.read_sql(sql=
                                                  f"""
-                                                 SELECT *
+                                                 SELECT item_id_oal as openalex_id, doi, funding_id
                                                  FROM kb_project_openbib.dfg_oa
                                                  LIMIT {limit}
                                                  """,
                                                  con=self.engine)
+
+        funding_information_schema_nested.validate(funding_information_export)
 
         if export_format == 'jsonl':
 
@@ -85,13 +92,13 @@ class OpenBibDataRelease:
             normalized_funding_information_export = pd.json_normalize(
                 funding_information_export.to_dict(orient='records'),
                 record_path='funding_id',
-                meta=['doi', 'item_id_oal'])
+                meta=['doi', 'openalex_id'])
             normalized_funding_information_export.columns = ['funding_id',
                                                              'doi',
-                                                             'item_id_oal']
-            normalized_funding_information_export = normalized_funding_information_export[['doi',
-                                                                                           'funding_id',
-                                                                                           'item_id_oal']]
+                                                             'openalex_id']
+            normalized_funding_information_export = normalized_funding_information_export[['openalex_id',
+                                                                                           'doi',
+                                                                                           'funding_id']]
             normalized_funding_information_export.to_csv(path_or_buf=os.path.join(
                 self.export_directory, 'funding_information.csv'), index=False)
 
@@ -99,11 +106,13 @@ class OpenBibDataRelease:
 
         document_type_export = pd.read_sql(sql=
                                            f"""
-                                           SELECT *
+                                           SELECT openalex_id, doi, is_research, proba
                                            FROM kb_project_openbib.classification_article_reviews_2014_2024_august24
                                            LIMIT {limit}
                                            """,
                                            con=self.engine)
+
+        document_type_schema.validate(document_type_export)
 
         if export_format == 'jsonl':
 

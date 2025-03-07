@@ -6,6 +6,9 @@ from dotenv import load_dotenv
 from pathlib import Path
 import zipfile
 from scripts.export_files import OpenBibDataRelease
+from models.document_type import document_type_schema
+from models.funding_information import funding_information_schema_unnested
+from models.publisher import publisher_schema
 
 
 class TestOpenBibDataRelease:
@@ -41,12 +44,14 @@ class TestOpenBibDataRelease:
 
         assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/publishers.csv'))
 
-        pd.read_csv(
+        publishers_export = pd.read_csv(
             filepath_or_buffer=os.path.join(self.test_dir, 'openbib_export/publishers.csv'),
             sep=',',
             quotechar='"',
             header=0
         )
+
+        publisher_schema.validate(publishers_export)
 
     def test_export_funding_information(self, openbib_snapshot):
 
@@ -54,12 +59,14 @@ class TestOpenBibDataRelease:
 
         assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/funding_information.csv'))
 
-        pd.read_csv(
+        funding_information_export = pd.read_csv(
             filepath_or_buffer=os.path.join(self.test_dir, 'openbib_export/funding_information.csv'),
             sep=',',
             quotechar='"',
             header=0
         )
+
+        funding_information_schema_unnested.validate(funding_information_export)
 
     def test_export_document_types(self, openbib_snapshot):
 
@@ -67,15 +74,18 @@ class TestOpenBibDataRelease:
 
         assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/document_types.csv'))
 
-        pd.read_csv(
+        document_type_export = pd.read_csv(
             filepath_or_buffer=os.path.join(self.test_dir, 'openbib_export/document_types.csv'),
             sep=',',
             quotechar='"',
             header=0
         )
 
+        document_type_schema.validate(document_type_export)
+
     def test_make_archive(self, openbib_snapshot):
 
+        openbib_snapshot.export_publishers(limit=10, export_format='csv')
         openbib_snapshot.export_funding_information(limit=10, export_format='csv')
         openbib_snapshot.export_document_types(limit=10, export_format='csv')
 
@@ -85,6 +95,6 @@ class TestOpenBibDataRelease:
 
         archive = zipfile.ZipFile(file=os.path.join(self.test_dir, 'kbopenbib_release.zip'), mode='r')
 
-        assert len(archive.infolist()) == 2
+        assert len(archive.infolist()) == 3
 
         os.remove(os.path.join(self.test_dir, 'kbopenbib_release.zip'))
