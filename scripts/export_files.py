@@ -8,6 +8,16 @@ from models.document_type import document_type_schema
 from models.funding_information import funding_information_schema_nested
 from models.publisher import publisher_schema
 from models.address_information import kb_a_addr_inst_sec_open_alex_schema_nested
+import logging
+import sys
+
+log_level = os.environ.get('LOG_LEVEL', 'INFO')
+
+logging.basicConfig(
+    level=log_level,
+    format='%(asctime)s : %(levelname)s : %(message)s',
+    stream=sys.stdout
+)
 
 
 class OpenBibDataRelease:
@@ -43,6 +53,8 @@ class OpenBibDataRelease:
 
     def export_publishers(self, limit='NULL', export_format='csv'):
 
+        logging.info('Query table: kb_publisher_standard_relation')
+
         publishers_export = pd.read_sql(sql=
                                            f"""
                                            SELECT publisher_id, publisher_id_orig, publisher_name,
@@ -53,9 +65,13 @@ class OpenBibDataRelease:
                                            """,
                                            con=self.engine)
 
+        logging.info('Query completed.')
+
         publisher_schema.validate(publishers_export)
 
         if export_format == 'jsonl':
+
+            logging.info('Start exporting: JSONL')
 
             with open(f'{self.export_directory}/publishers.jsonl', 'w') as f:
                 result = [json.dumps(record, ensure_ascii=False) for record in
@@ -63,14 +79,23 @@ class OpenBibDataRelease:
                 for line in result:
                     f.write(line + '\n')
 
+            logging.info('Finish exporting: JSONL')
+
         if export_format == 'csv':
+
+            logging.info('Start exporting: CSV')
+
             normalized_publishers_export = pd.json_normalize(
                 publishers_export.to_dict(orient='records'))
             normalized_publishers_export.to_csv(
                 path_or_buf=os.path.join(self.export_directory,
                                          'publishers.csv'), index=False)
 
+            logging.info('Finish exporting: CSV')
+
     def export_funding_information(self, limit='NULL', export_format='csv'):
+
+        logging.info('Query table: dfg_oa')
 
         funding_information_export = pd.read_sql(sql=
                                                  f"""
@@ -80,9 +105,13 @@ class OpenBibDataRelease:
                                                  """,
                                                  con=self.engine)
 
+        logging.info('Query completed.')
+
         funding_information_schema_nested.validate(funding_information_export)
 
         if export_format == 'jsonl':
+
+            logging.info('Start exporting: JSONL')
 
             with open(f'{self.export_directory}/funding_information.jsonl', 'w') as f:
                 result = [json.dumps(record, ensure_ascii=False) for record in
@@ -90,7 +119,11 @@ class OpenBibDataRelease:
                 for line in result:
                     f.write(line + '\n')
 
+            logging.info('Finish exporting: JSONL')
+
         if export_format == 'csv':
+
+            logging.info('Start exporting: CSV')
 
             normalized_funding_information_export = pd.json_normalize(
                 funding_information_export.to_dict(orient='records'),
@@ -105,7 +138,11 @@ class OpenBibDataRelease:
             normalized_funding_information_export.to_csv(path_or_buf=os.path.join(
                 self.export_directory, 'funding_information.csv'), index=False)
 
+            logging.info('Finish exporting: CSV')
+
     def export_document_types(self, limit='NULL', export_format='csv'):
+
+        logging.info('Query table: classification_article_reviews_2014_2024_august24')
 
         document_type_export = pd.read_sql(sql=
                                            f"""
@@ -115,9 +152,13 @@ class OpenBibDataRelease:
                                            """,
                                            con=self.engine)
 
+        logging.info('Query completed.')
+
         document_type_schema.validate(document_type_export)
 
         if export_format == 'jsonl':
+
+            logging.info('Start exporting: JSONL')
 
             with open(f'{self.export_directory}/document_types.jsonl', 'w') as f:
                 result = [json.dumps(record, ensure_ascii=False) for record in
@@ -125,14 +166,23 @@ class OpenBibDataRelease:
                 for line in result:
                     f.write(line + '\n')
 
+            logging.info('Finish exporting: JSONL')
+
         if export_format == 'csv':
+
+            logging.info('Start exporting: CSV')
+
             normalized_document_type_export = pd.json_normalize(
                 document_type_export.to_dict(orient='records'))
             normalized_document_type_export.to_csv(
                 path_or_buf=os.path.join(self.export_directory,
                                          'document_types.csv'), index=False)
 
+            logging.info('Finish exporting: CSV')
+
     def export_address_information(self, limit='NULL', export_format='csv'):
+
+        logging.info('Query table: kb_a_addr_inst_sec_oa_b_20240831')
 
         kb_a_addr_inst_export = pd.read_sql(sql=
                                             f"""
@@ -147,9 +197,13 @@ class OpenBibDataRelease:
                                             """,
                                             con=self.engine)
 
+        logging.info('Query completed.')
+
         kb_a_addr_inst_sec_open_alex_schema_nested.validate(kb_a_addr_inst_export)
 
         if export_format == 'jsonl':
+
+            logging.info('Start exporting: JSONL')
 
             with open(f'{self.export_directory}/kb_a_addr_inst.jsonl', 'w') as f:
                 result = [json.dumps(record, ensure_ascii=False) for record in
@@ -157,7 +211,11 @@ class OpenBibDataRelease:
                 for line in result:
                     f.write(line + '\n')
 
+            logging.info('Finish exporting: JSONL')
+
         if export_format == 'csv':
+
+            logging.info('Start exporting: CSV')
 
             normalized_kb_a_addr_inst_export = pd.json_normalize(
                 kb_a_addr_inst_export.to_dict(orient='records'),
@@ -179,12 +237,18 @@ class OpenBibDataRelease:
             normalized_kb_a_addr_inst_export.to_csv(path_or_buf=os.path.join(
                 self.export_directory, 'kb_a_addr_inst.csv'), index=False)
 
+            logging.info('Finish exporting: CSV')
+
     def make_archive(self, limit='NULL', export_format='csv'):
 
         self.export_publishers(limit=limit, export_format=export_format)
         self.export_funding_information(limit=limit, export_format=export_format)
         self.export_document_types(limit=limit, export_format=export_format)
 
+        logging.info('Start compressing archive.')
+
         shutil.make_archive(base_name=self.export_file_name,
                             format='zip',
                             root_dir=self.export_directory)
+
+        logging.info('Finish compressing archive.')
