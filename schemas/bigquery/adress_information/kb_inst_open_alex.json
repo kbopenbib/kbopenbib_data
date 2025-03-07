@@ -1,0 +1,32 @@
+[
+  {
+    "mode": "NULLABLE",
+    "name": "kb_inst_id",
+    "type": "INTEGER"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "name",
+    "type": "STRING"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "first_year",
+    "type": "INTEGER"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "last_year",
+    "type": "INTEGER"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "ror",
+    "type": "STRING"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "dfg_instituts_id",
+    "type": "INTEGER"
+  }
+]

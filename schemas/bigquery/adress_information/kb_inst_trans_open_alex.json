@@ -1,0 +1,22 @@
+[
+  {
+    "mode": "NULLABLE",
+    "name": "inst_ante",
+    "type": "INTEGER"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "transition_date",
+    "type": "STRING"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "inst_post",
+    "type": "INTEGER"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "type",
+    "type": "STRING"
+  }
+]

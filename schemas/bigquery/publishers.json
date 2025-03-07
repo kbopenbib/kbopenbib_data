@@ -1,0 +1,62 @@
+[
+  {
+    "mode": "NULLABLE",
+    "name": "publisher_id",
+    "type": "INTEGER"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "publisher_id_orig",
+    "type": "STRING"
+  },
+  {
+    "mode": "REPEATED",
+    "name": "publisher_name",
+    "type": "STRING"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "standard_name",
+    "type": "STRING"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "unit_pk",
+    "type": "INTEGER"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "other_name",
+    "type": "STRING"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "wikidata",
+    "type": "STRING"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "ror",
+    "type": "STRING"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "url",
+    "type": "STRING"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "parent_name",
+    "type": "STRING"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "parent_id",
+    "type": "STRING"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "parent_unit",
+    "type": "INTEGER"
+  }
+]

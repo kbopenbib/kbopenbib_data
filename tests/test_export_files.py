@@ -35,6 +35,19 @@ class TestOpenBibDataRelease:
         yield snapshot
         shutil.rmtree(os.path.join(self.test_dir, 'openbib_export'))
 
+    def test_export_publisher_information(self, openbib_snapshot):
+
+        openbib_snapshot.export_publishers(limit=10, export_format='csv')
+
+        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/publishers.csv'))
+
+        pd.read_csv(
+            filepath_or_buffer=os.path.join(self.test_dir, 'openbib_export/publishers.csv'),
+            sep=',',
+            quotechar='"',
+            header=0
+        )
+
     def test_export_funding_information(self, openbib_snapshot):
 
         openbib_snapshot.export_funding_information(limit=10, export_format='csv')

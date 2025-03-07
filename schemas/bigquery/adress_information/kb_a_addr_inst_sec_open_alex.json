@@ -1,0 +1,32 @@
+[
+  {
+    "mode": "NULLABLE",
+    "name": "kb_inst_id",
+    "type": "INTEGER"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "openalex_id",
+    "type": "STRING"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "address_full",
+    "type": "STRING"
+  },
+  {
+    "mode": "REPEATED",
+    "name": "kb_sector_id",
+    "type": "STRING"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "doi",
+    "type": "STRING"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "identifier",
+    "type": "STRING"
+  }
+]

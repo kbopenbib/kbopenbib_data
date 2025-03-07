@@ -1,0 +1,17 @@
+[
+  {
+    "mode": "NULLABLE",
+    "name": "openalex_id",
+    "type": "STRING"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "doi",
+    "type": "STRING"
+  },
+  {
+    "mode": "REPEATED",
+    "name": "funding_id",
+    "type": "STRING"
+  }
+]

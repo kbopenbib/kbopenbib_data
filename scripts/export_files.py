@@ -37,6 +37,31 @@ class OpenBibDataRelease:
             if Path(self.export_file_name).exists() and Path(self.export_file_name).is_file():
                 os.remove(self.export_file_name)
 
+    def export_publishers(self, limit='NULL', export_format='csv'):
+
+        publishers_export = pd.read_sql(sql=
+                                           f"""
+                                           SELECT *
+                                           FROM kb_project_openbib.kb_publisher_standard_relation
+                                           LIMIT {limit}
+                                           """,
+                                           con=self.engine)
+
+        if export_format == 'jsonl':
+
+            with open(f'{self.export_directory}/publishers.jsonl', 'w') as f:
+                result = [json.dumps(record, ensure_ascii=False) for record in
+                          publishers_export.to_dict(orient='records')]
+                for line in result:
+                    f.write(line + '\n')
+
+        if export_format == 'csv':
+            normalized_publishers_export = pd.json_normalize(
+                publishers_export.to_dict(orient='records'))
+            normalized_publishers_export.to_csv(
+                path_or_buf=os.path.join(self.export_directory,
+                                         'publishers.csv'), index=False)
+
     def export_funding_information(self, limit='NULL', export_format='csv'):
 
         funding_information_export = pd.read_sql(sql=
