@@ -129,7 +129,11 @@ class OpenBibDataRelease:
                 path_or_buf=os.path.join(self.export_directory,
                                          'document_types.csv'), index=False)
 
-    def make_archive(self):
+    def make_archive(self, limit='NULL', export_format='csv'):
+
+        self.export_publishers(limit=limit, export_format=export_format)
+        self.export_funding_information(limit=limit, export_format=export_format)
+        self.export_document_types(limit=limit, export_format=export_format)
 
         shutil.make_archive(base_name=self.export_file_name,
                             format='zip',

@@ -85,11 +85,7 @@ class TestOpenBibDataRelease:
 
     def test_make_archive(self, openbib_snapshot):
 
-        openbib_snapshot.export_publishers(limit=10, export_format='csv')
-        openbib_snapshot.export_funding_information(limit=10, export_format='csv')
-        openbib_snapshot.export_document_types(limit=10, export_format='csv')
-
-        openbib_snapshot.make_archive()
+        openbib_snapshot.make_archive(limit=10, export_format='csv')
 
         assert os.path.exists(os.path.join(self.test_dir, 'kbopenbib_release.zip'))
 
