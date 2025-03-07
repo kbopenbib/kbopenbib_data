@@ -9,6 +9,7 @@ from scripts.export_files import OpenBibDataRelease
 from models.document_type import document_type_schema
 from models.funding_information import funding_information_schema_unnested
 from models.publisher import publisher_schema
+from models.address_information import kb_a_addr_inst_sec_open_alex_schema_unnested
 
 
 class TestOpenBibDataRelease:
@@ -82,6 +83,21 @@ class TestOpenBibDataRelease:
         )
 
         document_type_schema.validate(document_type_export)
+
+    def test_export_address_information(self, openbib_snapshot):
+
+        openbib_snapshot.export_address_information(limit=10, export_format='csv')
+
+        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/kb_a_addr_inst.csv'))
+
+        kb_a_addr_inst_sec_open_alex_export = pd.read_csv(
+            filepath_or_buffer=os.path.join(self.test_dir, 'openbib_export/kb_a_addr_inst.csv'),
+            sep=',',
+            quotechar='"',
+            header=0
+        )
+
+        kb_a_addr_inst_sec_open_alex_schema_unnested.validate(kb_a_addr_inst_sec_open_alex_export)
 
     def test_make_archive(self, openbib_snapshot):
 

@@ -7,6 +7,7 @@ from pathlib import Path
 from models.document_type import document_type_schema
 from models.funding_information import funding_information_schema_nested
 from models.publisher import publisher_schema
+from models.address_information import kb_a_addr_inst_sec_open_alex_schema_nested
 
 
 class OpenBibDataRelease:
@@ -44,7 +45,9 @@ class OpenBibDataRelease:
 
         publishers_export = pd.read_sql(sql=
                                            f"""
-                                           SELECT *
+                                           SELECT publisher_id, publisher_id_orig, publisher_name,
+                                                  standard_name, unit_pk, other_name, wikidata, ror, url, 
+                                                  parent_name, parent_id, parent_unit
                                            FROM kb_project_openbib.kb_publisher_standard_relation
                                            LIMIT {limit}
                                            """,
@@ -128,6 +131,53 @@ class OpenBibDataRelease:
             normalized_document_type_export.to_csv(
                 path_or_buf=os.path.join(self.export_directory,
                                          'document_types.csv'), index=False)
+
+    def export_address_information(self, limit='NULL', export_format='csv'):
+
+        kb_a_addr_inst_export = pd.read_sql(sql=
+                                            f"""
+                                            SELECT kb_inst_id, 
+                                                   item_id as openalex_id, 
+                                                   address_full, 
+                                                   kb_sector_id, 
+                                                   doi,
+                                                   identifier
+                                            FROM kb_project_openbib.kb_a_addr_inst_sec_oa_b_20240831
+                                            LIMIT {limit}
+                                            """,
+                                            con=self.engine)
+
+        kb_a_addr_inst_sec_open_alex_schema_nested.validate(kb_a_addr_inst_export)
+
+        if export_format == 'jsonl':
+
+            with open(f'{self.export_directory}/kb_a_addr_inst.jsonl', 'w') as f:
+                result = [json.dumps(record, ensure_ascii=False) for record in
+                          kb_a_addr_inst_export.to_dict(orient='records')]
+                for line in result:
+                    f.write(line + '\n')
+
+        if export_format == 'csv':
+
+            normalized_kb_a_addr_inst_export = pd.json_normalize(
+                kb_a_addr_inst_export.to_dict(orient='records'),
+                record_path='kb_sector_id',
+                meta=['kb_inst_id', 'openalex_id', 'address_full', 'doi', 'identifier'])
+            normalized_kb_a_addr_inst_export.columns = ['kb_sector_id',
+                                                        'kb_inst_id',
+                                                        'openalex_id',
+                                                        'address_full',
+                                                        'doi',
+                                                        'identifier']
+            normalized_kb_a_addr_inst_export = normalized_kb_a_addr_inst_export[['kb_inst_id',
+                                                                                 'openalex_id',
+                                                                                 'address_full',
+                                                                                 'kb_sector_id',
+                                                                                 'doi',
+                                                                                 'identifier']]
+
+            normalized_kb_a_addr_inst_export.to_csv(path_or_buf=os.path.join(
+                self.export_directory, 'kb_a_addr_inst.csv'), index=False)
 
     def make_archive(self, limit='NULL', export_format='csv'):
 

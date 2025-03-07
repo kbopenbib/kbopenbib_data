@@ -10,7 +10,7 @@
     "type": "STRING"
   },
   {
-    "mode": "REPEATED",
+    "mode": "NULLABLE",
     "name": "publisher_name",
     "type": "STRING"
   },
