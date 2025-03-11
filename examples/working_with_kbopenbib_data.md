@@ -110,7 +110,7 @@ identifier: "10.1007/S004310050674§5617"
 - kb_inst_id (INTEGER): The institution id associated with this publication.
 - openalex_id (STRING): The OpenAlex id associated with this publication.
 - address_full (TEXT): The address string found for this publication in OpenAlex.
-- kb_sector_id (STRING): The sector id associated with this publication.
+- kb_sector_id (STRING): The sector id(s) associated with this publication.
 - doi (STRING): The DOI associated with this publication.
 - identifier (STRING): 
 
@@ -120,7 +120,7 @@ Table: <i>kb_a_inst_sec_oa_b_20240831</i>
 
 ```bash
 kb_inst_id: 5617
-kb_sector_id: ["mpg"]
+kb_sector_id: "mpg"
 ```
 
 #### Fields
@@ -148,7 +148,7 @@ identifier: "10.1038/NMETH.3493§142"
 - kb_inst_id (INTEGER): The institution id associated with this publication.
 - openalex_id (STRING): The OpenAlex id associated with this publication.
 - address_full (TEXT): The address string found for this publication in OpenAlex.
-- kb_sector_id (STRING): The sector id associated with this publication.
+- kb_sector_id (STRING): The sector id(s) associated with this publication.
 - doi (STRING): The DOI associated with this publication.
 - identifier (STRING):  
 
@@ -158,7 +158,7 @@ Table: <i>kb_s_inst_sec_oa_b_20240831</i>
 
 ```bash
 kb_inst_id: 142
-kb_sector_id: ["uni"]
+kb_sector_id: "uni"
 first_year: 1000
 last_year: 9999
 ```
