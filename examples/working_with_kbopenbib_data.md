@@ -2,6 +2,8 @@
 
 ## Publishers
 
+Table: <i>kb_publisher_standard_relation</i>
+
 ```bash
 publisher_id: 13711
 publisher_id_orig: "P4310320330"
@@ -36,6 +38,11 @@ parent_unit: 220
 
 ## Funding information
 
+Table: <i>dfg_oa</i>
+<br>
+Limitations: Only includes publications from 2022 to 2024
+<br>
+
 ```bash
 openalex_id: "W4321327768"
 doi: "10.1002/1873-3468.14601"
@@ -49,8 +56,12 @@ funding_id: ["430651076"]
 - funding_id (TEXT): The grant id(s) we found for this work. 
 
 ## Document types
-The table <i>classification_article_reviews</i> contains articles
-and reviews with the source type journal from 2014 onwards.
+
+Table: <i>classification_article_reviews_2014_2024_august24 (placeholder)</i>
+<br>
+Limitations: Only includes articles and reviews with the source type journal from 2014 onwards.
+<br>
+
 A machine learning classifier detects whether an article or review
 is actually a research contribution or not.
 
@@ -80,6 +91,8 @@ Examples of works that are considered as non-research publications by the classi
 
 #### kb_a_addr_inst_sec_open_alex
 
+Table: <i>kb_a_addr_inst_sec_oa_b_20240831</i>
+
 ```bash
 kb_inst_id: 5617
 openalex_id: "W2074596230"
@@ -100,6 +113,8 @@ identifier: "10.1007/S004310050674§5617"
 
 #### kb_a_inst_sec_open_alex
 
+Table: <i>kb_a_inst_sec_oa_b_20240831</i>
+
 ```bash
 kb_inst_id: 5617
 kb_sector_id: ["mpg"]
@@ -113,6 +128,8 @@ kb_sector_id: ["mpg"]
 ### Modus S (Historic mode)
 
 #### kb_s_addr_inst_sec_open_alex
+
+Table: <i>kb_s_addr_inst_sec_oa_b_20240831</i>
 
 ```bash
 kb_inst_id: 142
@@ -134,6 +151,8 @@ identifier: "10.1038/NMETH.3493§142"
 
 #### kb_s_inst_sec_open_alex
 
+Table: <i>kb_s_inst_sec_oa_b_20240831</i>
+
 ```bash
 kb_inst_id: 142
 kb_sector_id: ["uni"]
@@ -151,6 +170,8 @@ last_year: 9999
 ### Institutions
 
 #### kb_inst_open_alex
+
+Table: <i>kb_inst_oa_b_20240831</i>
 
 ```bash
 kb_inst_id: 137
@@ -172,6 +193,8 @@ dfg_instituts_id: 10192
 
 #### kb_sectors_open_alex
 
+Table: <i>kb_sectors_oa_b_20240831</i>
+
 ```bash
 kb_sectorgroup_id: "FHG"
 kb_sector_id: "fhg"
@@ -189,6 +212,8 @@ remarks: ""
 - remarks (STRING): A description of this sector.
 
 ####  kb_inst_trans_open_alex
+
+Table: <i>kb_inst_trans_oa_b_20240831</i>
 
 ```bash
 inst_ante: 854
