@@ -8,7 +8,8 @@ have already worked with PostgreSQL and have a running instance.
 
 If you want to work with a specific table from the OpenBib snapshot, 
 you do not have to write a schema yourself. We have already prepared 
-schemas for you that you can reuse. You can find these schemas [here](../schemas).
+schemas for you that you can reuse. You can find these schemas 
+[here](../schemas/postgresql).
 
 ```sql
 create table kb_project_openbib.classification_article_reviews (
