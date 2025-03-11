@@ -9,7 +9,11 @@ from scripts.export_files import OpenBibDataRelease
 from models.document_type import document_type_schema
 from models.funding_information import funding_information_schema_unnested
 from models.publisher import publisher_schema
-from models.address_information import kb_a_addr_inst_sec_open_alex_schema_unnested
+from models.address_information import (kb_a_addr_inst_sec_open_alex_schema_unnested,
+                                        kb_a_addr_inst_sec_open_alex_schema_nested,
+                                        kb_s_addr_inst_sec_open_alex_schema_unnested,
+                                        kb_s_addr_inst_sec_open_alex_schema_nested,
+                                        kb_inst_trans_open_alex_schema)
 
 
 class TestOpenBibDataRelease:
@@ -39,7 +43,7 @@ class TestOpenBibDataRelease:
         yield snapshot
         shutil.rmtree(os.path.join(self.test_dir, 'openbib_export'))
 
-    def test_export_publisher_information(self, openbib_snapshot):
+    def test_export_publisher_information_to_csv(self, openbib_snapshot: OpenBibDataRelease) -> None:
 
         openbib_snapshot.export_publishers(limit=10, export_format='csv')
 
@@ -54,7 +58,18 @@ class TestOpenBibDataRelease:
 
         publisher_schema.validate(publishers_export)
 
-    def test_export_funding_information(self, openbib_snapshot):
+    def test_export_publisher_information_to_jsonl(self, openbib_snapshot: OpenBibDataRelease) -> None:
+
+        openbib_snapshot.export_publishers(limit=10, export_format='jsonl')
+
+        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/publishers.jsonl'))
+
+        publishers_export = pd.read_json(path_or_buf='openbib_export/publishers.jsonl',
+                                         lines=True)
+
+        publisher_schema.validate(publishers_export)
+
+    def test_export_funding_information_to_csv(self, openbib_snapshot: OpenBibDataRelease) -> None:
 
         openbib_snapshot.export_funding_information(limit=10, export_format='csv')
 
@@ -69,7 +84,18 @@ class TestOpenBibDataRelease:
 
         funding_information_schema_unnested.validate(funding_information_export)
 
-    def test_export_document_types(self, openbib_snapshot):
+    def test_export_funding_information_to_jsonl(self, openbib_snapshot: OpenBibDataRelease) -> None:
+
+        openbib_snapshot.export_funding_information(limit=10, export_format='jsonl')
+
+        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/funding_information.jsonl'))
+
+        funding_information_export = pd.read_json(path_or_buf='openbib_export/funding_information.jsonl',
+                                                  lines=True)
+
+        funding_information_schema_unnested.validate(funding_information_export)
+
+    def test_export_document_types_to_csv(self, openbib_snapshot: OpenBibDataRelease) -> None:
 
         openbib_snapshot.export_document_types(limit=10, export_format='csv')
 
@@ -84,9 +110,20 @@ class TestOpenBibDataRelease:
 
         document_type_schema.validate(document_type_export)
 
-    def test_export_address_information(self, openbib_snapshot):
+    def test_export_document_types_to_jsonl(self, openbib_snapshot: OpenBibDataRelease) -> None:
 
-        openbib_snapshot.export_address_information(limit=10, export_format='csv')
+        openbib_snapshot.export_document_types(limit=10, export_format='jsonl')
+
+        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/document_types.jsonl'))
+
+        document_type_export = pd.read_json(path_or_buf='openbib_export/document_types.jsonl',
+                                            lines=True)
+
+        document_type_schema.validate(document_type_export)
+
+    def test_export_address_information_a_to_csv(self, openbib_snapshot: OpenBibDataRelease) -> None:
+
+        openbib_snapshot.export_address_information_a(limit=10, export_format='csv')
 
         assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/kb_a_addr_inst.csv'))
 
@@ -99,7 +136,70 @@ class TestOpenBibDataRelease:
 
         kb_a_addr_inst_sec_open_alex_schema_unnested.validate(kb_a_addr_inst_sec_open_alex_export)
 
-    def test_make_archive(self, openbib_snapshot):
+    def test_export_address_information_a_to_jsonl(self, openbib_snapshot: OpenBibDataRelease) -> None:
+
+        openbib_snapshot.export_address_information_a(limit=10, export_format='jsonl')
+
+        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/kb_a_addr_inst.jsonl'))
+
+        kb_a_addr_inst_sec_open_alex_export = pd.read_json(path_or_buf='openbib_export/kb_a_addr_inst.jsonl',
+                                                           lines=True)
+
+        kb_a_addr_inst_sec_open_alex_schema_nested.validate(kb_a_addr_inst_sec_open_alex_export)
+
+    def test_export_address_information_s_to_csv(self, openbib_snapshot: OpenBibDataRelease) -> None:
+
+        openbib_snapshot.export_address_information_s(limit=10, export_format='csv')
+
+        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/kb_s_addr_inst.csv'))
+
+        kb_s_addr_inst_sec_open_alex_export = pd.read_csv(
+            filepath_or_buffer=os.path.join(self.test_dir, 'openbib_export/kb_s_addr_inst.csv'),
+            sep=',',
+            quotechar='"',
+            header=0
+        )
+
+        kb_s_addr_inst_sec_open_alex_schema_unnested.validate(kb_s_addr_inst_sec_open_alex_export)
+
+    def test_export_address_information_s_to_jsonl(self, openbib_snapshot: OpenBibDataRelease) -> None:
+
+        openbib_snapshot.export_address_information_s(limit=10, export_format='jsonl')
+
+        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/kb_s_addr_inst.jsonl'))
+
+        kb_s_addr_inst_sec_open_alex_export = pd.read_json(path_or_buf='openbib_export/kb_s_addr_inst.jsonl',
+                                                           lines=True)
+
+        kb_s_addr_inst_sec_open_alex_schema_nested.validate(kb_s_addr_inst_sec_open_alex_export)
+
+    def test_export_kb_inst_trans_open_alex_to_csv(self, openbib_snapshot: OpenBibDataRelease) -> None:
+
+        openbib_snapshot.export_kb_inst_trans_open_alex(limit=10, export_format='csv')
+
+        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/kb_inst_trans_open_alex.csv'))
+
+        kb_inst_trans_open_alex_export = pd.read_csv(
+            filepath_or_buffer=os.path.join(self.test_dir, 'openbib_export/kb_inst_trans_open_alex.csv'),
+            sep=',',
+            quotechar='"',
+            header=0
+        )
+
+        kb_inst_trans_open_alex_schema.validate(kb_inst_trans_open_alex_export)
+
+    def test_export_kb_inst_trans_open_alex_to_jsonl(self, openbib_snapshot: OpenBibDataRelease) -> None:
+
+        openbib_snapshot.export_kb_inst_trans_open_alex(limit=10, export_format='jsonl')
+
+        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/kb_inst_trans_open_alex.jsonl'))
+
+        kb_inst_trans_open_alex_export = pd.read_json(path_or_buf='openbib_export/kb_inst_trans_open_alex.jsonl',
+                                                      lines=True)
+
+        kb_inst_trans_open_alex_schema.validate(kb_inst_trans_open_alex_export)
+
+    def test_make_archive_to_csv(self, openbib_snapshot: OpenBibDataRelease) -> None:
 
         openbib_snapshot.make_archive(limit=10, export_format='csv')
 
@@ -107,6 +207,6 @@ class TestOpenBibDataRelease:
 
         archive = zipfile.ZipFile(file=os.path.join(self.test_dir, 'kbopenbib_release.zip'), mode='r')
 
-        assert len(archive.infolist()) == 3
+        assert len(archive.infolist()) == 6
 
         os.remove(os.path.join(self.test_dir, 'kbopenbib_release.zip'))

@@ -5,7 +5,7 @@
     "type": "INTEGER"
   },
   {
-    "mode": "REPEATED",
+    "mode": "NULLABLE",
     "name": "kb_sector_id",
     "type": "STRING"
   },

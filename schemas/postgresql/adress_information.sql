@@ -9,7 +9,7 @@ create table kb_project_openbib.kb_a_addr_inst_sec_open_alex (
 
 create table kb_project_openbib.kb_a_inst_sec_open_alex (
     kb_inst_id integer
-    kb_sector_id text[]
+    kb_sector_id text
 )
 
 create table kb_project_openbib.kb_s_addr_inst_sec_open_alex (
@@ -23,7 +23,7 @@ create table kb_project_openbib.kb_s_addr_inst_sec_open_alex (
 
 create table kb_project_openbib.kb_s_inst_sec_open_alex (
     kb_inst_id integer
-    kb_sector_id text[]
+    kb_sector_id text
     first_year integer
     last_year integer
 )

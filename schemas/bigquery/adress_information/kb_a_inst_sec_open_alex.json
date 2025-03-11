@@ -5,18 +5,8 @@
     "type": "INTEGER"
   },
   {
-    "mode": "REPEATED",
+    "mode": "NULLABLE",
     "name": "kb_sector_id",
     "type": "STRING"
-  },
-  {
-    "mode": "NULLABLE",
-    "name": "first_year",
-    "type": "INTEGER"
-  },
-  {
-    "mode": "NULLABLE",
-    "name": "last_year",
-    "type": "INTEGER"
   }
 ]
