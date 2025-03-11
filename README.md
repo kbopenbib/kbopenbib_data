@@ -1,5 +1,8 @@
 # KBOpenBib Data
 
+![License](https://img.shields.io/badge/License-Not%20defined-red)
+![Python Version](https://img.shields.io/badge/Python-3.11-blue)
+
 ## Overview
 
 This repository contains scripts, examples and instructions for working with the KBOpenBib data snapshot.
