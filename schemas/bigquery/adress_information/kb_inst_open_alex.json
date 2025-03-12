@@ -27,6 +27,6 @@
   {
     "mode": "NULLABLE",
     "name": "dfg_instituts_id",
-    "type": "INTEGER"
+    "type": "STRING"
   }
 ]

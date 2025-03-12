@@ -7,9 +7,11 @@ from pathlib import Path
 from models.document_type import document_type_schema
 from models.funding_information import funding_information_schema_nested
 from models.publisher import publisher_schema
-from models.address_information import (kb_a_addr_inst_sec_open_alex_schema_nested,
-                                        kb_s_addr_inst_sec_open_alex_schema_nested,
-                                        kb_inst_trans_open_alex_schema)
+from models.address_information import (kb_a_addr_inst_sec_schema_nested,
+                                        kb_s_addr_inst_sec_schema_nested,
+                                        kb_sectors_schema,
+                                        kb_inst_schema,
+                                        kb_inst_trans_schema)
 import logging
 import sys
 
@@ -197,7 +199,7 @@ class OpenBibDataRelease:
 
         logging.info('Query completed.')
 
-        kb_a_addr_inst_sec_open_alex_schema_nested.validate(kb_a_addr_inst_export)
+        kb_a_addr_inst_sec_schema_nested.validate(kb_a_addr_inst_export)
 
         if export_format == 'jsonl':
 
@@ -250,7 +252,7 @@ class OpenBibDataRelease:
 
         logging.info('Query completed.')
 
-        kb_s_addr_inst_sec_open_alex_schema_nested.validate(kb_s_addr_inst_export)
+        kb_s_addr_inst_sec_schema_nested.validate(kb_s_addr_inst_export)
 
         if export_format == 'jsonl':
 
@@ -284,11 +286,74 @@ class OpenBibDataRelease:
 
             logging.info('Finish exporting: CSV')
 
-    def export_kb_inst_trans_open_alex(self, limit: str='NULL', export_format: str='csv') -> None:
+    def export_kb_sectors(self, limit: str='NULL', export_format: str='csv') -> None:
+
+        logging.info('Query table: kb_sectors_oa_b_20240831')
+
+        kb_sectors_export = pd.read_sql(sql=
+                                        f"""
+                                        SELECT kb_sectorgroup_id,
+                                               kb_sector_id,
+                                               sectorgroup_name,
+                                               sector_name,
+                                               remarks
+                                        FROM kb_project_openbib.kb_sectors_oa_b_20240831
+                                        LIMIT {limit}
+                                        """,
+                                        con=self.engine)
+
+        logging.info('Query completed.')
+
+        kb_sectors_schema.validate(kb_sectors_export)
+
+        if export_format == 'jsonl':
+
+            OpenBibDataRelease.export_to_jsonl(export_directory=self.export_directory,
+                                               export_file_name='kb_sectors.jsonl',
+                                               dataframe=kb_sectors_export)
+
+        if export_format == 'csv':
+            OpenBibDataRelease.export_to_csv(export_directory=self.export_directory,
+                                             export_file_name='kb_sectors.csv',
+                                             dataframe=kb_sectors_export)
+
+    def export_kb_inst(self, limit: str='NULL', export_format: str='csv') -> None:
+
+        logging.info('Query table: kb_inst_oa_b_20240831')
+
+        kb_inst_export = pd.read_sql(sql=
+                                        f"""
+                                        SELECT kb_inst_id,
+                                               name,
+                                               first_year,
+                                               last_year,
+                                               ror,
+                                               dfg_instituts_id
+                                        FROM kb_project_openbib.kb_inst_oa_b_20240831
+                                        LIMIT {limit}
+                                        """,
+                                        con=self.engine)
+
+        logging.info('Query completed.')
+
+        kb_inst_schema.validate(kb_inst_export)
+
+        if export_format == 'jsonl':
+
+            OpenBibDataRelease.export_to_jsonl(export_directory=self.export_directory,
+                                               export_file_name='kb_inst.jsonl',
+                                               dataframe=kb_inst_export)
+
+        if export_format == 'csv':
+            OpenBibDataRelease.export_to_csv(export_directory=self.export_directory,
+                                             export_file_name='kb_inst.csv',
+                                             dataframe=kb_inst_export)
+
+    def export_kb_inst_trans(self, limit: str='NULL', export_format: str='csv') -> None:
 
         logging.info('Query table: kb_inst_trans_oa_b_20240831')
 
-        kb_inst_trans_open_alex_export = pd.read_sql(sql=
+        kb_inst_trans_export = pd.read_sql(sql=
                                             f"""
                                             SELECT inst_ante, 
                                                    transition_date, 
@@ -301,18 +366,18 @@ class OpenBibDataRelease:
 
         logging.info('Query completed.')
 
-        kb_inst_trans_open_alex_schema.validate(kb_inst_trans_open_alex_export)
+        kb_inst_trans_schema.validate(kb_inst_trans_export)
 
         if export_format == 'jsonl':
 
             OpenBibDataRelease.export_to_jsonl(export_directory=self.export_directory,
-                                               export_file_name='kb_inst_trans_open_alex.jsonl',
-                                               dataframe=kb_inst_trans_open_alex_export)
+                                               export_file_name='kb_inst_trans.jsonl',
+                                               dataframe=kb_inst_trans_export)
 
         if export_format == 'csv':
             OpenBibDataRelease.export_to_csv(export_directory=self.export_directory,
-                                             export_file_name='kb_inst_trans_open_alex.csv',
-                                             dataframe=kb_inst_trans_open_alex_export)
+                                             export_file_name='kb_inst_trans.csv',
+                                             dataframe=kb_inst_trans_export)
 
     def make_archive(self, limit: str='NULL', export_format: str='csv') -> None:
 
@@ -321,7 +386,9 @@ class OpenBibDataRelease:
         self.export_document_types(limit=limit, export_format=export_format)
         self.export_address_information_a(limit=limit, export_format=export_format)
         self.export_address_information_s(limit=limit, export_format=export_format)
-        self.export_kb_inst_trans_open_alex(limit=limit, export_format=export_format)
+        self.export_kb_sectors(limit=limit, export_format=export_format)
+        self.export_kb_inst(limit=limit, export_format=export_format)
+        self.export_kb_inst_trans(limit=limit, export_format=export_format)
 
         logging.info('Start compressing archive.')
 
