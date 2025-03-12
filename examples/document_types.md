@@ -45,8 +45,8 @@ For example, among the journals with the highest percentage of
 classified non-research publications are sources like 
 
 - Reactions Weekly (mainly publishes case reports)
-- Eos (mainly publishes news in popular scientific form)
-- Physics Today (mainly publishes news in popular scientific form)
+- Eos (mainly publishes science news)
+- Physics Today (mainly publishes science news, opinions and overview articles)
 - ISEE Conference Abstracts (mainly publishes abstracts)
 - The Proceedings of the Annual Convention of the Japanese Psychological Association (mainly publishes abstracts)
 - PharmacoEconomics & Outcomes News (mainly publishes clinical studies and news)
