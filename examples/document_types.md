@@ -13,7 +13,8 @@ Among these are:
 Based on these findings, we have developed a machine learning classifier with the
 purpose to support the identification of those types of works. The classifier uses
 open metadata such as the number of references and the number of authors that 
-are linked to a publication.
+are linked to a publication. In addition, we use information from the OpenAlex `biblio` 
+field to find [issue supplements in journals](https://github.com/eschares/compareOpenAlex_and_Dimensions). 
 
 The results of this approach are structured as follows. For each publication, a
 probability score is calculated that represents whether a publication is a 
