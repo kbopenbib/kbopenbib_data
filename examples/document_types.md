@@ -52,6 +52,7 @@ classified non-research publications are sources like
 - The Proceedings of the Annual Convention of the Japanese Psychological Association (mainly publishes abstracts)
 - PharmacoEconomics & Outcomes News (mainly publishes clinical studies and news)
 - Bulletin of the Center for Children's Books./Bulletin of the Center for Children's Books (mainly publishes book reviews)
+- Innovation in Aging (also publishes supplements labelled as articles)
 
 ## Info
 
