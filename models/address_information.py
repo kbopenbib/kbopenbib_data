@@ -74,7 +74,7 @@ kb_inst_schema = pa.DataFrameSchema(
         'first_year': pa.Column(int, required=True),
         'last_year': pa.Column(int, required=True),
         'ror': pa.Column(str, nullable=True, required=True),
-        'dfg_instituts_id': pa.Column(str, nullable=True, required=True)
+        'dfg_instituts_id': pa.Column(dtype='Int64', nullable=True, coerce=True, required=True)
     },
     index=pa.Index(int),
 )

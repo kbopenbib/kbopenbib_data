@@ -9,6 +9,6 @@ create table kb_project_openbib.publishers (
     ror text,
     url text,
     parent_name text,
-    parent_id text
+    parent_id text,
     parent_unit integer
 )
