@@ -3,33 +3,62 @@
 ![License](https://img.shields.io/badge/License-Not%20defined-red)
 ![Python Version](https://img.shields.io/badge/Python-3.11-blue)
 
-## Overview
+## About
 
-This repository contains scripts, examples and instructions for working with the KBOpenBib data snapshot.
+The KBOpenBib project, maintained by the [Kompetenznetzwerk Bibliometrie](https://bibliometrie.info),  
+provides access to curated OpenAlex data with a focus on the German research landscape.
 
-## Examples
+Curated data is provided for following entities: 
 
-- [`Working with the KBOpenBib snapshot`](examples/working_with_kbopenbib_data.md)
-- [`Working with PostgreSQL`](examples/working_with_postgresql.md)
-- [`Working with BigQuery`](examples/working_with_bigquery.md)
+- [Authors](examples/authors.md) 👩‍🎓
+- [Publishers](examples/publishers.md) 📚
+- [Funding information](examples/funder_information.md) 📄
+- [Document types](examples/document_types.md) 🗂️
+- [Address information](examples/address_information.md) 🏛️
 
-## How to export a snapshot
+Annual snapshots from the KBOpenBib project are openly available for Users of the 
+[Kompetenznetzwerk Bibliometrie](https://bibliometrie.info), via the 
+[Open Scholarly Data Warehouse of the SUB Göttingen](https://subugoe.github.io/scholcomm_analytics/data.html)
+and [Zenodo](https://zenodo.org).
 
-```python
-from scripts.export_files import OpenBibDataRelease
+The current release is based on the August 2024 snapshot of OpenAlex, including works
+with publication years 2014 to 2024.
 
-openbib_snapshot = OpenBibDataRelease(
-    export_directory='openbib_export',
-    export_file_name='kbopenbib_release',
-    host='host',
-    database='database',
-    port='port',
-    user='user',
-    password='password'
-)
+## Usage
 
-openbib_snapshot.make_archive(export_format='csv')
-```
+## How do I get it?
+
+- If you are a user of the [Kompetenznetzwerk Bibliometrie](https://bibliometrie.info)
+you can access the data snapshot via the KB data infrastructure hosted by FIZ Karlsruhe.
+
+- For big scholarly data analysis in a Google Cloud environment, you can use the 
+[Open Scholarly Data Warehouse](https://subugoe.github.io/scholcomm_analytics/data.html)
+maintained by the SUB Göttingen.
+
+- Alternatively, you can download the snapshot from Zenodo: https://zenodo.org. 
+
+
+
+
+## Technical Documentation
+
+- A list of all entities and fields included in the KBOpenBib snapshot can be found
+[here](examples/working_with_kbopenbib_data.md).
+- A guide for importing the KBOpenBib snapshot into a PostgreSQL environment can be 
+found [here](examples/working_with_postgresql.md).
+- A guide for importing the KBOpenBib snapshot into a Google BigQuery environment can be 
+found [here](examples/working_with_bigquery.md).
+
+## How I can get involved?
+
+If you see mistakes, want to suggest changes or submit feature requests, please 
+[create an issue](https://github.com/kbopenbib/kbopenbib_data/issues).
+
+## License
+
+## Citation
+
+## Contact
 
 
 
