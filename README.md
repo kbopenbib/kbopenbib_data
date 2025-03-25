@@ -16,12 +16,12 @@ Curated data is provided for following entities:
 - [Document types](examples/document_types.md) 🗂️
 - [Address information](examples/address_information.md) 🏛️
 
-Annual snapshots from the KBOpenBib project are openly available for Users of the 
+Annual snapshots from the KBOpenBib project are openly available to Users of the 
 [Kompetenznetzwerk Bibliometrie](https://bibliometrie.info), via the 
 [Open Scholarly Data Warehouse of the SUB Göttingen](https://subugoe.github.io/scholcomm_analytics/data.html)
 and [Zenodo](https://zenodo.org).
 
-The current release is based on the August 2024 snapshot of OpenAlex, including works
+The current release is based on the August 2024 snapshot of OpenAlex, limited to works
 with publication years 2014 to 2024.
 
 ## Usage
@@ -36,9 +36,6 @@ you can access the data snapshot via the KB data infrastructure hosted by FIZ Ka
 maintained by the SUB Göttingen.
 
 - Alternatively, you can download the snapshot from Zenodo: https://zenodo.org. 
-
-
-
 
 ## Technical Documentation
 
