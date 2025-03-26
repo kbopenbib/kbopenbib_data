@@ -81,7 +81,7 @@ class OpenBibDataRelease:
 
         logging.info('Finish exporting: CSV')
 
-    def export_publishers(self, limit: str='NULL', export_format: str='csv') -> None:
+    def export_publishers(self, limit: str | int='NULL', export_format: str='csv') -> None:
 
         logging.info('Query table: kb_publisher_standard_relation')
 
@@ -111,7 +111,7 @@ class OpenBibDataRelease:
                                              export_file_name='publishers.csv',
                                              dataframe=publishers_export)
 
-    def export_funding_information(self, limit: str='NULL', export_format: str='csv') -> None:
+    def export_funding_information(self, limit: str | int='NULL', export_format: str='csv') -> None:
 
         logging.info('Query table: dfg_oa')
 
@@ -152,7 +152,7 @@ class OpenBibDataRelease:
 
             logging.info('Finish exporting: CSV')
 
-    def export_document_types(self, limit: str='NULL', export_format: str='csv') -> None:
+    def export_document_types(self, limit: str | int='NULL', export_format: str='csv') -> None:
 
         logging.info('Query table: classification_article_reviews_2014_2024_august24')
 
@@ -180,7 +180,7 @@ class OpenBibDataRelease:
                                              export_file_name='document_types.csv',
                                              dataframe=document_type_export)
 
-    def export_address_information_a(self, limit: str='NULL', export_format: str='csv') -> None:
+    def export_address_information_a(self, limit: str | int='NULL', export_format: str='csv') -> None:
 
         logging.info('Query table: kb_a_addr_inst_sec_oa_b_20240831')
 
@@ -233,7 +233,7 @@ class OpenBibDataRelease:
 
             logging.info('Finish exporting: CSV')
 
-    def export_address_information_s(self, limit: str='NULL', export_format: str='csv') -> None:
+    def export_address_information_s(self, limit: str | int='NULL', export_format: str='csv') -> None:
 
         logging.info('Query table: kb_s_addr_inst_sec_oa_b_20240831')
 
@@ -286,7 +286,7 @@ class OpenBibDataRelease:
 
             logging.info('Finish exporting: CSV')
 
-    def export_kb_sectors(self, limit: str='NULL', export_format: str='csv') -> None:
+    def export_kb_sectors(self, limit: str | int='NULL', export_format: str='csv') -> None:
 
         logging.info('Query table: kb_sectors_oa_b_20240831')
 
@@ -317,7 +317,7 @@ class OpenBibDataRelease:
                                              export_file_name='kb_sectors.csv',
                                              dataframe=kb_sectors_export)
 
-    def export_kb_inst(self, limit: str='NULL', export_format: str='csv') -> None:
+    def export_kb_inst(self, limit: str | int='NULL', export_format: str='csv') -> None:
 
         logging.info('Query table: kb_inst_oa_b_20240831')
 
@@ -349,7 +349,7 @@ class OpenBibDataRelease:
                                              export_file_name='kb_inst.csv',
                                              dataframe=kb_inst_export)
 
-    def export_kb_inst_trans(self, limit: str='NULL', export_format: str='csv') -> None:
+    def export_kb_inst_trans(self, limit: str | int='NULL', export_format: str='csv') -> None:
 
         logging.info('Query table: kb_inst_trans_oa_b_20240831')
 
@@ -379,7 +379,7 @@ class OpenBibDataRelease:
                                              export_file_name='kb_inst_trans.csv',
                                              dataframe=kb_inst_trans_export)
 
-    def make_archive(self, limit: str='NULL', export_format: str='csv') -> None:
+    def make_archive(self, limit: str | int='NULL', export_format: str='csv') -> None:
 
         self.export_publishers(limit=limit, export_format=export_format)
         self.export_funding_information(limit=limit, export_format=export_format)

@@ -3,7 +3,6 @@ import os
 import shutil
 import pandas as pd
 from dotenv import load_dotenv
-from pathlib import Path
 import zipfile
 from scripts.export_files import OpenBibDataRelease
 from models.document_type import document_type_schema
@@ -22,7 +21,7 @@ class TestOpenBibDataRelease:
 
     test_dir = os.path.abspath(os.path.dirname(__file__))
 
-    dotenv_path = Path('./../.env')
+    dotenv_path = os.path.join(test_dir, '.env')
     load_dotenv(dotenv_path=dotenv_path)
 
     host = os.environ['KB_HOST']
@@ -35,7 +34,7 @@ class TestOpenBibDataRelease:
     def openbib_snapshot(self):
         snapshot = OpenBibDataRelease(
             export_directory=os.path.join(self.test_dir, 'openbib_export'),
-            export_file_name='kbopenbib_release',
+            export_file_name=os.path.join(self.test_dir, 'kbopenbib_release'),
             host=self.host,
             database=self.database,
             port=self.port,
@@ -66,7 +65,8 @@ class TestOpenBibDataRelease:
 
         assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/publishers.jsonl'))
 
-        publishers_export = pd.read_json(path_or_buf='openbib_export/publishers.jsonl',
+        publishers_export = pd.read_json(path_or_buf=os.path.join(self.test_dir,
+                                                                  'openbib_export/publishers.jsonl'),
                                          lines=True)
 
         publisher_schema.validate(publishers_export)
@@ -92,7 +92,8 @@ class TestOpenBibDataRelease:
 
         assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/funding_information.jsonl'))
 
-        funding_information_export = pd.read_json(path_or_buf='openbib_export/funding_information.jsonl',
+        funding_information_export = pd.read_json(path_or_buf=os.path.join(self.test_dir,
+                                                                           'openbib_export/funding_information.jsonl'),
                                                   lines=True)
 
         funding_information_schema_unnested.validate(funding_information_export)
@@ -118,7 +119,8 @@ class TestOpenBibDataRelease:
 
         assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/document_types.jsonl'))
 
-        document_type_export = pd.read_json(path_or_buf='openbib_export/document_types.jsonl',
+        document_type_export = pd.read_json(path_or_buf=os.path.join(self.test_dir,
+                                                                     'openbib_export/document_types.jsonl'),
                                             lines=True)
 
         document_type_schema.validate(document_type_export)
@@ -144,8 +146,9 @@ class TestOpenBibDataRelease:
 
         assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/kb_a_addr_inst.jsonl'))
 
-        kb_a_addr_inst_sec_export = pd.read_json(path_or_buf='openbib_export/kb_a_addr_inst.jsonl',
-                                                           lines=True)
+        kb_a_addr_inst_sec_export = pd.read_json(path_or_buf=os.path.join(self.test_dir,
+                                                                          'openbib_export/kb_a_addr_inst.jsonl'),
+                                                 lines=True)
 
         kb_a_addr_inst_sec_schema_nested.validate(kb_a_addr_inst_sec_export)
 
@@ -170,7 +173,8 @@ class TestOpenBibDataRelease:
 
         assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/kb_s_addr_inst.jsonl'))
 
-        kb_s_addr_inst_sec_open_alex_export = pd.read_json(path_or_buf='openbib_export/kb_s_addr_inst.jsonl',
+        kb_s_addr_inst_sec_open_alex_export = pd.read_json(path_or_buf=os.path.join(self.test_dir,
+                                                                                    'openbib_export/kb_s_addr_inst.jsonl'),
                                                            lines=True)
 
         kb_s_addr_inst_sec_schema_nested.validate(kb_s_addr_inst_sec_open_alex_export)
@@ -196,8 +200,9 @@ class TestOpenBibDataRelease:
 
         assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/kb_sectors.jsonl'))
 
-        kb_sectors_export = pd.read_json(path_or_buf='openbib_export/kb_sectors.jsonl',
-                                                      lines=True)
+        kb_sectors_export = pd.read_json(path_or_buf=os.path.join(self.test_dir,
+                                                                  'openbib_export/kb_sectors.jsonl'),
+                                         lines=True)
 
         kb_sectors_schema.validate(kb_sectors_export)
 
@@ -222,8 +227,9 @@ class TestOpenBibDataRelease:
 
         assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/kb_inst.jsonl'))
 
-        kb_inst_export = pd.read_json(path_or_buf='openbib_export/kb_inst.jsonl',
-                                                      lines=True)
+        kb_inst_export = pd.read_json(path_or_buf=os.path.join(self.test_dir,
+                                                               'openbib_export/kb_inst.jsonl'),
+                                      lines=True)
 
         kb_inst_schema.validate(kb_inst_export)
 
@@ -248,7 +254,8 @@ class TestOpenBibDataRelease:
 
         assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/kb_inst_trans.jsonl'))
 
-        kb_inst_trans_export = pd.read_json(path_or_buf='openbib_export/kb_inst_trans.jsonl',
+        kb_inst_trans_export = pd.read_json(path_or_buf=os.path.join(self.test_dir,
+                                                                     'openbib_export/kb_inst_trans.jsonl'),
                                             lines=True)
 
         kb_inst_trans_schema.validate(kb_inst_trans_export)

@@ -1,3 +1,4 @@
-.env
+tests/.env
 .idea
 __pycache__
+.coverage
