@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=75.3.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "kbopenbib_data"
+version = "1.0.0"
+dependencies = {file = ["requirements.txt"]}
+authors = [{name = "Nick Haupka", email = "nick.haupka@sub.uni-goettingen.de"}]
+keywords = ["openalex", "scholarly metadata", "curation"]
+readme = {file = "README.md", content-type = "text/markdown"}
+requires-python = ">=3.11"
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11"
+]
+
+[project.urls]
+Repository = "https://github.com/kbopenbib/kbopenbib_data.git"
+Issues = "https://github.com/kbopenbib/kbopenbib_data/issues"
+
+[tool.setuptools.packages.find]
+where = ["."]
