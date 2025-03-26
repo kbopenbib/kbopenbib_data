@@ -1,7 +1,8 @@
 # KBOpenBib Data
 
-![License](https://img.shields.io/badge/License-Not%20defined-red)
+![License](https://img.shields.io/badge/License-CC0%5f1.0-orange)
 ![Python Version](https://img.shields.io/badge/Python-3.11-blue)
+![Coverage](https://img.shields.io/badge/Coverage-99%25-4c1)
 
 ## About
 
