@@ -27,14 +27,12 @@ with publication years 2014 to 2024.
 
 ## Usage
 
-<div style="text-align:center">
-    <figure>
-        <img src="examples/document_types_sectors.png" height="250" />
-        <figcaption>
-            Fig.1: Classification of article and reviews in journals for German institutions in OpenAlex and OPENBIB classifier.
-        </figcaption>
-    </figure>
-</div>
+<figure>
+    <img src="examples/document_types_sectors.png" width="400" />
+    <figcaption>
+        Fig.1: Classification of article and reviews in journals for German institutions in OpenAlex and by OPENBIB classifier.
+    </figcaption>
+</figure>
 
 ## How do I get it?
 
