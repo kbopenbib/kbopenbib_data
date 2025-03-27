@@ -1,8 +1,8 @@
-# Working with KBOpenBib data
+# Working with KBOpenBib data - Entities overview
 
-This page contains a list of all entities included in the OpenBib snapshot.
+This page contains a list of all entities included in the KBOpenbib snapshot.
 <br>
-If you want detailed information about an individual entity, take a look at the [examples](../examples) directory.
+If you want detailed information about an individual entity, take a look at the [docs](../docs) directory.
 ## Publishers
 
 Table: <i>kb_publisher_standard_relation</i>
