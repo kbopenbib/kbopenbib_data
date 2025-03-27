@@ -68,7 +68,7 @@ funding_id: ["430651076"]
 - doi (STRING): The DOI of this work.
 - funding_id (TEXT): The grant id(s) we found for this work. 
 
-## 🗂️ Document types
+## 🗂 Document types
 
 Journals publishes different types of scholarly works such as
 research articles, reviews, book reviews, case reports and editorials.
