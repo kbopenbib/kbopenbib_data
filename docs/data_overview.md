@@ -78,7 +78,8 @@ contributions and other types of works.
 
 Table: <i>classification_article_reviews_2014_2024_august24 (placeholder)</i>
 <br>
-Limitations: Only includes articles and reviews with the source type journal from 2014 onwards.
+Limitations: Only includes articles and reviews from OpenAlex with the 
+source type journal and the publication year 2014 to 2024.
 <br>
 
 ```bash
