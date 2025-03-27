@@ -6,10 +6,6 @@ If you want detailed information about an individual entity, take a look at the 
 
 ## 📚 Publishers
 
-Some journals are already assigned to publishers in OpenAlex, but there are often different forms of categorisation, especially for large publishing houses (Springer Heidelberg, Springer Tokyo, etc.). In addition, imprints, i.e. acquired publishers, sometimes trade under their original name, sometimes under a compound name that characterises the umbrella publisher (e.g. Wiley-Blackwell). With regard to these entities, curation is primarily aimed at
-the standardisation of publisher names and the adjusted representation of their
-relations over time.
-
 Table: <i>kb_publisher_standard_relation</i>
 
 ```bash
@@ -103,16 +99,6 @@ Examples of works that are considered as non-research publications by the classi
 - proba (FLOAT): The probability that this work is a research contribution.
 
 ## 🏛 Address information
-
-An assignment of publications (works) to institutions (venues) already 
-exists in OpenAlex. For this purpose, OpenAlex analyses address strings 
-from structured (e.g. PubMed) and unstructured (websites) sources and 
-assigns them to a ROR ID 
-([Priem et al. 2022](https://arxiv.org/abs/2205.01833)). 
-With the help of the [institution 
-coding by I2SOS](https://pub.uni-bielefeld.de/record/2999367), the 
-assignment for the address information of German research 
-institutions can be optimised.
 
 ### Modus A
 
