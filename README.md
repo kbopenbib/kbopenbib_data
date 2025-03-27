@@ -28,7 +28,7 @@ with publication years 2014 to 2024.
 ## Usage
 
 <figure>
-    <img src="examples/document_types_sectors.png" width="100%" />
+    <img src="examples/document_types_sectors.png" width="70%" />
     <figcaption>
         Fig.1: Classification of article and reviews in journals for German institutions in OpenAlex and by OPENBIB classifier.
     </figcaption>
