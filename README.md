@@ -11,11 +11,11 @@ provides access to curated OpenAlex data with a focus on the German research lan
 
 Curated data is provided for following entities: 
 
-- [Authors](docs/data_overview.md#authors) 👩‍🎓
-- [Publishers](docs/data_overview.md#publishers) 📚
-- [Funding information](docs/data_overview.md#funding-information) 📄
-- [Document types](docs/data_overview.md#document-types) 🗂️
-- [Address information](docs/data_overview.md#address-information) 🏛️
+- [Authors](docs/data_overview.md#-authors) 👩‍🎓
+- [Publishers](docs/data_overview.md#-publishers) 📚
+- [Funding information](docs/data_overview.md#-funding-information) 📄
+- [Document types](docs/data_overview.md#-document-types) 🗂️
+- [Address information](docs/data_overview.md#-address-information) 🏛️
 
 Annual snapshots from the KBOpenBib project are openly available to users of the 
 [Kompetenznetzwerk Bibliometrie](https://bibliometrie.info), via the 

@@ -3,7 +3,12 @@
 This page contains a list of all entities included in the KBOpenbib snapshot.
 <br>
 If you want detailed information about an individual entity, take a look at the [docs](../docs) directory.
-## Publishers
+
+## 📚 Publishers
+
+Some journals are already assigned to publishers in OpenAlex, but there are often different forms of categorisation, especially for large publishing houses (Springer Heidelberg, Springer Tokyo, etc.). In addition, imprints, i.e. acquired publishers, sometimes trade under their original name, sometimes under a compound name that characterises the umbrella publisher (e.g. Wiley-Blackwell). With regard to these entities, curation is primarily aimed at
+the standardisation of publisher names and the adjusted representation of their
+relations over time.
 
 Table: <i>kb_publisher_standard_relation</i>
 
@@ -37,9 +42,14 @@ parent_unit: 220
 - parent_id (STRING): The OpenAlex id for the parent organisation of this publisher.
 - parent_unit (INTEGER):
 
-## Authors
+## 👩‍🎓 Authors
 
-## Funding information
+The aim of curation is the automatic disambiguation of German Authors.
+
+## 📄 Funding information
+
+Funding information is provided for publications funded by the
+German [Open-Access-Publikationskosten](https://www.dfg.de/en/research-funding/funding-opportunities/programmes/infrastructure/lis/funding-opportunities/open-access-publication-funding) program. 
 
 Table: <i>dfg_oa</i>
 <br>
@@ -58,15 +68,18 @@ funding_id: ["430651076"]
 - doi (STRING): The DOI of this work.
 - funding_id (TEXT): The grant id(s) we found for this work. 
 
-## Document types
+## 🗂️ Document types
+
+Journals publishes different types of scholarly works such as
+research articles, reviews, book reviews, case reports and editorials.
+The latter are often classified as articles in OpenAlex. Using a machine 
+learning classifier helps to distinguish between research
+contributions and other types of works. 
 
 Table: <i>classification_article_reviews_2014_2024_august24 (placeholder)</i>
 <br>
 Limitations: Only includes articles and reviews with the source type journal from 2014 onwards.
 <br>
-
-A machine learning classifier detects whether an article or review
-is actually a research contribution or not.
 
 ```bash
 openalex_id: "W4256503663"
@@ -88,7 +101,17 @@ Examples of works that are considered as non-research publications by the classi
 - is_research (BOOLEAN): True if our classifier detect this work as a research contribution.
 - proba (FLOAT): The probability that this work is a research contribution.
 
-## Address information
+## 🏛 Address information
+
+An assignment of publications (works) to institutions (venues) already 
+exists in OpenAlex. For this purpose, OpenAlex analyses address strings 
+from structured (e.g. PubMed) and unstructured (websites) sources and 
+assigns them to a ROR ID 
+([Priem et al. 2022](https://arxiv.org/abs/2205.01833)). 
+With the help of the [institution 
+coding by I2SOS](https://pub.uni-bielefeld.de/record/2999367), the 
+assignment for the address information of German research 
+institutions can be optimised.
 
 ### Modus A
 
