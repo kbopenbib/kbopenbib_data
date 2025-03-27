@@ -27,7 +27,7 @@ with publication years 2014 to 2024.
 
 ## Usage
 
-<div align="center">
+<div style="text-align:center">
     <figure>
         <img src="examples/document_types_sectors.png" height="250" />
         <figcaption>
