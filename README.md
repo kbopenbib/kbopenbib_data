@@ -11,13 +11,13 @@ provides access to curated OpenAlex data with a focus on the German research lan
 
 Curated data is provided for following entities: 
 
-- [Authors](examples/authors.md) 👩‍🎓
-- [Publishers](examples/publishers.md) 📚
-- [Funding information](examples/funder_information.md) 📄
-- [Document types](examples/document_types.md) 🗂️
-- [Address information](examples/address_information.md) 🏛️
+- [Authors](docs/authors.md) 👩‍🎓
+- [Publishers](docs/publishers.md) 📚
+- [Funding information](docs/funder_information.md) 📄
+- [Document types](docs/document_types.md) 🗂️
+- [Address information](docs/address_information.md) 🏛️
 
-Annual snapshots from the KBOpenBib project are openly available to Users of the 
+Annual snapshots from the KBOpenBib project are openly available to users of the 
 [Kompetenznetzwerk Bibliometrie](https://bibliometrie.info), via the 
 [Open Scholarly Data Warehouse of the SUB Göttingen](https://subugoe.github.io/scholcomm_analytics/data.html)
 and [Zenodo](https://zenodo.org).
@@ -26,6 +26,15 @@ The current release is based on the August 2024 snapshot of OpenAlex, limited to
 with publication years 2014 to 2024.
 
 ## Usage
+
+<div align="center">
+    <figure>
+        <img src="examples/document_types_sectors.png" height="250" />
+        <figcaption>
+            Fig.1: Classification of article and reviews in journals for German institutions in OpenAlex and OPENBIB classifier.
+        </figcaption>
+    </figure>
+</div>
 
 ## How do I get it?
 
@@ -41,11 +50,11 @@ maintained by the SUB Göttingen.
 ## Technical Documentation
 
 - A list of all entities and fields included in the KBOpenBib snapshot can be found
-[here](examples/working_with_kbopenbib_data.md).
+[here](docs/data_overview).
 - A guide for importing the KBOpenBib snapshot into a PostgreSQL environment can be 
-found [here](examples/working_with_postgresql.md).
+found [here](docs/working_with_postgresql.md).
 - A guide for importing the KBOpenBib snapshot into a Google BigQuery environment can be 
-found [here](examples/working_with_bigquery.md).
+found [here](docs/working_with_bigquery.md).
 
 ## How I can get involved?
 
