@@ -6,7 +6,7 @@ kb_a_addr_inst_sec_schema_nested = pa.DataFrameSchema(
         'kb_inst_id': pa.Column(int, required=True),
         'openalex_id': pa.Column(str, nullable=True, required=True),
         'address_full': pa.Column(str, required=True),
-        'kb_sector_id': pa.Column(List[str], required=True),
+        'kb_sector_id': pa.Column(List[str], nullable=True, required=True),
         'doi': pa.Column(str, nullable=True, required=True),
         'identifier': pa.Column(str, required=True)
     },
@@ -18,7 +18,7 @@ kb_a_addr_inst_sec_schema_unnested = pa.DataFrameSchema(
         'kb_inst_id': pa.Column(int, required=True),
         'openalex_id': pa.Column(str, nullable=True, required=True),
         'address_full': pa.Column(str, required=True),
-        'kb_sector_id': pa.Column(str, required=True),
+        'kb_sector_id': pa.Column(str, nullable=True, required=True),
         'doi': pa.Column(str, nullable=True, required=True),
         'identifier': pa.Column(str, required=True)
     },
@@ -74,7 +74,7 @@ kb_inst_schema = pa.DataFrameSchema(
         'first_year': pa.Column(int, required=True),
         'last_year': pa.Column(int, required=True),
         'ror': pa.Column(str, nullable=True, required=True),
-        'dfg_instituts_id': pa.Column(dtype='Int64', nullable=True, coerce=True, required=True)
+        'dfg_instituts_id': pa.Column(int, nullable=True, required=True)
     },
     index=pa.Index(int),
 )

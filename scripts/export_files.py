@@ -336,6 +336,10 @@ class OpenBibDataRelease:
 
         logging.info('Query completed.')
 
+        kb_inst_export['dfg_instituts_id'] = kb_inst_export['dfg_instituts_id'].fillna(0)
+
+        kb_inst_export['dfg_instituts_id'] = kb_inst_export['dfg_instituts_id'].astype('int')
+
         kb_inst_schema.validate(kb_inst_export)
 
         if export_format == 'jsonl':

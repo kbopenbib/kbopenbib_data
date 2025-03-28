@@ -48,7 +48,7 @@ maintained by the SUB Göttingen.
 ## Technical Documentation
 
 - A list of all entities and fields included in the KBOpenBib snapshot can be found
-[here](docs/data_overview).
+[here](docs/data_overview.md).
 - A guide for importing the KBOpenBib snapshot into a PostgreSQL environment can be 
 found [here](docs/working_with_postgresql.md).
 - A guide for importing the KBOpenBib snapshot into a Google BigQuery environment can be 
