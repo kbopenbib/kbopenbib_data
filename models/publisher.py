@@ -13,7 +13,7 @@ publisher_schema = pa.DataFrameSchema(
         'url': pa.Column(str, nullable=True, required=True),
         'parent_name': pa.Column(str, nullable=True, required=True),
         'parent_id': pa.Column(str, nullable=True, required=True),
-        'parent_unit': pa.Column(float, nullable=True, required=True),
+        'parent_unit': pa.Column(int, nullable=True, required=True),
     },
     index=pa.Index(int),
 )

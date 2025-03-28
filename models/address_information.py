@@ -38,7 +38,7 @@ kb_s_addr_inst_sec_schema_nested = pa.DataFrameSchema(
         'kb_inst_id': pa.Column(int, required=True),
         'openalex_id': pa.Column(str, nullable=True, required=True),
         'address_full': pa.Column(str, required=True),
-        'kb_sector_id': pa.Column(List[str], required=True),
+        'kb_sector_id': pa.Column(List[str], nullable=True, required=True),
         'doi': pa.Column(str, nullable=True, required=True),
         'identifier': pa.Column(str, required=True)
     },
@@ -50,7 +50,7 @@ kb_s_addr_inst_sec_schema_unnested = pa.DataFrameSchema(
         'kb_inst_id': pa.Column(int, required=True),
         'openalex_id': pa.Column(str, nullable=True, required=True),
         'address_full': pa.Column(str, required=True),
-        'kb_sector_id': pa.Column(str, required=True),
+        'kb_sector_id': pa.Column(str, nullable=True, required=True),
         'doi': pa.Column(str, nullable=True, required=True),
         'identifier': pa.Column(str, required=True)
     },

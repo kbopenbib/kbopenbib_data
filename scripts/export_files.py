@@ -97,6 +97,10 @@ class OpenBibDataRelease:
 
         logging.info('Query completed.')
 
+        publishers_export['parent_unit'] = publishers_export['parent_unit'].fillna(0)
+
+        publishers_export['parent_unit'] = publishers_export['parent_unit'].astype('int')
+
         publisher_schema.validate(publishers_export)
 
         if export_format == 'jsonl':
