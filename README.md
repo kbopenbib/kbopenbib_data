@@ -34,6 +34,7 @@ with publication years 2014 to 2024.
     </figcaption>
 </figure>
 
+<p></p>
 
 <figure>
     <img src="examples/document_types_sectors.png" width="70%" />
