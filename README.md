@@ -28,9 +28,17 @@ with publication years 2014 to 2024.
 ## Usage
 
 <figure>
+    <img src="examples/kb_institution_disambiguation.png" width="70%" />
+    <figcaption>
+        <b>Fig.1:</b> Number of publications assigned to German institutions in OpenAlex and OPENBIB based on ROR-Matching. Only publications published between 2014 and 2024 are considered.
+    </figcaption>
+</figure>
+
+
+<figure>
     <img src="examples/document_types_sectors.png" width="70%" />
     <figcaption>
-        Fig.1: Classification of article and reviews in journals for German institutions in OpenAlex and by OPENBIB classifier.
+        <b>Fig.2:</b> Classification of article and reviews in journals for German institutions in OpenAlex and by OPENBIB classifier. Only publications published between 2014 and 2024 are considered.
     </figcaption>
 </figure>
 
