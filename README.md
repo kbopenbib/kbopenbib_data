@@ -48,7 +48,7 @@ with publication years 2014 to 2024.
 <figure>
     <img src="examples/funding_information_sectors.png" width="70%" />
     <figcaption>
-        <b>Fig.3:</b> Publications containing funding information of the German Research Foundation assigned to German institutions in OpenAlex and by OPENBIB. Only publications published between 2020 and 2024 are considered. 
+        <b>Fig.3:</b> Publications containing funding information of the German Research Foundation per German institution in OpenAlex and by OPENBIB. Only publications published between 2020 and 2024 are considered. 
     </figcaption>
 </figure>
 
