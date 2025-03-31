@@ -1,4 +1,4 @@
-# Working with KBOpenBib data - Entities overview
+# Working with OPENBIB data - Entities overview
 
 This page contains a list of all entities included in the KBOpenbib snapshot.
 <br>

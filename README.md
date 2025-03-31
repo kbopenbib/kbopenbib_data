@@ -6,7 +6,7 @@
 
 ## About
 
-The KBOpenBib project, maintained by the [Kompetenznetzwerk Bibliometrie](https://bibliometrie.info),  
+The OPENBIB project, maintained by the [Kompetenznetzwerk Bibliometrie](https://bibliometrie.info),  
 provides access to curated OpenAlex data with a focus on the German research landscape.
 
 Curated data is provided for following entities: 
@@ -17,7 +17,7 @@ Curated data is provided for following entities:
 - [Document types](docs/data_overview.md#-document-types) 🗂️
 - [Address information](docs/data_overview.md#-address-information) 🏛️
 
-Annual snapshots from the KBOpenBib project are openly available to users of the 
+Annual snapshots from the OPENBIB project are openly available to users of the 
 [Kompetenznetzwerk Bibliometrie](https://bibliometrie.info), via the 
 [Open Scholarly Data Warehouse of the SUB Göttingen](https://subugoe.github.io/scholcomm_analytics/data.html)
 and [Zenodo](https://zenodo.org).
@@ -39,7 +39,7 @@ with publication years 2014 to 2024.
 <figure>
     <img src="examples/document_types_sectors.png" width="70%" />
     <figcaption>
-        <b>Fig.2:</b> Classification of article and reviews in journals for German institutions in OpenAlex and by OPENBIB classifier. Only publications published between 2014 and 2024 are considered.
+        <b>Fig.2:</b> Classification of article and reviews in journals for German institutions in OpenAlex and by OPENBIB. Only publications published between 2014 and 2024 are considered.
     </figcaption>
 </figure>
 
@@ -56,12 +56,12 @@ maintained by the SUB Göttingen.
 
 ## Technical Documentation
 
-- A list of all entities and fields included in the KBOpenBib snapshot can be found
+- A list of all entities and fields included in the OPENBIB snapshot can be found
 [here](docs/data_overview.md).
-- A guide for importing the KBOpenBib snapshot into a PostgreSQL environment can be 
-found [here](docs/working_with_postgresql.md).
-- A guide for importing the KBOpenBib snapshot into a Google BigQuery environment can be 
-found [here](docs/working_with_bigquery.md).
+- A guide for working with the OPENBIB snapshot in the KB data infrastructure can be 
+found [here](examples/).
+- A guide for working with the OPENBIB snapshot in the Open Scholarly 
+Data Warehouse of the SUB Göttingen can be found [here](examples/bigquery_notebook.ipynb).
 
 ## How I can get involved?
 
