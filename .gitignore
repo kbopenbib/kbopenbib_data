@@ -3,3 +3,4 @@ tests/.env
 __pycache__
 .coverage
 coverage.svg
+.ipynb_checkpoints
