@@ -27,6 +27,8 @@ with publication years 2014 to 2024.
 
 ## Usage
 
+### Address information
+
 <figure>
     <img src="examples/kb_institution_disambiguation.png" width="70%" />
     <figcaption>
@@ -34,7 +36,7 @@ with publication years 2014 to 2024.
     </figcaption>
 </figure>
 
-<p></p>
+### Document types
 
 <figure>
     <img src="examples/document_types_sectors.png" width="70%" />
@@ -43,7 +45,7 @@ with publication years 2014 to 2024.
     </figcaption>
 </figure>
 
-<p></p>
+### Funding information
 
 <figure>
     <img src="examples/funding_information_sectors.png" width="70%" />
