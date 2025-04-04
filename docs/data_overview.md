@@ -100,7 +100,16 @@ Examples of works that are considered as non-research publications by the classi
 
 ## 🏛 Address information
 
+Disambiguation of address information is provided by the [Institute for Interdisciplinary Studies of
+Science](https://www.uni-bielefeld.de/einrichtungen/i2sos/) in Bielefeld. 
+
+Limitations: Only includes publications that are assigned to German institutions 
+by the algorithm.
+
 ### Modus A
+
+Modus A contains all assignments of publications to currently existing 
+institutions.
 
 #### kb_a_addr_inst_sec_open_alex
 
@@ -140,17 +149,20 @@ kb_sector_id: "mpg"
 
 ### Modus S (Historic mode)
 
+Modus S contains all assignments of publications to institutions that existed 
+at the time of publication.
+
 #### kb_s_addr_inst_sec_open_alex
 
 Table: <i>kb_s_addr_inst_sec_oa_b_20240831</i>
 
 ```bash
-kb_inst_id: 142
-openalex_id: "W2097461905"
-address_full: "Department for Bioanalytics, Georg-August University Göttingen, Göttingen, Germany."
-kb_sector_id: ["uni"]
-doi: "10.1038/nmeth.3493"
-identifier: "10.1038/nmeth.3493§142"
+kb_inst_id: 1073
+openalex_id: "W3031617943"
+address_full: "Department of Molecular Neurobiology, Max Planck Institute of Experimental Medicine, Göttingen 37075, Germany"
+kb_sector_id: ["mpg"]
+doi: "10.1016/j.isci.2020.101203"
+identifier: "10.1016/j.isci.2020.101203§1073"
 ```
 
 #### Fields 
@@ -167,8 +179,8 @@ identifier: "10.1038/nmeth.3493§142"
 Table: <i>kb_s_inst_sec_oa_b_20240831</i>
 
 ```bash
-kb_inst_id: 142
-kb_sector_id: "uni"
+kb_inst_id: 1073
+kb_sector_id: "mpg"
 first_year: 1000
 last_year: 9999
 ```
@@ -229,10 +241,10 @@ remarks: ""
 Table: <i>kb_inst_trans_oa_b_20240831</i>
 
 ```bash
-inst_ante: 854
-transition_date: "2008-01-01"
-inst_post: 801
-type: "fusion"
+inst_ante: 1073
+transition_date: "2022-01-01"
+inst_post: 5617
+type: "inclusion"
 ```
 
 - inst_ante (INTEGER): The institution id before the transition.
