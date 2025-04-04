@@ -111,8 +111,8 @@ kb_inst_id: 5617
 openalex_id: "W2074596230"
 address_full: "Max-Plank-Institut für Biophysikalische Chemie, Göttingen, Germany, DE"
 kb_sector_id: ["mpg"]
-doi: "10.1007/S004310050674"
-identifier: "10.1007/S004310050674§5617"
+doi: "10.1007/s004310050674"
+identifier: "10.1007/s004310050674§5617"
 ```
 
 #### Fields 
@@ -149,8 +149,8 @@ kb_inst_id: 142
 openalex_id: "W2097461905"
 address_full: "Department for Bioanalytics, Georg-August University Göttingen, Göttingen, Germany."
 kb_sector_id: ["uni"]
-doi: "10.1038/NMETH.3493"
-identifier: "10.1038/NMETH.3493§142"
+doi: "10.1038/nmeth.3493"
+identifier: "10.1038/nmeth.3493§142"
 ```
 
 #### Fields 

@@ -70,7 +70,7 @@ maintained by the SUB Göttingen.
 - A list of all entities and fields included in the OPENBIB snapshot can be found
 [here](docs/data_overview.md).
 - A guide for working with the OPENBIB snapshot in the KB data infrastructure can be 
-found [here](examples/).
+found [here](examples/kb_notebook.ipynb).
 - A guide for working with the OPENBIB snapshot in the Open Scholarly 
 Data Warehouse of the SUB Göttingen can be found [here](examples/bigquery_notebook.ipynb).
 
