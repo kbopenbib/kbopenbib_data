@@ -99,7 +99,7 @@ class OpenBibDataRelease:
 
         logging.info('Query completed.')
 
-        publishers_export['parent_unit'] = publishers_export['parent_unit'].fillna(0)
+        publishers_export['parent_unit'] = publishers_export['parent_unit'].fillna('0')
 
         publishers_export['parent_unit'] = publishers_export['parent_unit'].astype('int')
 
@@ -400,7 +400,7 @@ class OpenBibDataRelease:
 
         logging.info('Query completed.')
 
-        kb_inst_export['dfg_instituts_id'] = kb_inst_export['dfg_instituts_id'].fillna(0)
+        kb_inst_export['dfg_instituts_id'] = kb_inst_export['dfg_instituts_id'].fillna('0')
 
         kb_inst_export['dfg_instituts_id'] = kb_inst_export['dfg_instituts_id'].astype('int')
 
