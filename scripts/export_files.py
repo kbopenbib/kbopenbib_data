@@ -9,6 +9,8 @@ from models.funding_information import funding_information_schema_nested
 from models.publisher import publisher_schema
 from models.address_information import (kb_a_addr_inst_sec_schema_nested,
                                         kb_s_addr_inst_sec_schema_nested,
+                                        kb_a_inst_sec_schema,
+                                        kb_s_inst_sec_schema,
                                         kb_sectors_schema,
                                         kb_inst_schema,
                                         kb_inst_trans_schema)
@@ -237,6 +239,34 @@ class OpenBibDataRelease:
 
             logging.info('Finish exporting: CSV')
 
+    def export_address_information_a_sec(self, limit: str | int='NULL', export_format: str='csv') -> None:
+
+        logging.info('Query table: kb_a_inst_sec_oa_b_20240831')
+
+        kb_a_inst_export = pd.read_sql(sql=
+                                        f"""
+                                        SELECT kb_inst_id,
+                                               kb_sector_id
+                                        FROM kb_project_openbib.kb_a_inst_sec_oa_b_20240831
+                                        LIMIT {limit}
+                                        """,
+                                        con=self.engine)
+
+        logging.info('Query completed.')
+
+        kb_a_inst_sec_schema.validate(kb_a_inst_export)
+
+        if export_format == 'jsonl':
+
+            OpenBibDataRelease.export_to_jsonl(export_directory=self.export_directory,
+                                               export_file_name='kb_a_inst.jsonl',
+                                               dataframe=kb_a_inst_export)
+
+        if export_format == 'csv':
+            OpenBibDataRelease.export_to_csv(export_directory=self.export_directory,
+                                             export_file_name='kb_a_inst.csv',
+                                             dataframe=kb_a_inst_export)
+
     def export_address_information_s(self, limit: str | int='NULL', export_format: str='csv') -> None:
 
         logging.info('Query table: kb_s_addr_inst_sec_oa_b_20240831')
@@ -289,6 +319,36 @@ class OpenBibDataRelease:
                 self.export_directory, 'kb_s_addr_inst.csv'), index=False)
 
             logging.info('Finish exporting: CSV')
+
+    def export_address_information_s_sec(self, limit: str | int='NULL', export_format: str='csv') -> None:
+
+        logging.info('Query table: kb_s_inst_sec_oa_b_20240831')
+
+        kb_s_inst_export = pd.read_sql(sql=
+                                        f"""
+                                        SELECT kb_inst_id,
+                                               kb_sector_id,
+                                               first_year,
+                                               last_year
+                                        FROM kb_project_openbib.kb_s_inst_sec_oa_b_20240831
+                                        LIMIT {limit}
+                                        """,
+                                        con=self.engine)
+
+        logging.info('Query completed.')
+
+        kb_s_inst_sec_schema.validate(kb_s_inst_export)
+
+        if export_format == 'jsonl':
+
+            OpenBibDataRelease.export_to_jsonl(export_directory=self.export_directory,
+                                               export_file_name='kb_s_inst.jsonl',
+                                               dataframe=kb_s_inst_export)
+
+        if export_format == 'csv':
+            OpenBibDataRelease.export_to_csv(export_directory=self.export_directory,
+                                             export_file_name='kb_s_inst.csv',
+                                             dataframe=kb_s_inst_export)
 
     def export_kb_sectors(self, limit: str | int='NULL', export_format: str='csv') -> None:
 
@@ -393,7 +453,9 @@ class OpenBibDataRelease:
         self.export_funding_information(limit=limit, export_format=export_format)
         self.export_document_types(limit=limit, export_format=export_format)
         self.export_address_information_a(limit=limit, export_format=export_format)
+        self.export_address_information_a_sec(limit=limit, export_format=export_format)
         self.export_address_information_s(limit=limit, export_format=export_format)
+        self.export_address_information_s_sec(limit=limit, export_format=export_format)
         self.export_kb_sectors(limit=limit, export_format=export_format)
         self.export_kb_inst(limit=limit, export_format=export_format)
         self.export_kb_inst_trans(limit=limit, export_format=export_format)

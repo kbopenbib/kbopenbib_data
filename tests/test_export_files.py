@@ -12,6 +12,8 @@ from models.address_information import (kb_a_addr_inst_sec_schema_unnested,
                                         kb_a_addr_inst_sec_schema_nested,
                                         kb_s_addr_inst_sec_schema_unnested,
                                         kb_s_addr_inst_sec_schema_nested,
+                                        kb_a_inst_sec_schema,
+                                        kb_s_inst_sec_schema,
                                         kb_sectors_schema,
                                         kb_inst_schema,
                                         kb_inst_trans_schema)
@@ -152,6 +154,33 @@ class TestOpenBibDataRelease:
 
         kb_a_addr_inst_sec_schema_nested.validate(kb_a_addr_inst_sec_export)
 
+    def test_export_address_information_a_sec_to_csv(self, openbib_snapshot: OpenBibDataRelease) -> None:
+
+        openbib_snapshot.export_address_information_a_sec(limit=10, export_format='csv')
+
+        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/kb_a_inst.csv'))
+
+        kb_a_inst_sec_export = pd.read_csv(
+            filepath_or_buffer=os.path.join(self.test_dir, 'openbib_export/kb_a_inst.csv'),
+            sep=',',
+            quotechar='"',
+            header=0
+        )
+
+        kb_a_inst_sec_schema.validate(kb_a_inst_sec_export)
+
+    def test_export_address_information_a_sec_to_jsonl(self, openbib_snapshot: OpenBibDataRelease) -> None:
+
+        openbib_snapshot.export_address_information_a_sec(limit=10, export_format='jsonl')
+
+        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/kb_a_inst.jsonl'))
+
+        kb_a_inst_sec_export = pd.read_json(path_or_buf=os.path.join(self.test_dir,
+                                                                     'openbib_export/kb_a_inst.jsonl'),
+                                            lines=True)
+
+        kb_a_inst_sec_schema.validate(kb_a_inst_sec_export)
+
     def test_export_address_information_s_to_csv(self, openbib_snapshot: OpenBibDataRelease) -> None:
 
         openbib_snapshot.export_address_information_s(limit=10, export_format='csv')
@@ -178,6 +207,33 @@ class TestOpenBibDataRelease:
                                                            lines=True)
 
         kb_s_addr_inst_sec_schema_nested.validate(kb_s_addr_inst_sec_open_alex_export)
+
+    def test_export_address_information_s_sec_to_csv(self, openbib_snapshot: OpenBibDataRelease) -> None:
+
+        openbib_snapshot.export_address_information_s_sec(limit=10, export_format='csv')
+
+        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/kb_s_inst.csv'))
+
+        kb_s_inst_sec_export = pd.read_csv(
+            filepath_or_buffer=os.path.join(self.test_dir, 'openbib_export/kb_s_inst.csv'),
+            sep=',',
+            quotechar='"',
+            header=0
+        )
+
+        kb_s_inst_sec_schema.validate(kb_s_inst_sec_export)
+
+    def test_export_address_information_s_sec_to_jsonl(self, openbib_snapshot: OpenBibDataRelease) -> None:
+
+        openbib_snapshot.export_address_information_s_sec(limit=10, export_format='jsonl')
+
+        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/kb_s_inst.jsonl'))
+
+        kb_s_inst_sec_export = pd.read_json(path_or_buf=os.path.join(self.test_dir,
+                                                                     'openbib_export/kb_s_inst.jsonl'),
+                                            lines=True)
+
+        kb_s_inst_sec_schema.validate(kb_s_inst_sec_export)
 
     def test_export_sectors_to_csv(self, openbib_snapshot: OpenBibDataRelease) -> None:
 
@@ -268,6 +324,18 @@ class TestOpenBibDataRelease:
 
         archive = zipfile.ZipFile(file=os.path.join(self.test_dir, 'kbopenbib_release.zip'), mode='r')
 
-        assert len(archive.infolist()) == 8
+        assert len(archive.infolist()) == 10
+
+        os.remove(os.path.join(self.test_dir, 'kbopenbib_release.zip'))
+
+    def test_make_archive_to_jsonl(self, openbib_snapshot: OpenBibDataRelease) -> None:
+
+        openbib_snapshot.make_archive(limit=10, export_format='jsonl')
+
+        assert os.path.exists(os.path.join(self.test_dir, 'kbopenbib_release.zip'))
+
+        archive = zipfile.ZipFile(file=os.path.join(self.test_dir, 'kbopenbib_release.zip'), mode='r')
+
+        assert len(archive.infolist()) == 10
 
         os.remove(os.path.join(self.test_dir, 'kbopenbib_release.zip'))
