@@ -26,11 +26,6 @@
   },
   {
     "mode": "NULLABLE",
-    "name": "other_name",
-    "type": "STRING"
-  },
-  {
-    "mode": "NULLABLE",
     "name": "wikidata",
     "type": "STRING"
   },
@@ -43,20 +38,5 @@
     "mode": "NULLABLE",
     "name": "url",
     "type": "STRING"
-  },
-  {
-    "mode": "NULLABLE",
-    "name": "parent_name",
-    "type": "STRING"
-  },
-  {
-    "mode": "NULLABLE",
-    "name": "parent_id",
-    "type": "STRING"
-  },
-  {
-    "mode": "NULLABLE",
-    "name": "parent_unit",
-    "type": "INTEGER"
   }
 ]
