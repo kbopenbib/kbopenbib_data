@@ -29,6 +29,13 @@ with publication years 2014 to 2024.
 
 ### Address information
 
+The following figure compares the assignment of publications to German institutions
+in OpenAlex and in OPENBIB. While OpenAlex uses a probability model to match 
+address affiliations in documents with institutions, OPENBIB uses a pattern matching
+approach. The figure only displays institutions that are present in both 
+OpenAlex and OPENBIB and can be assigned a unique Research Organisation 
+Registry (ROR) ID.
+
 <figure>
     <img src="examples/kb_institution_disambiguation.png" width="70%" />
     <figcaption>
@@ -38,6 +45,11 @@ with publication years 2014 to 2024.
 
 ### Document types
 
+The following figure compares the classification of article and reviews in OpenAlex
+and in OPENBIB. OpenAlex counts more article and reviews than OPENBIB, because
+OpenAlex also labels case reports, abstracts, book reviews and editorials
+as articles and reviews. 
+
 <figure>
     <img src="examples/document_types_sectors.png" width="70%" />
     <figcaption>
@@ -46,6 +58,12 @@ with publication years 2014 to 2024.
 </figure>
 
 ### Funding information
+
+The following figure compares the number of publications with funding
+information of the German Research Foundation in OpenAlex and in OPENBIB. 
+Only publications funded by the German 
+[Open-Access-Publikationskosten](https://www.dfg.de/en/research-funding/funding-opportunities/programmes/infrastructure/lis/funding-opportunities/open-access-publication-funding) 
+program are considered.
 
 <figure>
     <img src="examples/funding_information_sectors.png" width="70%" />
@@ -67,7 +85,7 @@ maintained by the SUB Göttingen.
 
 ## Technical Documentation
 
-- A list of all entities and fields included in the OPENBIB snapshot can be found
+A list of all entities and fields included in the OPENBIB snapshot can be found
 [here](docs/data_overview.md).
 
 ### Jupyter notebooks
