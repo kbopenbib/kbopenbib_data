@@ -69,9 +69,11 @@ maintained by the SUB Göttingen.
 
 - A list of all entities and fields included in the OPENBIB snapshot can be found
 [here](docs/data_overview.md).
-- A guide for working with the OPENBIB snapshot in the KB data infrastructure can be 
+
+### Jupyter notebooks
+- A jupyter notebook containing code examples for working with the OPENBIB snapshot in the KB data infrastructure can be 
 found [here](examples/kb_notebook.ipynb).
-- A guide for working with the OPENBIB snapshot in the Open Scholarly 
+- A jupyter notebook containing code examples for working with the OPENBIB snapshot in the Open Scholarly 
 Data Warehouse of the SUB Göttingen can be found [here](examples/bigquery_notebook.ipynb).
 
 ## How I can get involved?
@@ -80,6 +82,8 @@ If you see mistakes, want to suggest changes or submit feature requests, please
 [create an issue](https://github.com/kbopenbib/kbopenbib_data/issues).
 
 ## License
+
+Data is made available under the [CC0 license](LICENSE.txt).
 
 ## Citation
 

@@ -8,7 +8,7 @@ This subset of publications registered at FZ Jülich by funded institutions with
 
 ## Data and data structure
 
-The data is uploaded to the KB relational database in the table `kb_project_openbib.dfg_oa` with the following table structure:
+The data is uploaded to the KB relational database in the table `kb_project_openbib.add_funding_information_20240831` with the following table structure:
 
 ```sql
 doi	        text
@@ -28,7 +28,7 @@ FROM (
     SELECT doi, count(funding_id) c
     FROM (
         SELECT doi, unnest(funding_id) funding_id
-        FROM kb_project_openbib.dfg_oa
+        FROM kb_project_openbib.add_funding_information_20240831
     ) a
     GROUP BY doi
 ) b;
@@ -50,7 +50,7 @@ SELECT pubyear, count(*)
 FROM fiz_openalex_bdb_20240831_openbib.items
 WHERE item_id IN (
     SELECT item_id_oal
-    FROM kb_project_openbib.dfg_oa 
+    FROM kb_project_openbib.add_funding_information_20240831 
     WHERE item_id_oal IS NOT NULL
 )
 GROUP BY ROLLUP(pubyear)
@@ -79,7 +79,7 @@ SELECT class_name[1], count(*)
 FROM fiz_openalex_bdb_20240831_openbib.items
 WHERE item_id IN (
     SELECT item_id_oal
-    FROM kb_project_openbib.dfg_oa 
+    FROM kb_project_openbib.add_funding_information_20240831
     WHERE item_id_oal IS NOT NULL
 )
 GROUP BY ROLLUP(class_name[1])
@@ -110,7 +110,7 @@ SELECT count(distinct item_id)
 FROM fiz_openalex_bdb_20240831_openbib.funding_agencies_grants
 WHERE item_id IN (
     SELECT item_id_oal
-    FROM kb_project_openbib.dfg_oa
+    FROM kb_project_openbib.add_funding_information_20240831
     WHERE item_id_oal IS NOT NULL
 )
 AND funding_agency = 'Deutsche Forschungsgemeinschaft';
@@ -132,7 +132,7 @@ FROM (
     JOIN fiz_openalex_bdb_20240831_openbib.authors_affiliations aa ON (ia.item_id, ia.author_seq_nr) = (aa.item_id, aa.author_seq_nr)
     WHERE ia.item_id IN (
         SELECT item_id_oal
-        FROM kb_project_openbib.dfg_oa
+        FROM kb_project_openbib.add_funding_information_20240831
         WHERE item_id_oal IS NOT NULL
     )
     AND ia.corresponding = true
@@ -169,7 +169,7 @@ FROM kb_project_openbib.kb_a_addr_inst_sec_open_alex kboal
 JOIN kb_project_openbib.kb_inst_open_alex k ON kboal.kb_inst_id = k.kb_inst_id
 WHERE kboal.item_id IN (
     SELECT item_id_oal
-    FROM kb_project_openbib.dfg_oa
+    FROM kb_project_openbib.add_funding_information_20240831
     WHERE item_id_oal IS NOT NULL)
 ) a
 GROUP BY name

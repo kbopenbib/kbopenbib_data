@@ -7,13 +7,9 @@ publisher_schema = pa.DataFrameSchema(
         'publisher_name': pa.Column(str, nullable=True, required=True),
         'standard_name': pa.Column(str, nullable=True, required=True),
         'unit_pk': pa.Column(int, nullable=True, required=True),
-        'other_name': pa.Column(str, nullable=True, required=True),
         'wikidata': pa.Column(str, nullable=True, required=True),
         'ror': pa.Column(str, nullable=True, required=True),
-        'url': pa.Column(str, nullable=True, required=True),
-        'parent_name': pa.Column(str, nullable=True, required=True),
-        'parent_id': pa.Column(str, nullable=True, required=True),
-        'parent_unit': pa.Column(int, nullable=True, required=True),
+        'url': pa.Column(str, nullable=True, required=True)
     },
     index=pa.Index(int),
 )

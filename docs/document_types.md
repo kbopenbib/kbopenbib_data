@@ -33,9 +33,9 @@ frequency of non-research items.
 
 ```sql
 SELECT s.display_name AS journal, is_research, COUNT(DISTINCT(doi)) AS n
-FROM kb_project_openbib.classification_article_reviews_2014_2024_august24 AS dt
+FROM kb_project_openbib.add_document_types_20240831 AS dt
 JOIN fiz_openalex_rep_20240831_openbib.works_primary_locations AS wpl
-	ON LOWER(TRIM('https://openalex.org/' FROM dt.openalex_id)) = LOWER(wpl.work_id)
+	ON LOWER(dt.openalex_id) = LOWER(wpl.work_id)
 JOIN fiz_openalex_rep_20240831_openbib.sources AS s
 	ON LOWER(wpl.source_id) = LOWER(s.id)
 GROUP BY journal, is_research

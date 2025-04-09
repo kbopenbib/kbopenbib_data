@@ -85,23 +85,18 @@ class OpenBibDataRelease:
 
     def export_publishers(self, limit: str | int='NULL', export_format: str='csv') -> None:
 
-        logging.info('Query table: kb_publisher_standard_relation')
+        logging.info('Query table: add_publishers_20240831')
 
         publishers_export = pd.read_sql(sql=
                                            f"""
                                            SELECT publisher_id, publisher_id_orig, publisher_name,
-                                                  standard_name, unit_pk, other_name, wikidata, ror, url, 
-                                                  parent_name, parent_id, parent_unit
-                                           FROM kb_project_openbib.kb_publisher_standard_relation
+                                                  standard_name, unit_pk, wikidata, ror, url
+                                           FROM kb_project_openbib.add_publishers_20240831
                                            LIMIT {limit}
                                            """,
                                            con=self.engine)
 
         logging.info('Query completed.')
-
-        publishers_export['parent_unit'] = publishers_export['parent_unit'].fillna('0')
-
-        publishers_export['parent_unit'] = publishers_export['parent_unit'].astype('int')
 
         publisher_schema.validate(publishers_export)
 
@@ -119,12 +114,12 @@ class OpenBibDataRelease:
 
     def export_funding_information(self, limit: str | int='NULL', export_format: str='csv') -> None:
 
-        logging.info('Query table: dfg_oa')
+        logging.info('Query table: add_funding_information_20240831')
 
         funding_information_export = pd.read_sql(sql=
                                                  f"""
                                                  SELECT item_id_oal as openalex_id, doi, funding_id
-                                                 FROM kb_project_openbib.dfg_oa
+                                                 FROM kb_project_openbib.add_funding_information_20240831
                                                  LIMIT {limit}
                                                  """,
                                                  con=self.engine)
@@ -160,12 +155,12 @@ class OpenBibDataRelease:
 
     def export_document_types(self, limit: str | int='NULL', export_format: str='csv') -> None:
 
-        logging.info('Query table: classification_article_reviews_2014_2024_august24')
+        logging.info('Query table: add_document_types_20240831')
 
         document_type_export = pd.read_sql(sql=
                                            f"""
                                            SELECT openalex_id, doi, is_research, proba
-                                           FROM kb_project_openbib.classification_article_reviews_2014_2024_august24
+                                           FROM kb_project_openbib.add_document_types_20240831
                                            LIMIT {limit}
                                            """,
                                            con=self.engine)
@@ -188,7 +183,7 @@ class OpenBibDataRelease:
 
     def export_address_information_a(self, limit: str | int='NULL', export_format: str='csv') -> None:
 
-        logging.info('Query table: kb_a_addr_inst_sec_oa_b_20240831')
+        logging.info('Query table: add_address_information_a_addr_inst_sec_20240831')
 
         kb_a_addr_inst_export = pd.read_sql(sql=
                                             f"""
@@ -198,7 +193,7 @@ class OpenBibDataRelease:
                                                    kb_sector_id, 
                                                    doi,
                                                    identifier
-                                            FROM kb_project_openbib.kb_a_addr_inst_sec_oa_b_20240831
+                                            FROM kb_project_openbib.add_address_information_a_addr_inst_sec_20240831
                                             LIMIT {limit}
                                             """,
                                             con=self.engine)
@@ -241,13 +236,13 @@ class OpenBibDataRelease:
 
     def export_address_information_a_sec(self, limit: str | int='NULL', export_format: str='csv') -> None:
 
-        logging.info('Query table: kb_a_inst_sec_oa_b_20240831')
+        logging.info('Query table: add_address_information_a_inst_sec_20240831')
 
         kb_a_inst_export = pd.read_sql(sql=
                                         f"""
                                         SELECT kb_inst_id,
                                                kb_sector_id
-                                        FROM kb_project_openbib.kb_a_inst_sec_oa_b_20240831
+                                        FROM kb_project_openbib.add_address_information_a_inst_sec_20240831
                                         LIMIT {limit}
                                         """,
                                         con=self.engine)
@@ -269,7 +264,7 @@ class OpenBibDataRelease:
 
     def export_address_information_s(self, limit: str | int='NULL', export_format: str='csv') -> None:
 
-        logging.info('Query table: kb_s_addr_inst_sec_oa_b_20240831')
+        logging.info('Query table: add_address_information_s_addr_inst_sec_20240831')
 
         kb_s_addr_inst_export = pd.read_sql(sql=
                                             f"""
@@ -279,7 +274,7 @@ class OpenBibDataRelease:
                                                    kb_sector_id, 
                                                    doi,
                                                    identifier
-                                            FROM kb_project_openbib.kb_s_addr_inst_sec_oa_b_20240831
+                                            FROM kb_project_openbib.add_address_information_s_addr_inst_sec_20240831
                                             LIMIT {limit}
                                             """,
                                             con=self.engine)
@@ -322,7 +317,7 @@ class OpenBibDataRelease:
 
     def export_address_information_s_sec(self, limit: str | int='NULL', export_format: str='csv') -> None:
 
-        logging.info('Query table: kb_s_inst_sec_oa_b_20240831')
+        logging.info('Query table: add_address_information_s_inst_sec_20240831')
 
         kb_s_inst_export = pd.read_sql(sql=
                                         f"""
@@ -330,7 +325,7 @@ class OpenBibDataRelease:
                                                kb_sector_id,
                                                first_year,
                                                last_year
-                                        FROM kb_project_openbib.kb_s_inst_sec_oa_b_20240831
+                                        FROM kb_project_openbib.add_address_information_s_inst_sec_20240831
                                         LIMIT {limit}
                                         """,
                                         con=self.engine)
@@ -352,7 +347,7 @@ class OpenBibDataRelease:
 
     def export_kb_sectors(self, limit: str | int='NULL', export_format: str='csv') -> None:
 
-        logging.info('Query table: kb_sectors_oa_b_20240831')
+        logging.info('Query table: add_address_information_sectors_20240831')
 
         kb_sectors_export = pd.read_sql(sql=
                                         f"""
@@ -361,7 +356,7 @@ class OpenBibDataRelease:
                                                sectorgroup_name,
                                                sector_name,
                                                remarks
-                                        FROM kb_project_openbib.kb_sectors_oa_b_20240831
+                                        FROM kb_project_openbib.add_address_information_sectors_20240831
                                         LIMIT {limit}
                                         """,
                                         con=self.engine)
@@ -383,7 +378,7 @@ class OpenBibDataRelease:
 
     def export_kb_inst(self, limit: str | int='NULL', export_format: str='csv') -> None:
 
-        logging.info('Query table: kb_inst_oa_b_20240831')
+        logging.info('Query table: add_address_information_inst_20240831')
 
         kb_inst_export = pd.read_sql(sql=
                                         f"""
@@ -393,7 +388,7 @@ class OpenBibDataRelease:
                                                last_year,
                                                ror,
                                                dfg_instituts_id
-                                        FROM kb_project_openbib.kb_inst_oa_b_20240831
+                                        FROM kb_project_openbib.add_address_information_inst_20240831
                                         LIMIT {limit}
                                         """,
                                         con=self.engine)
@@ -419,7 +414,7 @@ class OpenBibDataRelease:
 
     def export_kb_inst_trans(self, limit: str | int='NULL', export_format: str='csv') -> None:
 
-        logging.info('Query table: kb_inst_trans_oa_b_20240831')
+        logging.info('Query table: add_address_information_inst_trans_20240831')
 
         kb_inst_trans_export = pd.read_sql(sql=
                                             f"""
@@ -427,7 +422,7 @@ class OpenBibDataRelease:
                                                    transition_date, 
                                                    inst_post, 
                                                    type
-                                            FROM kb_project_openbib.kb_inst_trans_oa_b_20240831
+                                            FROM kb_project_openbib.add_address_information_inst_trans_20240831
                                             LIMIT {limit}
                                             """,
                                             con=self.engine)

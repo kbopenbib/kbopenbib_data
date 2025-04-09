@@ -6,7 +6,7 @@ If you want detailed information about an individual entity, take a look at the 
 
 ## 📚 Publishers
 
-Table: <i>kb_publisher_standard_relation</i>
+Table: <i>add_publishers_20240831</i>
 
 ```bash
 publisher_id: 13711
@@ -14,13 +14,9 @@ publisher_id_orig: "P4310320330"
 publisher_name: "Adis, Springer Healthcare"
 standard_name: "Springer Healthcare"
 unit_pk: 249
-other_name: "Adis, Springer Healthcare"
 wikidata: "Q52636673"
 ror: ""
 url: "https://springerhealthcare.com/"
-parent_name: "Springer Nature"
-parent_id: "P4310319965"
-parent_unit: 220
 ```
 
 ### Fields
@@ -29,14 +25,10 @@ parent_unit: 220
 - publisher_id_orig (STRING): The OpenAlex id for this publisher.
 - publisher_name (STRING): The name for this publisher.
 - standard_name (STRING): The standardised name for this publisher.
-- unit_pk (INTEGER): 
-- other_name (STRING): Other names for this publisher.
+- unit_pk (INTEGER):
 - wikidata (STRING): The Wikidata id for this publisher.
 - ror (STRING): The ROR-id for this publisher.
 - url (STRING): The URL for this publisher.
-- parent_name (STRING): The name for the parent organisation of this publisher.
-- parent_id (STRING): The OpenAlex id for the parent organisation of this publisher.
-- parent_unit (INTEGER):
 
 ## 👩‍🎓 Authors
 
@@ -47,7 +39,7 @@ The aim of curation is the automatic disambiguation of German Authors.
 Funding information is provided for publications funded by the
 German [Open-Access-Publikationskosten](https://www.dfg.de/en/research-funding/funding-opportunities/programmes/infrastructure/lis/funding-opportunities/open-access-publication-funding) program. 
 
-Table: <i>dfg_oa</i>
+Table: <i>add_funding_information_20240831</i>
 <br>
 Limitations: Only includes publications from 2022 to 2024
 <br>
@@ -72,7 +64,7 @@ The latter are often classified as articles in OpenAlex. Using a machine
 learning classifier helps to distinguish between research
 contributions and other types of works. 
 
-Table: <i>classification_article_reviews_2014_2024_august24 (placeholder)</i>
+Table: <i>add_document_types_20240831</i>
 <br>
 Limitations: Only includes articles and reviews from OpenAlex with the 
 source type journal and the publication year 2014 to 2024.
@@ -113,7 +105,7 @@ institutions.
 
 #### kb_a_addr_inst_sec_open_alex
 
-Table: <i>kb_a_addr_inst_sec_oa_b_20240831</i>
+Table: <i>add_address_information_a_addr_inst_sec_20240831</i>
 
 ```bash
 kb_inst_id: 5617
@@ -135,7 +127,7 @@ identifier: "10.1007/s004310050674§5617"
 
 #### kb_a_inst_sec_open_alex
 
-Table: <i>kb_a_inst_sec_oa_b_20240831</i>
+Table: <i>add_address_information_a_inst_sec_20240831</i>
 
 ```bash
 kb_inst_id: 5617
@@ -154,7 +146,7 @@ at the time of publication.
 
 #### kb_s_addr_inst_sec_open_alex
 
-Table: <i>kb_s_addr_inst_sec_oa_b_20240831</i>
+Table: <i>add_address_information_s_addr_inst_sec_20240831</i>
 
 ```bash
 kb_inst_id: 1073
@@ -176,7 +168,7 @@ identifier: "10.1016/j.isci.2020.101203§1073"
 
 #### kb_s_inst_sec_open_alex
 
-Table: <i>kb_s_inst_sec_oa_b_20240831</i>
+Table: <i>add_address_information_s_inst_sec_20240831</i>
 
 ```bash
 kb_inst_id: 1073
@@ -196,7 +188,7 @@ last_year: 9999
 
 #### kb_inst_open_alex
 
-Table: <i>kb_inst_oa_b_20240831</i>
+Table: <i>add_address_information_inst_20240831</i>
 
 ```bash
 kb_inst_id: 137
@@ -218,7 +210,7 @@ dfg_instituts_id: 10192
 
 #### kb_sectors_open_alex
 
-Table: <i>kb_sectors_oa_b_20240831</i>
+Table: <i>add_address_information_sectors_20240831</i>
 
 ```bash
 kb_sectorgroup_id: "FHG"
@@ -238,7 +230,7 @@ remarks: ""
 
 ####  kb_inst_trans_open_alex
 
-Table: <i>kb_inst_trans_oa_b_20240831</i>
+Table: <i>add_address_information_inst_trans_20240831</i>
 
 ```bash
 inst_ante: 1073
