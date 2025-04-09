@@ -98,12 +98,12 @@ Science](https://www.uni-bielefeld.de/einrichtungen/i2sos/) in Bielefeld.
 Limitations: Only includes publications that are assigned to German institutions 
 by the algorithm.
 
-### Modus A
+### Mode A
 
-Modus A contains all assignments of publications to currently existing 
+Mode A contains all assignments of publications to currently existing 
 institutions.
 
-#### kb_a_addr_inst_sec_open_alex
+#### Allocation of documents to institutions (Mode A)
 
 Table: <i>add_address_information_a_addr_inst_sec_20240831</i>
 
@@ -125,7 +125,7 @@ identifier: "10.1007/s004310050674§5617"
 - doi (STRING): The DOI associated with this publication.
 - identifier (STRING): 
 
-#### kb_a_inst_sec_open_alex
+#### Allocation of institutions to sectors (Mode A)
 
 Table: <i>add_address_information_a_inst_sec_20240831</i>
 
@@ -139,12 +139,12 @@ kb_sector_id: "mpg"
 - kb_inst_id (INTEGER): The identifier for this institution.
 - kb_sector_id (STRING): The sector id for this institution.
 
-### Modus S (Historic mode)
+### Mode S (Historic mode)
 
-Modus S contains all assignments of publications to institutions that existed 
+Mode S contains all assignments of publications to institutions that existed 
 at the time of publication.
 
-#### kb_s_addr_inst_sec_open_alex
+#### Allocation of documents to institutions (Mode S)
 
 Table: <i>add_address_information_s_addr_inst_sec_20240831</i>
 
@@ -166,7 +166,7 @@ identifier: "10.1016/j.isci.2020.101203§1073"
 - doi (STRING): The DOI associated with this publication.
 - identifier (STRING):  
 
-#### kb_s_inst_sec_open_alex
+#### Allocation of institutions to sectors (Mode S)
 
 Table: <i>add_address_information_s_inst_sec_20240831</i>
 
@@ -185,8 +185,6 @@ last_year: 9999
 - last_year (INTEGER): Year of closure of this institution (9999 if currently existing).
 
 ### Institutions
-
-#### kb_inst_open_alex
 
 Table: <i>add_address_information_inst_20240831</i>
 
@@ -208,7 +206,7 @@ dfg_instituts_id: 10192
 - ror (STRING): The ROR-id of this institution.
 - dfg_instituts_id (INTEGER): The identifier assigned to this institution by the German Research Foundation.
 
-#### kb_sectors_open_alex
+### Sectors
 
 Table: <i>add_address_information_sectors_20240831</i>
 
@@ -228,7 +226,7 @@ remarks: ""
 - sector_name (STRING): The name of this sector.
 - remarks (STRING): A description of this sector.
 
-####  kb_inst_trans_open_alex
+###  Institutional changes
 
 Table: <i>add_address_information_inst_trans_20240831</i>
 
