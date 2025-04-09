@@ -94,6 +94,27 @@ found [here](examples/kb_notebook.ipynb).
 - A jupyter notebook containing code examples for working with the OPENBIB snapshot in the Open Scholarly 
 Data Warehouse of the SUB Göttingen can be found [here](examples/bigquery_notebook.ipynb).
 
+### How to export a snapshot
+
+To export a complete OPENBIB snapshot from the KB database, use the
+following code. 
+
+```python
+from scripts.export_files import OpenBibDataRelease
+
+openbib_snapshot = OpenBibDataRelease(
+    export_directory='openbib_export',
+    export_file_name='kbopenbib_release',
+    host='host',
+    database='database',
+    port='port',
+    user='user',
+    password='password'
+)
+
+openbib_snapshot.make_archive(export_format='csv')
+```
+
 ## How I can get involved?
 
 If you see mistakes, want to suggest changes or submit feature requests, please 
