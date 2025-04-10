@@ -7,7 +7,7 @@ import zipfile
 from scripts.export_files import OpenBibDataRelease
 from models.document_type import document_type_schema
 from models.funding_information import funding_information_schema_unnested
-from models.publisher import publisher_schema
+from models.publisher import publisher_schema, publisher_relation_schema
 from models.address_information import (kb_a_addr_inst_sec_schema_unnested,
                                         kb_a_addr_inst_sec_schema_nested,
                                         kb_s_addr_inst_sec_schema_unnested,
@@ -72,6 +72,33 @@ class TestOpenBibDataRelease:
                                          lines=True)
 
         publisher_schema.validate(publishers_export)
+
+    def test_export_publisher_relation_information_to_csv(self, openbib_snapshot: OpenBibDataRelease) -> None:
+
+        openbib_snapshot.export_publishers_relations(limit=10, export_format='csv')
+
+        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/publishers_relation.csv'))
+
+        publishers_export = pd.read_csv(
+            filepath_or_buffer=os.path.join(self.test_dir, 'openbib_export/publishers_relation.csv'),
+            sep=',',
+            quotechar='"',
+            header=0
+        )
+
+        publisher_relation_schema.validate(publishers_export)
+
+    def test_export_publisher_relation_information_to_jsonl(self, openbib_snapshot: OpenBibDataRelease) -> None:
+
+        openbib_snapshot.export_publishers_relations(limit=10, export_format='jsonl')
+
+        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/publishers_relation.jsonl'))
+
+        publishers_export = pd.read_json(path_or_buf=os.path.join(self.test_dir,
+                                                                  'openbib_export/publishers_relation.jsonl'),
+                                         lines=True)
+
+        publisher_relation_schema.validate(publishers_export)
 
     def test_export_funding_information_to_csv(self, openbib_snapshot: OpenBibDataRelease) -> None:
 
@@ -324,7 +351,7 @@ class TestOpenBibDataRelease:
 
         archive = zipfile.ZipFile(file=os.path.join(self.test_dir, 'kbopenbib_release.zip'), mode='r')
 
-        assert len(archive.infolist()) == 10
+        assert len(archive.infolist()) == 11
 
         os.remove(os.path.join(self.test_dir, 'kbopenbib_release.zip'))
 
@@ -336,6 +363,6 @@ class TestOpenBibDataRelease:
 
         archive = zipfile.ZipFile(file=os.path.join(self.test_dir, 'kbopenbib_release.zip'), mode='r')
 
-        assert len(archive.infolist()) == 10
+        assert len(archive.infolist()) == 11
 
         os.remove(os.path.join(self.test_dir, 'kbopenbib_release.zip'))

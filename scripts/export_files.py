@@ -6,7 +6,7 @@ import shutil
 from pathlib import Path
 from models.document_type import document_type_schema
 from models.funding_information import funding_information_schema_nested
-from models.publisher import publisher_schema
+from models.publisher import publisher_schema, publisher_relation_schema
 from models.address_information import (kb_a_addr_inst_sec_schema_nested,
                                         kb_s_addr_inst_sec_schema_nested,
                                         kb_a_inst_sec_schema,
@@ -111,6 +111,44 @@ class OpenBibDataRelease:
             OpenBibDataRelease.export_to_csv(export_directory=self.export_directory,
                                              export_file_name='publishers.csv',
                                              dataframe=publishers_export)
+
+    def export_publishers_relations(self, limit: str | int='NULL', export_format: str='csv') -> None:
+
+        logging.info('Query table: add_publishers_relations_20240831')
+
+        publishers_relation_export = pd.read_sql(sql=
+                                           f"""
+                                           SELECT p_relation_id, child_name, child_id, child_unit, parent_name, 
+                                           parent_id, parent_unit, first_date, last_date
+                                           FROM kb_project_openbib.add_publishers_relations_20240831
+                                           LIMIT {limit}
+                                           """,
+                                           con=self.engine)
+
+        logging.info('Query completed.')
+
+        publishers_relation_export['child_unit'] = publishers_relation_export['child_unit'].fillna('0')
+        publishers_relation_export['child_unit'] = publishers_relation_export['child_unit'].astype('int')
+
+        publishers_relation_export['first_date'] = publishers_relation_export['first_date'].fillna('')
+        publishers_relation_export['first_date'] = publishers_relation_export['first_date'].astype('str')
+
+        publishers_relation_export['last_date'] = publishers_relation_export['last_date'].fillna('')
+        publishers_relation_export['last_date'] = publishers_relation_export['last_date'].astype('str')
+
+        publisher_relation_schema.validate(publishers_relation_export)
+
+        if export_format == 'jsonl':
+
+            OpenBibDataRelease.export_to_jsonl(export_directory=self.export_directory,
+                                               export_file_name='publishers_relation.jsonl',
+                                               dataframe=publishers_relation_export)
+
+        if export_format == 'csv':
+
+            OpenBibDataRelease.export_to_csv(export_directory=self.export_directory,
+                                             export_file_name='publishers_relation.csv',
+                                             dataframe=publishers_relation_export)
 
     def export_funding_information(self, limit: str | int='NULL', export_format: str='csv') -> None:
 
@@ -445,6 +483,7 @@ class OpenBibDataRelease:
     def make_archive(self, limit: str | int='NULL', export_format: str='csv') -> None:
 
         self.export_publishers(limit=limit, export_format=export_format)
+        self.export_publishers_relations(limit=limit, export_format=export_format)
         self.export_funding_information(limit=limit, export_format=export_format)
         self.export_document_types(limit=limit, export_format=export_format)
         self.export_address_information_a(limit=limit, export_format=export_format)

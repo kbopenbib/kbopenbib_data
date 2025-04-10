@@ -30,6 +30,32 @@ url: "https://springerhealthcare.com/"
 - ror (STRING): The ROR-id for this publisher.
 - url (STRING): The URL for this publisher.
 
+Table: <i>add_publishers_relations_20240831</i>
+
+```bash
+p_relation_id: 340
+child_name: "BioMed Central"
+child_id: "P4310320256"
+child_unit: 81
+parent_name: "Springer Science+Business Media"
+parent_id: "P4310319900"
+parent_unit: 79
+first_date: "2008-10-01"
+last_date: "2015-04-30"
+```
+
+### Fields
+
+- p_relation_id (INTEGER): 
+- child_name (STRING): 
+- child_id (STRING): 
+- child_unit (INTEGER): 
+- parent_name (STRING): 
+- parent_id (STRING): 
+- parent_unit (INTEGER): 
+- first_date (DATE): 
+- last_date (DATE): 
+
 ## 👩‍🎓 Authors
 
 The aim of curation is the automatic disambiguation of German Authors.

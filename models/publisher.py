@@ -13,3 +13,18 @@ publisher_schema = pa.DataFrameSchema(
     },
     index=pa.Index(int),
 )
+
+publisher_relation_schema = pa.DataFrameSchema(
+    columns={
+        'p_relation_id': pa.Column(int, nullable=True, required=True),
+        'child_name': pa.Column(str, nullable=True, required=True),
+        'child_id': pa.Column(str, nullable=True, required=True),
+        'child_unit': pa.Column(int, nullable=True, required=True),
+        'parent_name': pa.Column(str, nullable=True, required=True),
+        'parent_id': pa.Column(str, nullable=True, required=True),
+        'parent_unit': pa.Column(int, nullable=True, required=True),
+        'first_date': pa.Column(str, nullable=True, required=True),
+        'last_date': pa.Column(str, nullable=True, required=True)
+    },
+    index=pa.Index(int),
+)

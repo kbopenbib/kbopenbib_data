@@ -1,0 +1,47 @@
+[
+  {
+    "mode": "NULLABLE",
+    "name": "p_relation_id",
+    "type": "INTEGER"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "child_name",
+    "type": "STRING"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "child_id",
+    "type": "STRING"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "child_unit",
+    "type": "INTEGER"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "parent_name",
+    "type": "STRING"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "parent_id",
+    "type": "STRING"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "parent_unit",
+    "type": "INTEGER"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "first_date",
+    "type": "DATE"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "last_date",
+    "type": "DATE"
+  }
+]
