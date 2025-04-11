@@ -6,6 +6,11 @@ If you want detailed information about an individual entity, take a look at the 
 
 ## 📚 Publishers
 
+### Publisher overview
+
+The following table lists publishers with enriched information, including 
+ROR and wikidata IDs.
+
 Table: <i>add_publishers_20240831</i>
 
 ```bash
@@ -19,16 +24,21 @@ ror: ""
 url: "https://springerhealthcare.com/"
 ```
 
-### Fields
+#### Fields
 
 - publisher_id (INTEGER): The id for this publisher.
 - publisher_id_orig (STRING): The OpenAlex id for this publisher.
 - publisher_name (STRING): The name for this publisher.
 - standard_name (STRING): The standardised name for this publisher.
-- unit_pk (INTEGER):
+- unit_pk (INTEGER): The internal ID for this publisher.
 - wikidata (STRING): The Wikidata id for this publisher.
 - ror (STRING): The ROR-id for this publisher.
 - url (STRING): The URL for this publisher.
+
+### Relations between Publishers
+
+The following table contains relationships between publishers, e.g. 
+when a publisher belongs to another publisher.
 
 Table: <i>add_publishers_relations_20240831</i>
 
@@ -44,17 +54,17 @@ first_date: "2008-10-01"
 last_date: "2015-04-30"
 ```
 
-### Fields
+#### Fields
 
-- p_relation_id (INTEGER): 
-- child_name (STRING): 
-- child_id (STRING): 
-- child_unit (INTEGER): 
-- parent_name (STRING): 
-- parent_id (STRING): 
-- parent_unit (INTEGER): 
-- first_date (DATE): 
-- last_date (DATE): 
+- p_relation_id (INTEGER): The ID for this relation. 
+- child_name (STRING): The name of this publisher.
+- child_id (STRING): The OpenAlex ID of this publisher.
+- child_unit (INTEGER): The internal ID of this publisher
+- parent_name (STRING): The name of the parent publisher.
+- parent_id (STRING): The OpenAlex ID of the parent publisher.
+- parent_unit (INTEGER): The internal ID of this parent publisher.
+- first_date (DATE): Date on which the connection to the parent publisher took place.
+- last_date (DATE): Date on which the connection to the parent publisher was revoked.
 
 ## 👩‍🎓 Authors
 
