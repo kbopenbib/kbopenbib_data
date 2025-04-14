@@ -4,7 +4,8 @@ from typing import List
 kb_a_addr_inst_sec_schema_nested = pa.DataFrameSchema(
     columns={
         'kb_inst_id': pa.Column(int, required=True),
-        'openalex_id': pa.Column(str, nullable=True, required=True),
+        'openalex_id': pa.Column(str, nullable=True, required=True,
+                                 checks=pa.Check(lambda s: s.str.startswith('https://openalex.org/'))),
         'address_full': pa.Column(str, required=True),
         'kb_sector_id': pa.Column(List[str], nullable=True, required=True),
         'doi': pa.Column(str, nullable=True, required=True),
@@ -16,7 +17,8 @@ kb_a_addr_inst_sec_schema_nested = pa.DataFrameSchema(
 kb_a_addr_inst_sec_schema_unnested = pa.DataFrameSchema(
     columns={
         'kb_inst_id': pa.Column(int, required=True),
-        'openalex_id': pa.Column(str, nullable=True, required=True),
+        'openalex_id': pa.Column(str, nullable=True, required=True,
+                                 checks=pa.Check(lambda s: s.str.startswith('https://openalex.org/'))),
         'address_full': pa.Column(str, required=True),
         'kb_sector_id': pa.Column(str, nullable=True, required=True),
         'doi': pa.Column(str, nullable=True, required=True),
@@ -36,7 +38,8 @@ kb_a_inst_sec_schema = pa.DataFrameSchema(
 kb_s_addr_inst_sec_schema_nested = pa.DataFrameSchema(
     columns={
         'kb_inst_id': pa.Column(int, required=True),
-        'openalex_id': pa.Column(str, nullable=True, required=True),
+        'openalex_id': pa.Column(str, nullable=True, required=True,
+                                 checks=pa.Check(lambda s: s.str.startswith('https://openalex.org/'))),
         'address_full': pa.Column(str, required=True),
         'kb_sector_id': pa.Column(List[str], nullable=True, required=True),
         'doi': pa.Column(str, nullable=True, required=True),
@@ -48,7 +51,8 @@ kb_s_addr_inst_sec_schema_nested = pa.DataFrameSchema(
 kb_s_addr_inst_sec_schema_unnested = pa.DataFrameSchema(
     columns={
         'kb_inst_id': pa.Column(int, required=True),
-        'openalex_id': pa.Column(str, nullable=True, required=True),
+        'openalex_id': pa.Column(str, nullable=True, required=True,
+                                 checks=pa.Check(lambda s: s.str.startswith('https://openalex.org/'))),
         'address_full': pa.Column(str, required=True),
         'kb_sector_id': pa.Column(str, nullable=True, required=True),
         'doi': pa.Column(str, nullable=True, required=True),

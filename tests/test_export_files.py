@@ -41,7 +41,8 @@ class TestOpenBibDataRelease:
             database=self.database,
             port=self.port,
             user=self.user,
-            password=self.password
+            password=self.password,
+            overwrite_snapshot=True
         )
         yield snapshot
         shutil.rmtree(os.path.join(self.test_dir, 'openbib_export'))

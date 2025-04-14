@@ -3,7 +3,8 @@ from typing import List
 
 funding_information_schema_nested = pa.DataFrameSchema(
     columns={
-        'openalex_id': pa.Column(str, nullable=True, required=True),
+        'openalex_id': pa.Column(str, nullable=True, required=True,
+                                 checks=pa.Check(lambda s: s.str.startswith('https://openalex.org/'))),
         'doi': pa.Column(str, nullable=True, required=True),
         'funding_id': pa.Column(List[str], nullable=True, required=True, coerce=True),
     },
@@ -12,7 +13,8 @@ funding_information_schema_nested = pa.DataFrameSchema(
 
 funding_information_schema_unnested = pa.DataFrameSchema(
     columns={
-        'openalex_id': pa.Column(str, nullable=True, required=True),
+        'openalex_id': pa.Column(str, nullable=True, required=True,
+                                 checks=pa.Check(lambda s: s.str.startswith('https://openalex.org/'))),
         'doi': pa.Column(str, nullable=True, required=True),
         'funding_id': pa.Column(str, nullable=True, required=True, coerce=True),
     },

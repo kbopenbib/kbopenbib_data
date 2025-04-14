@@ -15,11 +15,11 @@ Table: <i>add_publishers_20240831</i>
 
 ```bash
 publisher_id: 13711
-publisher_id_orig: "P4310320330"
+publisher_id_orig: "https://openalex.org/P4310320330"
 publisher_name: "Adis, Springer Healthcare"
 standard_name: "Springer Healthcare"
 unit_pk: 249
-wikidata: "Q52636673"
+wikidata: "https://wikidata.org/wiki/Q52636673"
 ror: ""
 url: "https://springerhealthcare.com/"
 ```
@@ -45,10 +45,10 @@ Table: <i>add_publishers_relations_20240831</i>
 ```bash
 p_relation_id: 340
 child_name: "BioMed Central"
-child_id: "P4310320256"
+child_id: "https://openalex.org/P4310320256"
 child_unit: 81
 parent_name: "Springer Science+Business Media"
-parent_id: "P4310319900"
+parent_id: "https://openalex.org/P4310319900"
 parent_unit: 79
 first_date: "2008-10-01"
 last_date: "2015-04-30"
@@ -81,7 +81,7 @@ Limitations: Only includes publications from 2022 to 2024
 <br>
 
 ```bash
-openalex_id: "W4321327768"
+openalex_id: "https://openalex.org/W4321327768"
 doi: "10.1002/1873-3468.14601"
 funding_id: ["430651076"]
 ```
@@ -107,7 +107,7 @@ source type journal and the publication year 2014 to 2024.
 <br>
 
 ```bash
-openalex_id: "W4256503663"
+openalex_id: "https://openalex.org/W4256503663"
 doi: "10.1016/s0099-2399(15)00667-6"
 is_research: False
 proba: 0.16
@@ -145,7 +145,7 @@ Table: <i>add_address_information_a_addr_inst_sec_20240831</i>
 
 ```bash
 kb_inst_id: 5617
-openalex_id: "W2074596230"
+openalex_id: "https://openalex.org/W2074596230"
 address_full: "Max-Plank-Institut für Biophysikalische Chemie, Göttingen, Germany, DE"
 kb_sector_id: ["mpg"]
 doi: "10.1007/s004310050674"
@@ -186,7 +186,7 @@ Table: <i>add_address_information_s_addr_inst_sec_20240831</i>
 
 ```bash
 kb_inst_id: 1073
-openalex_id: "W3031617943"
+openalex_id: "https://openalex.org/W3031617943"
 address_full: "Department of Molecular Neurobiology, Max Planck Institute of Experimental Medicine, Göttingen 37075, Germany"
 kb_sector_id: ["mpg"]
 doi: "10.1016/j.isci.2020.101203"

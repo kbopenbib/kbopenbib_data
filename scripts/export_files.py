@@ -89,8 +89,23 @@ class OpenBibDataRelease:
 
         publishers_export = pd.read_sql(sql=
                                            f"""
-                                           SELECT publisher_id, publisher_id_orig, publisher_name,
-                                                  standard_name, unit_pk, wikidata, ror, url
+                                           SELECT publisher_id, 
+                                                  CASE
+                                                    WHEN publisher_id_orig IS NOT NULL THEN CONCAT('https://openalex.org/', publisher_id_orig)
+                                                    ELSE NULL
+                                                  END AS publisher_id_orig, 
+                                                  publisher_name,
+                                                  standard_name, 
+                                                  unit_pk, 
+                                                  CASE 
+                                                    WHEN wikidata IS NOT NULL THEN CONCAT('https://wikidata.org/wiki/', wikidata)
+                                                    ELSE NULL
+                                                  END AS wikidata,
+                                                  CASE 
+                                                    WHEN ror IS NOT NULL THEN CONCAT('https://ror.org/', ror)
+                                                    ELSE NULL
+                                                  END AS ror,
+                                                  url
                                            FROM kb_project_openbib.add_publishers_20240831
                                            LIMIT {limit}
                                            """,
@@ -118,8 +133,21 @@ class OpenBibDataRelease:
 
         publishers_relation_export = pd.read_sql(sql=
                                            f"""
-                                           SELECT p_relation_id, child_name, child_id, child_unit, parent_name, 
-                                           parent_id, parent_unit, first_date, last_date
+                                           SELECT p_relation_id, 
+                                                  child_name, 
+                                                  CASE
+                                                    WHEN child_id IS NOT NULL THEN CONCAT('https://openalex.org/', child_id)
+                                                    ELSE NULL
+                                                  END AS child_id, 
+                                                  child_unit, 
+                                                  parent_name, 
+                                                  CASE
+                                                    WHEN parent_id IS NOT NULL THEN CONCAT('https://openalex.org/', parent_id)
+                                                    ELSE NULL
+                                                  END AS parent_id, 
+                                                  parent_unit, 
+                                                  first_date, 
+                                                  last_date
                                            FROM kb_project_openbib.add_publishers_relations_20240831
                                            LIMIT {limit}
                                            """,
@@ -156,7 +184,13 @@ class OpenBibDataRelease:
 
         funding_information_export = pd.read_sql(sql=
                                                  f"""
-                                                 SELECT item_id_oal as openalex_id, doi, funding_id
+                                                 SELECT 
+                                                    CASE
+                                                        WHEN item_id_oal IS NOT NULL THEN CONCAT('https://openalex.org/', item_id_oal)
+                                                        ELSE NULL
+                                                    END AS openalex_id, 
+                                                    doi, 
+                                                    funding_id
                                                  FROM kb_project_openbib.add_funding_information_20240831
                                                  LIMIT {limit}
                                                  """,
@@ -197,7 +231,14 @@ class OpenBibDataRelease:
 
         document_type_export = pd.read_sql(sql=
                                            f"""
-                                           SELECT openalex_id, doi, is_research, proba
+                                           SELECT 
+                                            CASE
+                                                WHEN openalex_id IS NOT NULL THEN CONCAT('https://openalex.org/', openalex_id)
+                                                ELSE NULL
+                                            END AS openalex_id, 
+                                            doi, 
+                                            is_research, 
+                                            proba
                                            FROM kb_project_openbib.add_document_types_20240831
                                            LIMIT {limit}
                                            """,
@@ -226,7 +267,10 @@ class OpenBibDataRelease:
         kb_a_addr_inst_export = pd.read_sql(sql=
                                             f"""
                                             SELECT kb_inst_id, 
-                                                   item_id as openalex_id, 
+                                                   CASE
+                                                    WHEN item_id IS NOT NULL THEN CONCAT('https://openalex.org/', item_id)
+                                                    ELSE NULL
+                                                   END AS openalex_id,
                                                    address_full, 
                                                    kb_sector_id, 
                                                    doi,
@@ -306,8 +350,11 @@ class OpenBibDataRelease:
 
         kb_s_addr_inst_export = pd.read_sql(sql=
                                             f"""
-                                            SELECT kb_inst_id, 
-                                                   item_id as openalex_id, 
+                                            SELECT kb_inst_id,
+                                                   CASE
+                                                    WHEN item_id IS NOT NULL THEN CONCAT('https://openalex.org/', item_id)
+                                                    ELSE NULL
+                                                   END AS openalex_id,
                                                    address_full, 
                                                    kb_sector_id, 
                                                    doi,
