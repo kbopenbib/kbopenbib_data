@@ -77,7 +77,9 @@ kb_inst_schema = pa.DataFrameSchema(
         'name': pa.Column(str, nullable=True, required=True),
         'first_year': pa.Column(int, required=True),
         'last_year': pa.Column(int, required=True),
-        'ror': pa.Column(str, nullable=True, required=True),
+        'ror': pa.Column(str, nullable=True, required=True,
+                         checks=pa.Check(lambda s: s if not isinstance(s,
+                                                                       str) else s.str.startswith('https://ror.org/'))),
         'dfg_instituts_id': pa.Column(int, nullable=True, required=True)
     },
     index=pa.Index(int),

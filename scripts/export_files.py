@@ -471,7 +471,10 @@ class OpenBibDataRelease:
                                                name,
                                                first_year,
                                                last_year,
-                                               ror,
+                                               CASE 
+                                                WHEN ror = '' THEN NULL
+                                                ELSE ror
+                                               END AS ror,
                                                dfg_instituts_id
                                         FROM kb_project_openbib.add_address_information_inst_20240831
                                         LIMIT {limit}
