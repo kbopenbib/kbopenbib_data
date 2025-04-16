@@ -278,7 +278,7 @@ type: "inclusion"
 - inst_post (INTEGER): The institution id after the transition. 
 - type (STRING): The type of structural change (merger, inclusion, exclusion).
 
-## ⚖️️ Transformative Agreements
+## ⚖️ Transformative Agreements
 
 ### Article
 
