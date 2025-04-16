@@ -278,3 +278,101 @@ type: "inclusion"
 - inst_post (INTEGER): The institution id after the transition. 
 - type (STRING): The type of structural change (merger, inclusion, exclusion).
 
+## ⚖️️ Transformative Agreements
+
+### Article
+
+Table: <i>add_jct_articles_20240831</i>
+
+```bash
+id: "https://openalex.org/W3107077096"
+doi: "10.1145/3428248"
+matching_issn_l: "2475-1421"
+matching_ror: "https://ror.org/02e2c7k09"
+ror_type: "ror_jct"
+esac_id: "acm2020delft"
+start_date: "2020-11-01"
+end_date: "2023-12-31"
+publication_date: "2020-11-13"
+```
+
+#### Fields
+
+- id (STRING): 
+- doi (STRING): 
+- matching_issn_l (STRING): 
+- matching_ror (STRING): 
+- esac_id (STRING): 
+- start_date (DATE):
+- end_date (DATE):
+- publication_date (DATE):
+
+### ESAC
+
+Table: <i>add_jct_esac_20240831</i>
+
+```bash
+publisher: "Taylor & Francis"
+country: "Austria"
+organization: "KEMOE/FWF"
+annual_publications: 70
+start_date: "2014-01-01 00:00:00 UTC"
+end_date: "2016-12-31 00:00:00 UTC"
+id: "tf2014kemoe"
+url: "https://esac-initiative.org/about/transformative-agreements/agreement-registry/tf2014kemoe/"
+jct_jn: false
+jct_inst: false
+```
+
+#### Fields
+
+- publisher (STRING): 
+- country (STRING): 
+- organization (STRING): 
+- annual_publications (INTEGER): 
+- start_date (TIMESTAMP): 
+- end_date (TIMESTAMP):
+- id (STRING):
+- url (STRING):
+- jct_jn (BOOL):
+- jct_inst (BOOL):
+
+### Institutions
+
+Table: <i>add_jct_institutions_20240831</i>
+
+```bash
+id: "https://openalex.org/I42934936"
+esac_id: "acm2020ie"
+ror_id: "https://ror.org/04a1a1e81"
+time_last_seen: "2023-01-02 02:19:56 UTC"
+commit: "fd749477fbe5e0d58040bdaa4466e63886e9fb17"
+```
+
+#### Fields
+
+- id (STRING): 
+- esac_id (STRING): 
+- ror_id (STRING): 
+- time_last_seen (TIMESTAMP): 
+- commit (STRING):
+
+### Journals
+
+Table: <i>add_jct_journals_20240831</i>
+
+```bash
+id: "https://openalex.org/S2764691006"
+esac_id: "acm2020delft"
+issn_l: "2153-2184"
+time_last_seen: "2024-04-01 09:23:06 UTC"
+commit: "a689426e782c5f42b850b327a1a89d9ad9d19a16"
+```
+
+#### Fields
+
+- id (STRING): 
+- esac_id (STRING): 
+- issn_l (STRING): 
+- time_last_seen (TIMESTAMP): 
+- commit (STRING):

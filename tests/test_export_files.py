@@ -17,6 +17,9 @@ from models.address_information import (kb_a_addr_inst_sec_schema_unnested,
                                         kb_sectors_schema,
                                         kb_inst_schema,
                                         kb_inst_trans_schema)
+from models.transformative_agreements import (jct_institutions_schema,
+                                              jct_journals_schema,
+                                              jct_esac_schema)
 
 
 class TestOpenBibDataRelease:
@@ -344,6 +347,87 @@ class TestOpenBibDataRelease:
 
         kb_inst_trans_schema.validate(kb_inst_trans_export)
 
+    def test_export_jct_esac_to_csv(self, openbib_snapshot: OpenBibDataRelease) -> None:
+
+        openbib_snapshot.export_jct_esac(limit=10, export_format='csv')
+
+        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/jct_esac.csv'))
+
+        jct_esac_export = pd.read_csv(
+            filepath_or_buffer=os.path.join(self.test_dir, 'openbib_export/jct_esac.csv'),
+            sep=',',
+            quotechar='"',
+            header=0
+        )
+
+        jct_esac_schema.validate(jct_esac_export)
+
+    def test_export_jct_esac_to_jsonl(self, openbib_snapshot: OpenBibDataRelease) -> None:
+
+        openbib_snapshot.export_jct_esac(limit=10, export_format='jsonl')
+
+        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/jct_esac.jsonl'))
+
+        jct_esac_export = pd.read_json(path_or_buf=os.path.join(self.test_dir,
+                                                                'openbib_export/jct_esac.jsonl'),
+                                       lines=True)
+
+        jct_esac_schema.validate(jct_esac_export)
+
+    def test_export_jct_institutions_to_csv(self, openbib_snapshot: OpenBibDataRelease) -> None:
+
+        openbib_snapshot.export_jct_institutions(limit=10, export_format='csv')
+
+        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/jct_institutions.csv'))
+
+        jct_institutions_export = pd.read_csv(
+            filepath_or_buffer=os.path.join(self.test_dir, 'openbib_export/jct_institutions.csv'),
+            sep=',',
+            quotechar='"',
+            header=0
+        )
+
+        jct_institutions_schema.validate(jct_institutions_export)
+
+    def test_export_jct_institutions_to_jsonl(self, openbib_snapshot: OpenBibDataRelease) -> None:
+
+        openbib_snapshot.export_jct_institutions(limit=10, export_format='jsonl')
+
+        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/jct_institutions.jsonl'))
+
+        jct_institutions_export = pd.read_json(path_or_buf=os.path.join(self.test_dir,
+                                                                        'openbib_export/jct_institutions.jsonl'),
+                                               lines=True)
+
+        jct_institutions_schema.validate(jct_institutions_export)
+
+    def test_export_jct_journals_to_csv(self, openbib_snapshot: OpenBibDataRelease) -> None:
+
+        openbib_snapshot.export_jct_journals(limit=10, export_format='csv')
+
+        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/jct_journals.csv'))
+
+        jct_journals_export = pd.read_csv(
+            filepath_or_buffer=os.path.join(self.test_dir, 'openbib_export/jct_journals.csv'),
+            sep=',',
+            quotechar='"',
+            header=0
+        )
+
+        jct_journals_schema.validate(jct_journals_export)
+
+    def test_export_jct_journals_to_jsonl(self, openbib_snapshot: OpenBibDataRelease) -> None:
+
+        openbib_snapshot.export_jct_journals(limit=10, export_format='jsonl')
+
+        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/jct_journals.jsonl'))
+
+        jct_journals_export = pd.read_json(path_or_buf=os.path.join(self.test_dir,
+                                                                    'openbib_export/jct_journals.jsonl'),
+                                           lines=True)
+
+        jct_journals_schema.validate(jct_journals_export)
+
     def test_make_archive_to_csv(self, openbib_snapshot: OpenBibDataRelease) -> None:
 
         openbib_snapshot.make_archive(limit=10, export_format='csv')
@@ -352,7 +436,7 @@ class TestOpenBibDataRelease:
 
         archive = zipfile.ZipFile(file=os.path.join(self.test_dir, 'kbopenbib_release.zip'), mode='r')
 
-        assert len(archive.infolist()) == 11
+        assert len(archive.infolist()) == 14
 
         os.remove(os.path.join(self.test_dir, 'kbopenbib_release.zip'))
 
@@ -364,6 +448,6 @@ class TestOpenBibDataRelease:
 
         archive = zipfile.ZipFile(file=os.path.join(self.test_dir, 'kbopenbib_release.zip'), mode='r')
 
-        assert len(archive.infolist()) == 11
+        assert len(archive.infolist()) == 14
 
         os.remove(os.path.join(self.test_dir, 'kbopenbib_release.zip'))

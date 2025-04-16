@@ -1,0 +1,27 @@
+[
+  {
+    "mode": "NULLABLE",
+    "name": "id",
+    "type": "STRING"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "esac_id",
+    "type": "STRING"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "issn_l",
+    "type": "STRING"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "time_last_seen",
+    "type": "TIMESTAMP"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "commit",
+    "type": "STRING"
+  }
+]

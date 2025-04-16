@@ -14,6 +14,9 @@ from models.address_information import (kb_a_addr_inst_sec_schema_nested,
                                         kb_sectors_schema,
                                         kb_inst_schema,
                                         kb_inst_trans_schema)
+from models.transformative_agreements import (jct_institutions_schema,
+                                              jct_journals_schema,
+                                              jct_esac_schema)
 import logging
 import sys
 
@@ -530,6 +533,104 @@ class OpenBibDataRelease:
                                              export_file_name='kb_inst_trans.csv',
                                              dataframe=kb_inst_trans_export)
 
+    def export_jct_esac(self, limit: str | int='NULL', export_format: str='csv') -> None:
+
+        logging.info('Query table: add_jct_esac_20240831')
+
+        jct_esac_export = pd.read_sql(sql=
+                                        f"""
+                                        SELECT publisher, 
+                                               country, 
+                                               organization, 
+                                               annual_publications, 
+                                               start_date, 
+                                               end_date, 
+                                               id, 
+                                               url, 
+                                               jct_jn, 
+                                               jct_inst
+                                        FROM kb_project_openbib.add_jct_esac_20240831
+                                        LIMIT {limit}
+                                        """,
+                                        con=self.engine)
+
+        logging.info('Query completed.')
+
+        jct_esac_schema.validate(jct_esac_export)
+
+        if export_format == 'jsonl':
+
+            OpenBibDataRelease.export_to_jsonl(export_directory=self.export_directory,
+                                               export_file_name='jct_esac.jsonl',
+                                               dataframe=jct_esac_export)
+
+        if export_format == 'csv':
+            OpenBibDataRelease.export_to_csv(export_directory=self.export_directory,
+                                             export_file_name='jct_esac.csv',
+                                             dataframe=jct_esac_export)
+
+    def export_jct_institutions(self, limit: str | int='NULL', export_format: str='csv') -> None:
+
+        logging.info('Query table: add_jct_institutions_20240831')
+
+        jct_institutions_export = pd.read_sql(sql=
+                                                f"""
+                                                SELECT id, 
+                                                       esac_id, 
+                                                       ror_id, 
+                                                       time_last_seen, 
+                                                       commit
+                                                FROM kb_project_openbib.add_jct_institutions_20240831
+                                                LIMIT {limit}
+                                                """,
+                                                con=self.engine)
+
+        logging.info('Query completed.')
+
+        jct_institutions_schema.validate(jct_institutions_export)
+
+        if export_format == 'jsonl':
+
+            OpenBibDataRelease.export_to_jsonl(export_directory=self.export_directory,
+                                               export_file_name='jct_institutions.jsonl',
+                                               dataframe=jct_institutions_export)
+
+        if export_format == 'csv':
+            OpenBibDataRelease.export_to_csv(export_directory=self.export_directory,
+                                             export_file_name='jct_institutions.csv',
+                                             dataframe=jct_institutions_export)
+
+    def export_jct_journals(self, limit: str | int='NULL', export_format: str='csv') -> None:
+
+        logging.info('Query table: kb_project_openbib.add_jct_journals_20240831')
+
+        jct_journals_export = pd.read_sql(sql=
+                                                f"""
+                                                SELECT id, 
+                                                       esac_id, 
+                                                       issn_l, 
+                                                       time_last_seen, 
+                                                       commit
+                                                FROM kb_project_openbib.add_jct_journals_20240831
+                                                LIMIT {limit}
+                                                """,
+                                                con=self.engine)
+
+        logging.info('Query completed.')
+
+        jct_journals_schema.validate(jct_journals_export)
+
+        if export_format == 'jsonl':
+
+            OpenBibDataRelease.export_to_jsonl(export_directory=self.export_directory,
+                                               export_file_name='jct_journals.jsonl',
+                                               dataframe=jct_journals_export)
+
+        if export_format == 'csv':
+            OpenBibDataRelease.export_to_csv(export_directory=self.export_directory,
+                                             export_file_name='jct_journals.csv',
+                                             dataframe=jct_journals_export)
+
     def make_archive(self, limit: str | int='NULL', export_format: str='csv') -> None:
 
         self.export_publishers(limit=limit, export_format=export_format)
@@ -543,6 +644,9 @@ class OpenBibDataRelease:
         self.export_kb_sectors(limit=limit, export_format=export_format)
         self.export_kb_inst(limit=limit, export_format=export_format)
         self.export_kb_inst_trans(limit=limit, export_format=export_format)
+        self.export_jct_esac(limit=limit, export_format=export_format)
+        self.export_jct_institutions(limit=limit, export_format=export_format)
+        self.export_jct_journals(limit=limit, export_format=export_format)
 
         logging.info('Start compressing archive.')
 

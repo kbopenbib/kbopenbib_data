@@ -1,0 +1,47 @@
+[
+  {
+    "mode": "NULLABLE",
+    "name": "id",
+    "type": "STRING"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "doi",
+    "type": "STRING"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "matching_issn_l",
+    "type": "STRING"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "matching_ror",
+    "type": "STRING"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "ror_type",
+    "type": "STRING"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "esac_id",
+    "type": "STRING"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "start_date",
+    "type": "DATE"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "end_date",
+    "type": "DATE"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "publication_date",
+    "type": "DATE"
+  }
+]
