@@ -1,8 +1,15 @@
 # Working with OPENBIB data - Entities overview
 
-This page contains a list of all entities included in the KBOpenbib snapshot.
+This page contains a list of all entities included in the OPENBIB snapshot.
 <br>
 If you want detailed information about an individual entity, take a look at the [docs](../docs) directory.
+
+- [Publishers](#-publishers)
+- [Authors](#-authors)
+- [Funding information](#-funding-information)
+- [Document Types](#-document-types)
+- [Address information](#-address-information)
+- [Transformative Agreements](#-transformative-agreements)
 
 ## 📚 Publishers
 
@@ -109,7 +116,7 @@ source type journal and the publication year 2014 to 2024.
 ```bash
 openalex_id: "https://openalex.org/W4256503663"
 doi: "10.1016/s0099-2399(15)00667-6"
-is_research: False
+is_research: false
 proba: 0.16
 ```
 
@@ -123,7 +130,7 @@ Examples of works that are considered as non-research publications by the classi
 
 - openalex_id (STRING): The OpenAlex id of this work.
 - doi (STRING): The DOI of this work.
-- is_research (BOOLEAN): True if our classifier detect this work as a research contribution.
+- is_research (BOOLEAN): True if the classifier detect this work as a research contribution.
 - proba (FLOAT): The probability that this work is a research contribution.
 
 ## 🏛 Address information
@@ -159,7 +166,7 @@ identifier: "10.1007/s004310050674§5617"
 - address_full (TEXT): The address string found for this publication in OpenAlex.
 - kb_sector_id (STRING): The sector id(s) associated with this publication.
 - doi (STRING): The DOI associated with this publication.
-- identifier (STRING): 
+- identifier (STRING): The internal identifier for this publication.
 
 #### Allocation of institutions to sectors (Mode A)
 
@@ -200,7 +207,7 @@ identifier: "10.1016/j.isci.2020.101203§1073"
 - address_full (TEXT): The address string found for this publication in OpenAlex.
 - kb_sector_id (STRING): The sector id(s) associated with this publication.
 - doi (STRING): The DOI associated with this publication.
-- identifier (STRING):  
+- identifier (STRING): The internal identifier for this publication.
 
 #### Allocation of institutions to sectors (Mode S)
 
@@ -298,8 +305,8 @@ publication_date: "2020-11-13"
 
 #### Fields
 
-- id (STRING): 
-- doi (STRING): 
+- id (STRING): The OpenAlex id associated with this publication.
+- doi (STRING): The DOI associated with this publication. 
 - matching_issn_l (STRING): 
 - matching_ror (STRING): 
 - esac_id (STRING): 
