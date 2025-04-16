@@ -16,7 +16,7 @@ Curated data is provided for following entities:
 - [Funding information](docs/data_overview.md#-funding-information) 📄
 - [Document types](docs/data_overview.md#-document-types) 🗂️
 - [Address information](docs/data_overview.md#-address-information) 🏛️
-- [Transformative Agreements](docs/data_overview.md#-transformative-agreements) ⚖️️
+- [Transformative Agreements](docs/data_overview.md#-transformative-agreements) 📑️
 
 Annual snapshots from the OPENBIB project are openly available to users of the 
 [Kompetenznetzwerk Bibliometrie](https://bibliometrie.info), via the 
