@@ -1,4 +1,4 @@
-# KBOpenBib Data
+# OPENBIB Data: Curation of metadata from German research institutions in OpenAlex
 
 ![License](https://img.shields.io/badge/License-CC0%5f1.0-orange)
 ![Python Version](https://img.shields.io/badge/Python-3.11-blue)
@@ -116,7 +116,7 @@ openbib_snapshot = OpenBibDataRelease(
 openbib_snapshot.make_archive(export_format='csv')
 ```
 
-## How I can get involved?
+## How can I get involved?
 
 If you see mistakes, want to suggest changes or submit feature requests, please 
 [create an issue](https://github.com/kbopenbib/kbopenbib_data/issues).
