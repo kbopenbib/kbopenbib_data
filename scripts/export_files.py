@@ -16,6 +16,7 @@ from models.address_information import (kb_a_addr_inst_sec_schema_nested,
                                         kb_inst_trans_schema)
 from models.transformative_agreements import (jct_institutions_schema,
                                               jct_journals_schema,
+                                              jct_articles_schema,
                                               jct_esac_schema)
 import logging
 import sys
@@ -533,6 +534,45 @@ class OpenBibDataRelease:
                                              export_file_name='kb_inst_trans.csv',
                                              dataframe=kb_inst_trans_export)
 
+    def export_jct_articles(self, limit: str | int='NULL', export_format: str='csv') -> None:
+
+        logging.info('Query table: add_jct_articles_20240831')
+
+        jct_articles_export = pd.read_sql(sql=
+                                        f"""
+                                        SELECT 
+                                            CASE
+                                                WHEN id IS NOT NULL THEN CONCAT('https://openalex.org/', id)
+                                                ELSE NULL
+                                            END AS id, 
+                                            doi, 
+                                            matching_issn_l, 
+                                            matching_ror, 
+                                            ror_type, 
+                                            esac_id, 
+                                            start_date, 
+                                            end_date, 
+                                            publication_date
+                                        FROM kb_project_openbib.add_jct_articles_20240831
+                                        LIMIT {limit}
+                                        """,
+                                        con=self.engine)
+
+        logging.info('Query completed.')
+
+        jct_articles_schema.validate(jct_articles_export)
+
+        if export_format == 'jsonl':
+
+            OpenBibDataRelease.export_to_jsonl(export_directory=self.export_directory,
+                                               export_file_name='jct_articles.jsonl',
+                                               dataframe=jct_articles_export)
+
+        if export_format == 'csv':
+            OpenBibDataRelease.export_to_csv(export_directory=self.export_directory,
+                                             export_file_name='jct_articles.csv',
+                                             dataframe=jct_articles_export)
+
     def export_jct_esac(self, limit: str | int='NULL', export_format: str='csv') -> None:
 
         logging.info('Query table: add_jct_esac_20240831')
@@ -605,16 +645,16 @@ class OpenBibDataRelease:
         logging.info('Query table: kb_project_openbib.add_jct_journals_20240831')
 
         jct_journals_export = pd.read_sql(sql=
-                                                f"""
-                                                SELECT id, 
-                                                       esac_id, 
-                                                       issn_l, 
-                                                       time_last_seen, 
-                                                       commit
-                                                FROM kb_project_openbib.add_jct_journals_20240831
-                                                LIMIT {limit}
-                                                """,
-                                                con=self.engine)
+                                            f"""
+                                            SELECT id, 
+                                                   esac_id, 
+                                                   issn_l, 
+                                                   time_last_seen, 
+                                                   commit
+                                            FROM kb_project_openbib.add_jct_journals_20240831
+                                            LIMIT {limit}
+                                            """,
+                                            con=self.engine)
 
         logging.info('Query completed.')
 
@@ -644,6 +684,7 @@ class OpenBibDataRelease:
         self.export_kb_sectors(limit=limit, export_format=export_format)
         self.export_kb_inst(limit=limit, export_format=export_format)
         self.export_kb_inst_trans(limit=limit, export_format=export_format)
+        self.export_jct_articles(limit=limit, export_format=export_format)
         self.export_jct_esac(limit=limit, export_format=export_format)
         self.export_jct_institutions(limit=limit, export_format=export_format)
         self.export_jct_journals(limit=limit, export_format=export_format)

@@ -287,7 +287,7 @@ type: "inclusion"
 
 ## 📑 Transformative Agreements
 
-### Article
+### Articles
 
 Table: <i>add_jct_articles_20240831</i>
 
