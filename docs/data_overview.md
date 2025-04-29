@@ -103,7 +103,7 @@ funding_id: ["430651076"]
 
 Journals publish different types of scholarly works such as
 research articles, reviews, book reviews, case reports and editorials.
-The latter are often classified as articles in OpenAlex. Using a machine 
+The latter are sometimes classified as articles in OpenAlex. Using a machine 
 learning classifier helps to distinguish between research
 contributions and other types of works. 
 

@@ -32,7 +32,7 @@ with publication years 2014 to 2024.
 
 The following figure compares the assignment of publications to German institutions
 in OpenAlex and in OPENBIB. The figure includes publications between 2014 and 
-2024, but is not restricted to specific documents or publication types. While OpenAlex 
+2024, but is not restricted to specific document or publication types. While OpenAlex 
 combines rule-based and machine learning algorithms to match address affiliations in 
 documents with institutions, OPENBIB applies a pattern matching approach. The figure 
 only displays institutions that are present in both OpenAlex and OPENBIB and can be 
