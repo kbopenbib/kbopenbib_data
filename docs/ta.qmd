@@ -1,0 +1,199 @@
+---
+format: gfm
+---
+# Transformative Agreements Dataset
+
+This dataset preserves historical records of transformative agreements in scholarly publishing. By linking agreement data with OpenAlex and using standardised identifiers (ISSN-L, ROR), it enables research on these agreements' evolution and impact over time.
+
+## About 
+
+Research studies increasingly examine transformative agreements' impact on scholarly publishing. Unfortunately, information about this licensing model is only partly available and scattered around various open data sources.
+
+For example, the cOAlition SJournal Checker Tool, which is the most comprehensive source for journals and intuitions covered by transformative agreements, provides data only for current agreements; information about expired agreements is regularly deleted, limiting longitudinal studies.
+
+This dataset combines open data from various sources to improve transparency around transformative agreements and estimates articles published under these agreements in OpenAlex. It uses transformative agreement data from the Journal Checker Tool for information about journal portfolios and participating institutions.
+
+The data were normalised using ISSN-L for journals (according to the ISSN Agency) and associated ROR-IDs (according to OpenAlex).
+
+Due to limited public invoicing data, articles published under transformative agreements were identified by linking first author affiliations from OpenAlex to eligible institutions according to agreement data.
+
+The dataset aims to support empirical research on open access business models and transformative agreements.
+
+In the following, the methods and use-cases are presented.
+
+## Methods
+
+A [bot](https://github.com/njahn82/jct_data/) has been fetching the cOAlition S Public Transformative Agreement Data dump serving the Journal Checker Tool weekly since December 2022. The resulting data versions were saved using Git and are available via GitHub. To combine these snapshots, the weekly git versions were checked out and the resulting data combined (see [script](https://github.com/njahn82/jct_data/blob/main/combine.R)). As the Transformative Agreement Data are continuously curated, only the most recent data about an agreement were safeguarded. For expired agreements, this represented the latest snapshot available.
+
+The Transformative Agreement Data dumps link agreements to journals represented by journal names and ISSN. After mapping ISSN variants to the corresponding linking ISSN (ISSN-L), as provided by the ISSN International Centre, journals were associated with publishers according to the ESAC Transformative Agreement Registry. This reflects that some portfolios may include imprints.
+
+Transformative Agreement Data did not comprehensively cover associated institutions, such as university hospitals or institutes of large research organisations like the Max Planck Society. To improve matching, Transformative Agreement Data were automatically enriched with ROR-IDs from associated organisations according to OpenAlex's institution entity data.
+
+To estimate articles enabled by transformative agreements, article metadata were retrieved for each journal from OpenAlex. Then, participating institutions were matched with the first author affiliations recorded by OpenAlex. The matching considered first author affiliations instead of corresponding author affiliation due to the lack of corresponding author data in OpenAlex. Matching also considered the duration of agreements according to the ESAC registry.
+
+The matching was carried out on [Google BigQuery](https://console.cloud.google.com/bigquery) for performance reasons.
+
+The compilation of the datasets was carried out in April 2025 using the most recent datasets.
+
+## Data files
+
+You can find the documentation of data files in the [data documentation](data_overview.md#-transformative-agreements)
+
+## Use case
+
+```{r setup, echo=FALSE}
+
+suppressPackageStartupMessages(library(tidyverse))
+
+library(bigrquery)
+
+knitr::opts_chunk$set(
+  comment = "#>",
+  collapse = TRUE,
+  warning = FALSE,
+  message = FALSE, 
+  dpi = 600
+)
+options(scipen = 999, digits = 2)
+knitr::knit_hooks$set(
+  inline = function(x) {
+    if (is.numeric(x)) {
+      return(prettyNum(x, big.mark = ","))
+    } else{
+      return(x)
+    }
+  }
+)
+```
+
+```{r connection}
+#| echo: false
+#' BigQuery 
+bq_con <- dbConnect(
+  bigrquery::bigquery(),
+  project = "subugoe-collaborative",
+  billing = "subugoe-collaborative"
+)
+```
+
+```{sql}
+#| connection: bq_con
+#| output.var: bq_df
+SELECT
+  publication_year,
+  esac.publisher,
+  COUNT(DISTINCT(jct.id)) AS n,
+FROM
+  `subugoe-collaborative.openbib.jct_articles` AS jct
+INNER JOIN
+  `subugoe-collaborative.openalex.works` AS oalex
+ON
+  oalex.doi = jct.doi
+INNER JOIN
+  `subugoe-collaborative.openbib.jct_esac` AS esac
+ON
+  esac.id = jct.esac_id
+WHERE oalex.type IN ('article', 'review') AND is_paratext = FALSE
+GROUP BY
+  publication_year,
+  publisher
+ORDER BY
+  publication_year DESC,
+  n DESC
+```
+
+```{r}
+bq_df
+```
+
+```{r}
+pub_by_year_df <- bq_df |>
+  mutate(publisher_normalised = if_else(
+    publisher %in% c("Elsevier", "Springer Nature", "Wiley", "Taylor & Francis", "Sage"), publisher, "Other"
+  )) |>
+  group_by(publisher_normalised, publication_year) |>
+  summarise(n = sum(n)) |>
+  filter(between(publication_year, 2020, 2024)) |>
+  mutate(publisher_normalised = factor(publisher_normalised, levels = c("Elsevier", "Springer Nature", "Wiley", "Taylor & Francis", "Sage", "Other"))) 
+
+pub_by_year_df |>
+  ggplot(aes(publication_year, n, fill = fct_rev(publisher_normalised))) +
+  geom_bar(stat = "identity", color = "white", linewidth = .25) +
+  scale_fill_manual("", values = c('#cccccca0', '#f0f9e8','#bae4bc','#7bccc4','#43a2ca','#0868ac')) +
+  scale_y_continuous(labels =  scales::number_format(big.mark = ",")) +
+  labs(x = "Publication year", y = "First-author articles", title = "Growth of Transformative Agreements",
+       subtitle = "Annual first-author articles from participating institutions",
+       caption = "KBOPENBIB | April 2025 | CC0") +
+ theme_minimal() +
+  theme(plot.margin = margin(30, 30, 30, 30)) +
+  theme(panel.grid.minor = element_blank()) +
+  theme(axis.ticks = element_blank()) +
+  theme(panel.grid.major.x = element_blank()) +
+  theme(panel.border = element_blank()) +
+  theme(plot.title.position = "plot") +
+  theme(plot.caption.position = "plot")
+
+```
+
+By open access status. let's re-use oa status from openalex directly
+
+```{sql}
+#| connection: bq_con
+#| output.var: bq_oa_df
+SELECT
+  publication_year,
+  esac.publisher,
+  oalex.open_access.oa_status,
+  COUNT(DISTINCT(jct.id)) AS n,
+FROM
+  `subugoe-collaborative.openbib.jct_articles` AS jct
+INNER JOIN
+  `subugoe-collaborative.openalex.works` AS oalex
+ON
+  oalex.doi = jct.doi
+INNER JOIN
+  `subugoe-collaborative.openbib.jct_esac` AS esac
+ON
+  esac.id = jct.esac_id
+WHERE oalex.type IN ('article', 'review') AND is_paratext = FALSE
+GROUP BY
+  publication_year,
+  publisher, 
+  oalex.open_access.oa_status
+ORDER BY
+  publication_year DESC,
+  n DESC
+```
+
+```{r}
+oa_df <- bq_oa_df |>
+  filter(oa_status %in% c("gold", "hybrid", "closed")) |>
+  mutate(publisher_normalised = if_else(
+    publisher %in% c("Elsevier", "Springer Nature", "Wiley", "Taylor & Francis", "Sage"), publisher, "Other"
+  )) |>
+  group_by(publisher_normalised, publication_year, oa_status) |>
+  summarise(n = sum(n)) |>
+  filter(between(publication_year, 2020, 2024)) |>
+  mutate(publication_year = as.character(as.numeric(publication_year))) |>
+  mutate(oa_status = factor(oa_status, levels = c("gold", "hybrid", "closed"))) |>
+  mutate(publisher_normalised = factor(publisher_normalised, levels = c("Elsevier", "Springer Nature", "Wiley", "Taylor & Francis", "Sage", "Other")))
+  
+oa_df |>
+  ggplot(aes(gsub("^20", "'", publication_year), n, fill = fct_rev(publisher_normalised))) +
+  geom_bar(stat = "identity", color = "white", linewidth = .25) +
+  scale_fill_manual("", values = c('#cccccca0', '#f0f9e8','#bae4bc','#7bccc4','#43a2ca','#0868ac')) +
+  scale_y_continuous(labels =  scales::number_format(big.mark = ",")) +
+  facet_grid(~ oa_status) +
+  labs(x = "Publication year", y = "First-author articles", title = "Growth of Transformative Agreements",
+       subtitle = "Annual first-author articles from participating institutions, by open access status",
+       caption = "KBOPENBIB | April 2025 | CC0") +
+ theme_minimal() +
+  theme(plot.margin = margin(30, 30, 30, 30)) +
+  theme(panel.grid.minor = element_blank()) +
+  theme(axis.ticks = element_blank()) +
+  theme(panel.grid.major.x = element_blank()) +
+  theme(panel.border = element_blank()) +
+  theme(plot.title.position = "plot") +
+  theme(plot.caption.position = "plot")
+```
+
