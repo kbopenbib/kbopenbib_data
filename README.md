@@ -31,11 +31,12 @@ with publication years 2014 to 2024.
 ### Address information
 
 The following figure compares the assignment of publications to German institutions
-in OpenAlex and in OPENBIB. While OpenAlex combines rule-based and machine learning 
-algorithms to match address affiliations in documents with institutions, OPENBIB 
-applies a pattern matching approach. The figure only displays institutions that are 
-present in both OpenAlex and OPENBIB and can be assigned a unique Research 
-Organisation Registry (ROR) ID.
+in OpenAlex and in OPENBIB. The figure includes publications between 2014 and 
+2024, but is not restricted to specific documents or publication types. While OpenAlex 
+combines rule-based and machine learning algorithms to match address affiliations in 
+documents with institutions, OPENBIB applies a pattern matching approach. The figure 
+only displays institutions that are present in both OpenAlex and OPENBIB and can be 
+assigned a unique Research Organisation Registry (ROR) ID. 
 
 <figure>
     <img src="examples/kb_institution_disambiguation.png" width="80%" />
@@ -47,9 +48,10 @@ Organisation Registry (ROR) ID.
 ### Document types
 
 The following figure compares the classification of article and reviews in OpenAlex
-and in OPENBIB. OpenAlex counts more article and reviews than OPENBIB, because
-OpenAlex also labels case reports, abstracts, book reviews and editorials
-as articles and reviews. 
+and in OPENBIB, limited to the publication years 2014 to 2024. OpenAlex counts more 
+article and reviews than OPENBIB because the OPENBIB classifier is stricter when 
+classifying research contributions. Articles and reviews are assigned to German 
+institutions exclusively via OPENBIB address information. 
 
 <figure>
     <img src="examples/document_types_sectors.png" width="80%" />
@@ -64,7 +66,8 @@ The following figure compares the number of publications with funding
 information of the German Research Foundation in OpenAlex and in OPENBIB. 
 Only publications funded by the German 
 [Open-Access-Publikationskosten](https://www.dfg.de/en/research-funding/funding-opportunities/programmes/infrastructure/lis/funding-opportunities/open-access-publication-funding) 
-program are considered.
+program are considered (no restrictions to document or publication types). Publications 
+are assigned to German institutions exclusively via OPENBIB address information. 
 
 <figure>
     <img src="examples/funding_information_sectors.png" width="80%" />
