@@ -66,8 +66,9 @@ The following figure compares the number of publications with funding
 information of the German Research Foundation in OpenAlex and in OPENBIB. 
 Only publications funded by the German 
 [Open-Access-Publikationskosten](https://www.dfg.de/en/research-funding/funding-opportunities/programmes/infrastructure/lis/funding-opportunities/open-access-publication-funding) 
-program are considered (no restrictions to document or publication types). Publications 
-are assigned to German institutions exclusively via OPENBIB address information. 
+program are considered. Publications are assigned to German institutions exclusively 
+via OPENBIB address information. No restrictions were placed on the type of documents or 
+publications, however most of the records are journal articles.
 
 <figure>
     <img src="examples/funding_information_sectors.png" width="80%" />
