@@ -52,14 +52,18 @@ class OpenBibDataRelease:
 
         self.engine = create_engine(f'postgresql://{self.user}:{self.password}@{self.host}:{self.port}/{self.database}')
 
-        if Path(self.export_directory).exists() and Path(self.export_directory).is_dir():
-            shutil.rmtree(self.export_directory)
-
-        os.makedirs(self.export_directory, exist_ok=False)
-
         if overwrite_snapshot:
+
+            if Path(self.export_directory).exists() and Path(self.export_directory).is_dir():
+                shutil.rmtree(self.export_directory)
+
+            os.makedirs(self.export_directory, exist_ok=False)
+
             if Path(self.export_file_name).exists() and Path(self.export_file_name).is_file():
                 os.remove(self.export_file_name)
+
+        else:
+            os.makedirs(self.export_directory, exist_ok=True)
 
     @staticmethod
     def export_to_jsonl(export_directory: str, export_file_name: str, dataframe: pd.DataFrame) -> None:
@@ -615,11 +619,15 @@ class OpenBibDataRelease:
 
         jct_institutions_export = pd.read_sql(sql=
                                                 f"""
-                                                SELECT id, 
-                                                       esac_id, 
-                                                       ror_id, 
-                                                       time_last_seen, 
-                                                       commit
+                                                SELECT 
+                                                    CASE
+                                                        WHEN id IS NOT NULL THEN CONCAT('https://openalex.org/', id)
+                                                        ELSE NULL
+                                                    END AS id,  
+                                                    esac_id, 
+                                                    ror_id, 
+                                                    time_last_seen, 
+                                                    commit
                                                 FROM kb_project_openbib.add_jct_institutions_20240831
                                                 LIMIT {limit}
                                                 """,
@@ -646,11 +654,15 @@ class OpenBibDataRelease:
 
         jct_journals_export = pd.read_sql(sql=
                                             f"""
-                                            SELECT id, 
-                                                   esac_id, 
-                                                   issn_l, 
-                                                   time_last_seen, 
-                                                   commit
+                                            SELECT 
+                                                CASE
+                                                    WHEN id IS NOT NULL THEN CONCAT('https://openalex.org/', id)
+                                                    ELSE NULL
+                                                END AS id,  
+                                                esac_id, 
+                                                issn_l, 
+                                                time_last_seen, 
+                                                commit
                                             FROM kb_project_openbib.add_jct_journals_20240831
                                             LIMIT {limit}
                                             """,
