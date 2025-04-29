@@ -285,13 +285,84 @@ type: "inclusion"
 - inst_post (INTEGER): The institution id after the transition. 
 - type (STRING): The type of structural change (merger, inclusion, exclusion).
 
-## 📑 Transformative Agreements
+## 📑 Transformative Agreements Dataset Documentation
 
-### Articles
+### Overview
 
-Table: <i>add_jct_articles_20240831</i>
+This dataset comprises historic snapshots from the [cOAlitionS Transformative Agreements Public Data](https://journalcheckertool.org/transformative-agreements/) dump underlying the cOAlition S Journal Checker Tool (JCT). The data files were safeguarded on a weekly basis using a [robot](https://github.com/njahn82/jct_data).
 
-```bash
+### Dataset Components
+
+The dataset consists of four primary tables:
+
+1. `jct_journals` - Journals covered by transformative agreements
+2. `jct_institutions` - Institutions participating in transformative agreements
+3. `jct_articles` - Articles published under transformative agreements
+4. `jct_esac` - Metadata about the transformative agreements from the ESAC registry
+
+### Table Descriptions
+
+#### Journals (`add_jct_journals_20240831`)
+
+This table contains journals covered by transformative agreements. Journal ISSN variants are disambiguated using ISSN-L according to the ISSN agency.
+
+| Field | Type | Description |
+|-------|------|-------------|
+| id | STRING | OpenAlex journal identifier |
+| esac_id | STRING | Identifier for the transformative agreement |
+| issn_l | STRING | ISSN-L identifying the journal |
+| time_last_seen | TIMESTAMP | Last time this data was available in the Journal Checker Tool |
+| commit | STRING | Data snapshot Git commit ID |
+
+##### Example Record
+
+```
+id: "https://openalex.org/S2764691006"
+esac_id: "acm2020delft"
+issn_l: "2153-2184"
+time_last_seen: "2024-04-01 09:23:06 UTC"
+commit: "a689426e782c5f42b850b327a1a89d9ad9d19a16"
+```
+
+#### Institutions (`add_jct_institutions_20240831`)
+
+This table maps institutions to transformative agreements they participate in. The institution data is enriched with associated ROR-IDs according to OpenAlex.
+
+| Field | Type | Description |
+|-------|------|-------------|
+| id | STRING | OpenAlex institution identifier |
+| esac_id | STRING | Identifier for the transformative agreement |
+| ror_id | STRING | ROR-ID of the participating institution |
+| time_last_seen | TIMESTAMP | Last time this data was available in the Journal Checker Tool |
+| commit | STRING | Data snapshot Git commit ID |
+
+##### Example Record
+```
+id: "https://openalex.org/I42934936"
+esac_id: "acm2020ie"
+ror_id: "https://ror.org/04a1a1e81"
+time_last_seen: "2023-01-02 02:19:56 UTC"
+commit: "fd749477fbe5e0d58040bdaa4466e63886e9fb17"
+```
+
+#### Articles (`add_jct_articles_20240831`)
+
+This table contains articles enabled by transformative agreements based on first-author affiliations in OpenAlex.
+
+| Field | Type | Description |
+|-------|------|-------------|
+| id | STRING | OpenAlex identifier for the publication |
+| doi | STRING | Digital Object Identifier for the publication |
+| matching_issn_l | STRING | ISSN-L identifying the journal |
+| matching_ror | STRING | ROR-ID used to match between OpenAlex and Journal Checker Tool data |
+| ror_type | STRING | Type of ROR match (e.g., "ror_jct") |
+| esac_id | STRING | Identifier for the transformative agreement from ESAC Registry |
+| start_date | DATE | Agreement start date |
+| end_date | DATE | Agreement end date |
+| publication_date | DATE | Publication date according to OpenAlex |
+
+##### Example Record
+```
 id: "https://openalex.org/W3107077096"
 doi: "10.1145/3428248"
 matching_issn_l: "2475-1421"
@@ -303,22 +374,25 @@ end_date: "2023-12-31"
 publication_date: "2020-11-13"
 ```
 
-#### Fields
+#### ESAC Registry (`add_jct_esac_20240831`)
 
-- id (STRING): The OpenAlex id associated with this publication.
-- doi (STRING): The DOI associated with this publication. 
-- matching_issn_l (STRING): 
-- matching_ror (STRING): 
-- esac_id (STRING): 
-- start_date (DATE):
-- end_date (DATE):
-- publication_date (DATE):
+This table provides metadata about transformative agreements from the ESAC Registry.
 
-### ESAC
+| Field | Type | Description |
+|-------|------|-------------|
+| publisher | STRING | Name of the publisher |
+| country | STRING | Country where the agreement is applicable |
+| organization | STRING | Organization that negotiated the agreement |
+| annual_publications | INTEGER | Estimated number of articles published annually under the agreement |
+| start_date | TIMESTAMP | Agreement start date |
+| end_date | TIMESTAMP | Agreement end date |
+| id | STRING | Unique identifier for the agreement |
+| url | STRING | URL to the agreement details in the ESAC Registry |
+| jct_jn | BOOLEAN | Indicates if any journals are recorded under this agreement in JCT |
+| jct_inst | BOOLEAN | Indicates if any institutions are recorded under this agreement in JCT |
 
-Table: <i>add_jct_esac_20240831</i>
-
-```bash
+##### Example Record
+```
 publisher: "Taylor & Francis"
 country: "Austria"
 organization: "KEMOE/FWF"
@@ -331,55 +405,9 @@ jct_jn: false
 jct_inst: false
 ```
 
-#### Fields
+### Data Relationships
 
-- publisher (STRING): 
-- country (STRING): 
-- organization (STRING): 
-- annual_publications (INTEGER): 
-- start_date (TIMESTAMP): 
-- end_date (TIMESTAMP):
-- id (STRING):
-- url (STRING):
-- jct_jn (BOOL):
-- jct_inst (BOOL):
+- **Articles to Journals**: Articles are linked to journals via the `matching_issn_l` field
+- **Articles to Institutions**: Articles are linked to institutions via the `matching_ror` field
+- **Agreements**: All tables are linked via the `esac_id` field representing specific transformative agreements
 
-### Institutions
-
-Table: <i>add_jct_institutions_20240831</i>
-
-```bash
-id: "https://openalex.org/I42934936"
-esac_id: "acm2020ie"
-ror_id: "https://ror.org/04a1a1e81"
-time_last_seen: "2023-01-02 02:19:56 UTC"
-commit: "fd749477fbe5e0d58040bdaa4466e63886e9fb17"
-```
-
-#### Fields
-
-- id (STRING): 
-- esac_id (STRING): 
-- ror_id (STRING): 
-- time_last_seen (TIMESTAMP): 
-- commit (STRING):
-
-### Journals
-
-Table: <i>add_jct_journals_20240831</i>
-
-```bash
-id: "https://openalex.org/S2764691006"
-esac_id: "acm2020delft"
-issn_l: "2153-2184"
-time_last_seen: "2024-04-01 09:23:06 UTC"
-commit: "a689426e782c5f42b850b327a1a89d9ad9d19a16"
-```
-
-#### Fields
-
-- id (STRING): 
-- esac_id (STRING): 
-- issn_l (STRING): 
-- time_last_seen (TIMESTAMP): 
-- commit (STRING):
