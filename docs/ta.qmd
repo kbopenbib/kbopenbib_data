@@ -70,7 +70,7 @@ As such, the dataset aims to support data-driven research and monitoring of open
 
 A dedicated [bot](https://github.com/njahn82/jct_data/) has been fetching the cOAlition S Public Transformative Agreement Data dump serving the Journal Checker Tool weekly since December 2022. 
 The resulting data snapshots were saved using Git and are available via [GitHub](https://github.com/njahn82/jct_data?tab=readme-ov-file#snapshots). 
-To create a comprehensive dataset, the weekly snapshots were retrieved from git and merged together using a custom  [script](https://github.com/njahn82/jct_data/blob/main/combine.R)). As the Transformative Agreement Data are continuously curated, only the most recent data about an agreement were safeguarded. For expired agreements, this represented the latest snapshot available.
+To create a comprehensive dataset, the weekly snapshots were retrieved from git and merged together using a custom  [script](https://github.com/njahn82/jct_data/blob/main/combine.R). As the Transformative Agreement Data are continuously curated, only the most recent data about an agreement were safeguarded. For expired agreements, this represented the latest snapshot available.
 
 ### Data curation
 
@@ -78,9 +78,9 @@ The cOAlition S Public Transformative Agreement Data dumps link agreements to jo
 
 cOAlition S Public Transformative Agreement Data did not comprehensively cover associated institutions, such as university hospitals or institutes of large research organisations like the Max Planck Society. To improve matching, cOAlition S Public Transformative Agreement Data were automatically enriched with ROR-IDs from associated organisations according to OpenAlex's institution entity data.
 
-To estimate articles enabled by transformative agreements, article metadata were retrieved for each journal from OpenAlex. Then, participating institutions were matched with the first author affiliations recorded by OpenAlex. The matching considered first author affiliations instead of corresponding author affiliation due to the lack of corresponding author data in OpenAlex. Matching also considered the duration of agreements according to the [ESAC registry](https://esac-initiative.org/about/transformative-agreements/agreement-registry/).
+To estimate articles enabled by transformative agreements, article metadata were retrieved for each journal from OpenAlex. Then, participating institutions were matched with the first author affiliations recorded by OpenAlex. The matching considered first author affiliations instead of corresponding author affiliation due to the lack of corresponding author data in OpenAlex. Matching also considered the duration of agreements according to the [ESAC Transformative Agreement Registry](https://esac-initiative.org/about/transformative-agreements/agreement-registry/).
 
-The matching was carried out on [Google BigQuery](https://console.cloud.google.com/bigquery) for performance reasons.
+The matching was carried out on [Google BigQuery](https://console.cloud.google.com/bigquery?ws=!1m7!1m6!12m5!1m3!1ssubugoe-collaborative!2sus-central1!3s601a1298-c49c-47cd-a6c1-754e32c405eb!2e1) for performance reasons.
 
 The compilation of the datasets was carried out in April 2025 using the most recent datasets.
 
