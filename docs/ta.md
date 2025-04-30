@@ -64,7 +64,7 @@ resulting data snapshots were saved using Git and are available via
 [GitHub](https://github.com/njahn82/jct_data?tab=readme-ov-file#snapshots).
 To create a comprehensive dataset, the weekly snapshots were retrieved
 from git and merged together using a custom
-[script](https://github.com/njahn82/jct_data/blob/main/combine.R)). As
+[script](https://github.com/njahn82/jct_data/blob/main/combine.R). As
 the Transformative Agreement Data are continuously curated, only the
 most recent data about an agreement were safeguarded. For expired
 agreements, this represented the latest snapshot available.
@@ -92,12 +92,12 @@ participating institutions were matched with the first author
 affiliations recorded by OpenAlex. The matching considered first author
 affiliations instead of corresponding author affiliation due to the lack
 of corresponding author data in OpenAlex. Matching also considered the
-duration of agreements according to the [ESAC
-registry](https://esac-initiative.org/about/transformative-agreements/agreement-registry/).
+duration of agreements according to the [ESAC Transformative Agreement
+Registry](https://esac-initiative.org/about/transformative-agreements/agreement-registry/).
 
 The matching was carried out on [Google
-BigQuery](https://console.cloud.google.com/bigquery) for performance
-reasons.
+BigQuery](https://console.cloud.google.com/bigquery?ws=!1m7!1m6!12m5!1m3!1ssubugoe-collaborative!2sus-central1!3s601a1298-c49c-47cd-a6c1-754e32c405eb!2e1)
+for performance reasons.
 
 The compilation of the datasets was carried out in April 2025 using the
 most recent datasets.
