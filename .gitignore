@@ -6,4 +6,4 @@ coverage.svg
 .ipynb_checkpoints
 .Rproj.user
 openbib_export_csv/
-openbib_export_json/
+openbib_export_jsonl/
