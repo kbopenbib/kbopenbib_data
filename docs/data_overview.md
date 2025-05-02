@@ -303,7 +303,7 @@ type: "inclusion"
 
 ### Overview
 
-This dataset comprises historic snapshots from the [cOAlitionS Transformative Agreements Public Data](https://journalcheckertool.org/transformative-agreements/) dump underlying the cOAlition S Journal Checker Tool (JCT). The data files were safeguarded on a weekly basis using a [robot](https://github.com/njahn82/jct_data).
+This dataset comprises historic snapshots from the [cOAlitionS Transformative Agreements Public Data](https://journalcheckertool.org/transformative-agreements/) dump underlying the cOAlition S Journal Checker Tool (JCT). The data files were safeguarded on a weekly basis using a [bot](https://github.com/njahn82/jct_data).
 
 ### Dataset Components
 
