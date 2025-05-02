@@ -131,7 +131,7 @@ Data is made available under the [CC0 license](LICENSE.txt).
 
 ## Citation
 
-Haupka, N., Culbert, J., Donner, P., Jahn, N., Lenke, C., Mayr, P., Meier, A., Mittermaier, B., Scheidt, B., & Taubert, N. (2025). OPENBIB: Selected curated open metadata based on OpenAlex (0.1) [Data set]. Zenodo.
+Haupka, N., Culbert, J., Donner, P., Jahn, N., Lenke, C., Mayr, P., Meier, A., Mittermaier, B., Scheidt, B., Stahlschmidt, S., & Taubert, N. (2025). OPENBIB: Selected curated open metadata based on OpenAlex (0.1) [Data set]. Zenodo.
 
 ## Contact
 
