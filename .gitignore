@@ -4,3 +4,4 @@ __pycache__
 .coverage
 coverage.svg
 .ipynb_checkpoints
+.Rproj.user
