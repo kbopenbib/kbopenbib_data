@@ -426,3 +426,12 @@ jct_inst: false
 ## 👩‍🎓 Authors (tba)
 
 In the Authors section, we focus on improving author name disambiguation (AND) for German authors by developing a machine learning pipeline that links authorships to individual authors, using metadata from OpenAlex filtered by affiliation, publication date, etc. Key attributes from both authorships and works (e.g., raw author names, DOIs, topics) are used, with blocking strategies like Last Name First Initial (LNFI) employed to reduce comparison complexity. Future enhancements include progressive blocking and graph embedding models to further refine the disambiguation process.
+
+| Field | Type | Description |
+|-------|------|-------------|
+| kb_author_disambig | STRING | Internal id for author |
+| work_ids | ARRAY[STRING] | Associated OpenAlex work IDs for the author |
+| author_name_arr | ARRAY[STRING] | Representations of raw author name in OpenAlex |
+| author_id_arr | ARRAY[STRING] | OpenAlex Author IDs (if present) |
+| orcid | STRING | Orcid (if present) |
+
