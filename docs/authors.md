@@ -1,6 +1,6 @@
 # Authors
 ## Note 
-    Due to computational restraints, the Author data is still processingas of 2nd May 2025. It will be added to the open data release when complete.
+    Due to computational restraints, the Author data is still processing as of 2nd May 2025. It will be added to the open data release when complete.
 ##
 Our aim is to provide better author disambiguation for German authors specifically, to this end we have created a machine learning pipeline to discriminate which authorships belong to which author. We shall refer to this as Author Name Disambiguation (AND). 
 
