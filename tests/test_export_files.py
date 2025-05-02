@@ -55,10 +55,11 @@ class TestOpenBibDataRelease:
 
         openbib_snapshot.export_publishers(limit=10, export_format='csv')
 
-        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/publishers.csv'))
+        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/publishers.csv.gz'))
 
         publishers_export = pd.read_csv(
-            filepath_or_buffer=os.path.join(self.test_dir, 'openbib_export/publishers.csv'),
+            filepath_or_buffer=os.path.join(self.test_dir, 'openbib_export/publishers.csv.gz'),
+            compression='gzip',
             sep=',',
             quotechar='"',
             header=0
@@ -70,10 +71,11 @@ class TestOpenBibDataRelease:
 
         openbib_snapshot.export_publishers(limit=10, export_format='jsonl')
 
-        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/publishers.jsonl'))
+        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/publishers.jsonl.gz'))
 
         publishers_export = pd.read_json(path_or_buf=os.path.join(self.test_dir,
-                                                                  'openbib_export/publishers.jsonl'),
+                                                                  'openbib_export/publishers.jsonl.gz'),
+                                         compression='gzip',
                                          lines=True)
 
         publisher_schema.validate(publishers_export)
@@ -82,10 +84,11 @@ class TestOpenBibDataRelease:
 
         openbib_snapshot.export_publishers_relations(limit=10, export_format='csv')
 
-        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/publishers_relation.csv'))
+        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/publishers_relation.csv.gz'))
 
         publishers_export = pd.read_csv(
-            filepath_or_buffer=os.path.join(self.test_dir, 'openbib_export/publishers_relation.csv'),
+            filepath_or_buffer=os.path.join(self.test_dir, 'openbib_export/publishers_relation.csv.gz'),
+            compression='gzip',
             sep=',',
             quotechar='"',
             header=0
@@ -97,10 +100,11 @@ class TestOpenBibDataRelease:
 
         openbib_snapshot.export_publishers_relations(limit=10, export_format='jsonl')
 
-        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/publishers_relation.jsonl'))
+        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/publishers_relation.jsonl.gz'))
 
         publishers_export = pd.read_json(path_or_buf=os.path.join(self.test_dir,
-                                                                  'openbib_export/publishers_relation.jsonl'),
+                                                                  'openbib_export/publishers_relation.jsonl.gz'),
+                                         compression='gzip',
                                          lines=True)
 
         publisher_relation_schema.validate(publishers_export)
@@ -109,10 +113,11 @@ class TestOpenBibDataRelease:
 
         openbib_snapshot.export_funding_information(limit=10, export_format='csv')
 
-        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/funding_information.csv'))
+        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/funding_information.csv.gz'))
 
         funding_information_export = pd.read_csv(
-            filepath_or_buffer=os.path.join(self.test_dir, 'openbib_export/funding_information.csv'),
+            filepath_or_buffer=os.path.join(self.test_dir, 'openbib_export/funding_information.csv.gz'),
+            compression='gzip',
             sep=',',
             quotechar='"',
             header=0
@@ -124,10 +129,11 @@ class TestOpenBibDataRelease:
 
         openbib_snapshot.export_funding_information(limit=10, export_format='jsonl')
 
-        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/funding_information.jsonl'))
+        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/funding_information.jsonl.gz'))
 
         funding_information_export = pd.read_json(path_or_buf=os.path.join(self.test_dir,
-                                                                           'openbib_export/funding_information.jsonl'),
+                                                                        'openbib_export/funding_information.jsonl.gz'),
+                                                  compression='gzip',
                                                   lines=True)
 
         funding_information_schema_unnested.validate(funding_information_export)
@@ -136,10 +142,11 @@ class TestOpenBibDataRelease:
 
         openbib_snapshot.export_document_types(limit=10, export_format='csv')
 
-        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/document_types.csv'))
+        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/document_types.csv.gz'))
 
         document_type_export = pd.read_csv(
-            filepath_or_buffer=os.path.join(self.test_dir, 'openbib_export/document_types.csv'),
+            filepath_or_buffer=os.path.join(self.test_dir, 'openbib_export/document_types.csv.gz'),
+            compression='gzip',
             sep=',',
             quotechar='"',
             header=0
@@ -151,10 +158,11 @@ class TestOpenBibDataRelease:
 
         openbib_snapshot.export_document_types(limit=10, export_format='jsonl')
 
-        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/document_types.jsonl'))
+        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/document_types.jsonl.gz'))
 
         document_type_export = pd.read_json(path_or_buf=os.path.join(self.test_dir,
-                                                                     'openbib_export/document_types.jsonl'),
+                                                                     'openbib_export/document_types.jsonl.gz'),
+                                            compression='gzip',
                                             lines=True)
 
         document_type_schema.validate(document_type_export)
@@ -163,10 +171,11 @@ class TestOpenBibDataRelease:
 
         openbib_snapshot.export_address_information_a(limit=10, export_format='csv')
 
-        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/kb_a_addr_inst.csv'))
+        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/kb_a_addr_inst.csv.gz'))
 
         kb_a_addr_inst_sec_export = pd.read_csv(
-            filepath_or_buffer=os.path.join(self.test_dir, 'openbib_export/kb_a_addr_inst.csv'),
+            filepath_or_buffer=os.path.join(self.test_dir, 'openbib_export/kb_a_addr_inst.csv.gz'),
+            compression='gzip',
             sep=',',
             quotechar='"',
             header=0
@@ -178,10 +187,11 @@ class TestOpenBibDataRelease:
 
         openbib_snapshot.export_address_information_a(limit=10, export_format='jsonl')
 
-        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/kb_a_addr_inst.jsonl'))
+        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/kb_a_addr_inst.jsonl.gz'))
 
         kb_a_addr_inst_sec_export = pd.read_json(path_or_buf=os.path.join(self.test_dir,
-                                                                          'openbib_export/kb_a_addr_inst.jsonl'),
+                                                                          'openbib_export/kb_a_addr_inst.jsonl.gz'),
+                                                 compression='gzip',
                                                  lines=True)
 
         kb_a_addr_inst_sec_schema_nested.validate(kb_a_addr_inst_sec_export)
@@ -190,10 +200,11 @@ class TestOpenBibDataRelease:
 
         openbib_snapshot.export_address_information_a_sec(limit=10, export_format='csv')
 
-        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/kb_a_inst.csv'))
+        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/kb_a_inst.csv.gz'))
 
         kb_a_inst_sec_export = pd.read_csv(
-            filepath_or_buffer=os.path.join(self.test_dir, 'openbib_export/kb_a_inst.csv'),
+            filepath_or_buffer=os.path.join(self.test_dir, 'openbib_export/kb_a_inst.csv.gz'),
+            compression='gzip',
             sep=',',
             quotechar='"',
             header=0
@@ -205,10 +216,11 @@ class TestOpenBibDataRelease:
 
         openbib_snapshot.export_address_information_a_sec(limit=10, export_format='jsonl')
 
-        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/kb_a_inst.jsonl'))
+        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/kb_a_inst.jsonl.gz'))
 
         kb_a_inst_sec_export = pd.read_json(path_or_buf=os.path.join(self.test_dir,
-                                                                     'openbib_export/kb_a_inst.jsonl'),
+                                                                     'openbib_export/kb_a_inst.jsonl.gz'),
+                                            compression='gzip',
                                             lines=True)
 
         kb_a_inst_sec_schema.validate(kb_a_inst_sec_export)
@@ -217,10 +229,11 @@ class TestOpenBibDataRelease:
 
         openbib_snapshot.export_address_information_s(limit=10, export_format='csv')
 
-        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/kb_s_addr_inst.csv'))
+        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/kb_s_addr_inst.csv.gz'))
 
         kb_s_addr_inst_sec_open_alex_export = pd.read_csv(
-            filepath_or_buffer=os.path.join(self.test_dir, 'openbib_export/kb_s_addr_inst.csv'),
+            filepath_or_buffer=os.path.join(self.test_dir, 'openbib_export/kb_s_addr_inst.csv.gz'),
+            compression='gzip',
             sep=',',
             quotechar='"',
             header=0
@@ -232,10 +245,11 @@ class TestOpenBibDataRelease:
 
         openbib_snapshot.export_address_information_s(limit=10, export_format='jsonl')
 
-        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/kb_s_addr_inst.jsonl'))
+        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/kb_s_addr_inst.jsonl.gz'))
 
         kb_s_addr_inst_sec_open_alex_export = pd.read_json(path_or_buf=os.path.join(self.test_dir,
-                                                                                    'openbib_export/kb_s_addr_inst.jsonl'),
+                                                                            'openbib_export/kb_s_addr_inst.jsonl.gz'),
+                                                           compression='gzip',
                                                            lines=True)
 
         kb_s_addr_inst_sec_schema_nested.validate(kb_s_addr_inst_sec_open_alex_export)
@@ -244,10 +258,11 @@ class TestOpenBibDataRelease:
 
         openbib_snapshot.export_address_information_s_sec(limit=10, export_format='csv')
 
-        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/kb_s_inst.csv'))
+        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/kb_s_inst.csv.gz'))
 
         kb_s_inst_sec_export = pd.read_csv(
-            filepath_or_buffer=os.path.join(self.test_dir, 'openbib_export/kb_s_inst.csv'),
+            filepath_or_buffer=os.path.join(self.test_dir, 'openbib_export/kb_s_inst.csv.gz'),
+            compression='gzip',
             sep=',',
             quotechar='"',
             header=0
@@ -259,10 +274,11 @@ class TestOpenBibDataRelease:
 
         openbib_snapshot.export_address_information_s_sec(limit=10, export_format='jsonl')
 
-        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/kb_s_inst.jsonl'))
+        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/kb_s_inst.jsonl.gz'))
 
         kb_s_inst_sec_export = pd.read_json(path_or_buf=os.path.join(self.test_dir,
-                                                                     'openbib_export/kb_s_inst.jsonl'),
+                                                                     'openbib_export/kb_s_inst.jsonl.gz'),
+                                            compression='gzip',
                                             lines=True)
 
         kb_s_inst_sec_schema.validate(kb_s_inst_sec_export)
@@ -271,10 +287,11 @@ class TestOpenBibDataRelease:
 
         openbib_snapshot.export_kb_sectors(limit=10, export_format='csv')
 
-        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/kb_sectors.csv'))
+        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/kb_sectors.csv.gz'))
 
         kb_sectors_export = pd.read_csv(
-            filepath_or_buffer=os.path.join(self.test_dir, 'openbib_export/kb_sectors.csv'),
+            filepath_or_buffer=os.path.join(self.test_dir, 'openbib_export/kb_sectors.csv.gz'),
+            compression='gzip',
             sep=',',
             quotechar='"',
             header=0
@@ -286,10 +303,11 @@ class TestOpenBibDataRelease:
 
         openbib_snapshot.export_kb_sectors(limit=10, export_format='jsonl')
 
-        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/kb_sectors.jsonl'))
+        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/kb_sectors.jsonl.gz'))
 
         kb_sectors_export = pd.read_json(path_or_buf=os.path.join(self.test_dir,
-                                                                  'openbib_export/kb_sectors.jsonl'),
+                                                                  'openbib_export/kb_sectors.jsonl.gz'),
+                                         compression='gzip',
                                          lines=True)
 
         kb_sectors_schema.validate(kb_sectors_export)
@@ -298,10 +316,11 @@ class TestOpenBibDataRelease:
 
         openbib_snapshot.export_kb_inst(limit=10, export_format='csv')
 
-        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/kb_inst.csv'))
+        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/kb_inst.csv.gz'))
 
         kb_inst_export = pd.read_csv(
-            filepath_or_buffer=os.path.join(self.test_dir, 'openbib_export/kb_inst.csv'),
+            filepath_or_buffer=os.path.join(self.test_dir, 'openbib_export/kb_inst.csv.gz'),
+            compression='gzip',
             sep=',',
             quotechar='"',
             header=0
@@ -313,10 +332,11 @@ class TestOpenBibDataRelease:
 
         openbib_snapshot.export_kb_inst(limit=10, export_format='jsonl')
 
-        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/kb_inst.jsonl'))
+        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/kb_inst.jsonl.gz'))
 
         kb_inst_export = pd.read_json(path_or_buf=os.path.join(self.test_dir,
-                                                               'openbib_export/kb_inst.jsonl'),
+                                                               'openbib_export/kb_inst.jsonl.gz'),
+                                      compression='gzip',
                                       lines=True)
 
         kb_inst_schema.validate(kb_inst_export)
@@ -325,10 +345,11 @@ class TestOpenBibDataRelease:
 
         openbib_snapshot.export_kb_inst_trans(limit=10, export_format='csv')
 
-        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/kb_inst_trans.csv'))
+        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/kb_inst_trans.csv.gz'))
 
         kb_inst_trans_export = pd.read_csv(
-            filepath_or_buffer=os.path.join(self.test_dir, 'openbib_export/kb_inst_trans.csv'),
+            filepath_or_buffer=os.path.join(self.test_dir, 'openbib_export/kb_inst_trans.csv.gz'),
+            compression='gzip',
             sep=',',
             quotechar='"',
             header=0
@@ -340,10 +361,11 @@ class TestOpenBibDataRelease:
 
         openbib_snapshot.export_kb_inst_trans(limit=10, export_format='jsonl')
 
-        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/kb_inst_trans.jsonl'))
+        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/kb_inst_trans.jsonl.gz'))
 
         kb_inst_trans_export = pd.read_json(path_or_buf=os.path.join(self.test_dir,
-                                                                     'openbib_export/kb_inst_trans.jsonl'),
+                                                                     'openbib_export/kb_inst_trans.jsonl.gz'),
+                                            compression='gzip',
                                             lines=True)
 
         kb_inst_trans_schema.validate(kb_inst_trans_export)
@@ -352,10 +374,11 @@ class TestOpenBibDataRelease:
 
         openbib_snapshot.export_jct_articles(limit=10, export_format='csv')
 
-        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/jct_articles.csv'))
+        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/jct_articles.csv.gz'))
 
         jct_articles_export = pd.read_csv(
-            filepath_or_buffer=os.path.join(self.test_dir, 'openbib_export/jct_articles.csv'),
+            filepath_or_buffer=os.path.join(self.test_dir, 'openbib_export/jct_articles.csv.gz'),
+            compression='gzip',
             sep=',',
             quotechar='"',
             header=0
@@ -367,11 +390,12 @@ class TestOpenBibDataRelease:
 
         openbib_snapshot.export_jct_articles(limit=10, export_format='jsonl')
 
-        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/jct_articles.jsonl'))
+        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/jct_articles.jsonl.gz'))
 
         jct_articles_export = pd.read_json(path_or_buf=os.path.join(self.test_dir,
-                                                                'openbib_export/jct_articles.jsonl'),
-                                       lines=True)
+                                                                'openbib_export/jct_articles.jsonl.gz'),
+                                           compression='gzip',
+                                           lines=True)
 
         jct_articles_schema.validate(jct_articles_export)
 
@@ -379,10 +403,11 @@ class TestOpenBibDataRelease:
 
         openbib_snapshot.export_jct_esac(limit=10, export_format='csv')
 
-        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/jct_esac.csv'))
+        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/jct_esac.csv.gz'))
 
         jct_esac_export = pd.read_csv(
-            filepath_or_buffer=os.path.join(self.test_dir, 'openbib_export/jct_esac.csv'),
+            filepath_or_buffer=os.path.join(self.test_dir, 'openbib_export/jct_esac.csv.gz'),
+            compression='gzip',
             sep=',',
             quotechar='"',
             header=0
@@ -394,10 +419,11 @@ class TestOpenBibDataRelease:
 
         openbib_snapshot.export_jct_esac(limit=10, export_format='jsonl')
 
-        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/jct_esac.jsonl'))
+        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/jct_esac.jsonl.gz'))
 
         jct_esac_export = pd.read_json(path_or_buf=os.path.join(self.test_dir,
-                                                                'openbib_export/jct_esac.jsonl'),
+                                                                'openbib_export/jct_esac.jsonl.gz'),
+                                       compression='gzip',
                                        lines=True)
 
         jct_esac_schema.validate(jct_esac_export)
@@ -406,10 +432,11 @@ class TestOpenBibDataRelease:
 
         openbib_snapshot.export_jct_institutions(limit=10, export_format='csv')
 
-        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/jct_institutions.csv'))
+        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/jct_institutions.csv.gz'))
 
         jct_institutions_export = pd.read_csv(
-            filepath_or_buffer=os.path.join(self.test_dir, 'openbib_export/jct_institutions.csv'),
+            filepath_or_buffer=os.path.join(self.test_dir, 'openbib_export/jct_institutions.csv.gz'),
+            compression='gzip',
             sep=',',
             quotechar='"',
             header=0
@@ -421,10 +448,11 @@ class TestOpenBibDataRelease:
 
         openbib_snapshot.export_jct_institutions(limit=10, export_format='jsonl')
 
-        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/jct_institutions.jsonl'))
+        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/jct_institutions.jsonl.gz'))
 
         jct_institutions_export = pd.read_json(path_or_buf=os.path.join(self.test_dir,
-                                                                        'openbib_export/jct_institutions.jsonl'),
+                                                                        'openbib_export/jct_institutions.jsonl.gz'),
+                                               compression='gzip',
                                                lines=True)
 
         jct_institutions_schema.validate(jct_institutions_export)
@@ -433,10 +461,11 @@ class TestOpenBibDataRelease:
 
         openbib_snapshot.export_jct_journals(limit=10, export_format='csv')
 
-        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/jct_journals.csv'))
+        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/jct_journals.csv.gz'))
 
         jct_journals_export = pd.read_csv(
-            filepath_or_buffer=os.path.join(self.test_dir, 'openbib_export/jct_journals.csv'),
+            filepath_or_buffer=os.path.join(self.test_dir, 'openbib_export/jct_journals.csv.gz'),
+            compression='gzip',
             sep=',',
             quotechar='"',
             header=0
@@ -448,10 +477,11 @@ class TestOpenBibDataRelease:
 
         openbib_snapshot.export_jct_journals(limit=10, export_format='jsonl')
 
-        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/jct_journals.jsonl'))
+        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/jct_journals.jsonl.gz'))
 
         jct_journals_export = pd.read_json(path_or_buf=os.path.join(self.test_dir,
-                                                                    'openbib_export/jct_journals.jsonl'),
+                                                                    'openbib_export/jct_journals.jsonl.gz'),
+                                           compression='gzip',
                                            lines=True)
 
         jct_journals_schema.validate(jct_journals_export)

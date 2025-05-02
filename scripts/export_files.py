@@ -18,6 +18,7 @@ from models.transformative_agreements import (jct_institutions_schema,
                                               jct_journals_schema,
                                               jct_articles_schema,
                                               jct_esac_schema)
+import gzip
 import logging
 import sys
 
@@ -70,11 +71,11 @@ class OpenBibDataRelease:
 
         logging.info('Start exporting: JSONL')
 
-        with open(f'{export_directory}/{export_file_name}', 'w') as f:
-            result = [json.dumps(record, ensure_ascii=False) for record in
+        with gzip.open(f'{export_directory}/{export_file_name}.gz', 'w') as f:
+            result = [json.dumps(record, ensure_ascii=False).encode('utf-8') for record in
                       dataframe.to_dict(orient='records')]
             for line in result:
-                f.write(line + '\n')
+                f.write(line + bytes('\n', encoding='utf8'))
 
         logging.info('Finish exporting: JSONL')
 
@@ -87,7 +88,7 @@ class OpenBibDataRelease:
             dataframe.to_dict(orient='records'))
         normalized_publishers_export.to_csv(
             path_or_buf=os.path.join(export_directory,
-                                     export_file_name), index=False)
+                                     f'{export_file_name}.gz'), index=False, compression='gzip')
 
         logging.info('Finish exporting: CSV')
 
@@ -229,7 +230,7 @@ class OpenBibDataRelease:
                                                                                            'doi',
                                                                                            'funding_id']]
             normalized_funding_information_export.to_csv(path_or_buf=os.path.join(
-                self.export_directory, 'funding_information.csv'), index=False)
+                self.export_directory, 'funding_information.csv.gz'), index=False, compression='gzip')
 
             logging.info('Finish exporting: CSV')
 
@@ -320,7 +321,7 @@ class OpenBibDataRelease:
                                                                                  'identifier']]
 
             normalized_kb_a_addr_inst_export.to_csv(path_or_buf=os.path.join(
-                self.export_directory, 'kb_a_addr_inst.csv'), index=False)
+                self.export_directory, 'kb_a_addr_inst.csv.gz'), index=False, compression='gzip')
 
             logging.info('Finish exporting: CSV')
 
@@ -404,7 +405,7 @@ class OpenBibDataRelease:
                                                                                  'identifier']]
 
             normalized_kb_s_addr_inst_export.to_csv(path_or_buf=os.path.join(
-                self.export_directory, 'kb_s_addr_inst.csv'), index=False)
+                self.export_directory, 'kb_s_addr_inst.csv.gz'), index=False, compression='gzip')
 
             logging.info('Finish exporting: CSV')
 
@@ -540,7 +541,7 @@ class OpenBibDataRelease:
 
     def export_jct_articles(self, limit: str | int='NULL', export_format: str='csv') -> None:
 
-        logging.info('Query table: add_jct_articles_20240831')
+        logging.info('Query table: add_jct_articles')
 
         jct_articles_export = pd.read_sql(sql=
                                         f"""
@@ -557,7 +558,7 @@ class OpenBibDataRelease:
                                             start_date, 
                                             end_date, 
                                             publication_date
-                                        FROM kb_project_openbib.add_jct_articles_20240831
+                                        FROM kb_project_openbib.add_jct_articles
                                         LIMIT {limit}
                                         """,
                                         con=self.engine)
@@ -579,7 +580,7 @@ class OpenBibDataRelease:
 
     def export_jct_esac(self, limit: str | int='NULL', export_format: str='csv') -> None:
 
-        logging.info('Query table: add_jct_esac_20240831')
+        logging.info('Query table: add_jct_esac')
 
         jct_esac_export = pd.read_sql(sql=
                                         f"""
@@ -593,7 +594,7 @@ class OpenBibDataRelease:
                                                url, 
                                                jct_jn, 
                                                jct_inst
-                                        FROM kb_project_openbib.add_jct_esac_20240831
+                                        FROM kb_project_openbib.add_jct_esac
                                         LIMIT {limit}
                                         """,
                                         con=self.engine)
@@ -615,7 +616,7 @@ class OpenBibDataRelease:
 
     def export_jct_institutions(self, limit: str | int='NULL', export_format: str='csv') -> None:
 
-        logging.info('Query table: add_jct_institutions_20240831')
+        logging.info('Query table: add_jct_institutions')
 
         jct_institutions_export = pd.read_sql(sql=
                                                 f"""
@@ -628,7 +629,7 @@ class OpenBibDataRelease:
                                                     ror_id, 
                                                     time_last_seen, 
                                                     commit
-                                                FROM kb_project_openbib.add_jct_institutions_20240831
+                                                FROM kb_project_openbib.add_jct_institutions
                                                 LIMIT {limit}
                                                 """,
                                                 con=self.engine)
@@ -650,7 +651,7 @@ class OpenBibDataRelease:
 
     def export_jct_journals(self, limit: str | int='NULL', export_format: str='csv') -> None:
 
-        logging.info('Query table: kb_project_openbib.add_jct_journals_20240831')
+        logging.info('Query table: kb_project_openbib.add_jct_journals')
 
         jct_journals_export = pd.read_sql(sql=
                                             f"""
@@ -663,7 +664,7 @@ class OpenBibDataRelease:
                                                 issn_l, 
                                                 time_last_seen, 
                                                 commit
-                                            FROM kb_project_openbib.add_jct_journals_20240831
+                                            FROM kb_project_openbib.add_jct_journals
                                             LIMIT {limit}
                                             """,
                                             con=self.engine)
