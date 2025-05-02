@@ -243,7 +243,7 @@ German [Open-Access-Publikationskosten](https://www.dfg.de/en/research-funding/f
 
 Data File: <i>funding_information.csv</i>
 <br>
-Limitations: Only includes publications from 2022 to 2024
+Limitations: Only includes publications from 2020 to 2024
 <br>
 
 | Field | Type | Description |
