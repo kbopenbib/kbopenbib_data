@@ -155,7 +155,7 @@ remarks: ""
 
 ###  Institutional changes
 
-Table: <i>kb_inst_trans.csv</i>
+Data File: <i>kb_inst_trans.csv</i>
 
 | Field | Type | Description |
 |-------|------|-------------|
