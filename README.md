@@ -1,4 +1,4 @@
-# OPENBIB Data: Curation of metadata from German research institutions in OpenAlex
+# OPENBIB: Selected curated open metadata based on OpenAlex
 
 ![License](https://img.shields.io/badge/License-CC0%5f1.0-orange)
 ![Python Version](https://img.shields.io/badge/Python-3.11-blue)
@@ -6,25 +6,25 @@
 
 ## About
 
-The OPENBIB project, maintained by the [Kompetenznetzwerk Bibliometrie](https://bibliometrie.info),  
+The OPENBIB project, maintained by the German [Kompetenznetzwerk Bibliometrie](https://bibliometrie.info),  
 provides access to curated OpenAlex data with a focus on the German research landscape.
 
 Curated data is provided for following entities: 
 
-- [Authors](docs/data_overview.md#-authors) 👩‍🎓
+- [Address information](docs/data_overview.md#-address-information) 🏛️
 - [Publishers](docs/data_overview.md#-publishers) 📚
 - [Funding information](docs/data_overview.md#-funding-information) 📄
 - [Document types](docs/data_overview.md#-document-types) 🗂️
-- [Address information](docs/data_overview.md#-address-information) 🏛️
 - [Transformative Agreements](docs/data_overview.md#-transformative-agreements) 📑️
+- [Authors](docs/data_overview.md#-authors) 👩‍🎓 (tba)
 
 Annual snapshots from the OPENBIB project are openly available to users of the 
 [Kompetenznetzwerk Bibliometrie](https://bibliometrie.info), via the 
 [Open Scholarly Data Warehouse of the SUB Göttingen](https://subugoe.github.io/scholcomm_analytics/data.html)
 and [Zenodo](https://zenodo.org).
 
-The current release is based on the August 2024 snapshot of OpenAlex, limited to works
-with publication years 2014 to 2024.
+The current release is based on the August 2024 snapshot of OpenAlex. The OPENBIB snapshot 
+is offered in both CSV and JSONL format.
 
 ## Usage
 
@@ -102,7 +102,7 @@ Data Warehouse of the SUB Göttingen can be found [here](examples/bigquery_noteb
 ### How to export a snapshot
 
 To export a complete OPENBIB snapshot from the KB database, use the
-following code. 
+following code. A VPN connection to FIZ Karlsruhe is required to access the database.
 
 ```python
 from scripts.export_files import OpenBibDataRelease
