@@ -11,7 +11,7 @@ provided by the [Journal Checker Tool](https://journalcheckertool.org/)
 from the [cOAlition S](https://www.coalition-s.org/) since July 2021. By
 linking agreement data with OpenAlex and using standardised identifiers
 (ISSN-L for journals, ROR-IDs for institutions), it enables open data
-analyses on these agreements’ evolution and impact over time.
+analyses on transformative agreements over time.
 
 Overall, this dataset comprises:
 
@@ -29,11 +29,11 @@ libraries, measuring their extent is also high on the policy agenda.
 Unfortunately, information on this licensing model is only partially
 available and scattered across different open data sources.
 
-For example, the [public Transformative Agreement Data
-dumps](https://journalcheckertool.org/transformative-agreements/) as
-provided by the [Journal Checker Tool](https://journalcheckertool.org/)
-from the [cOAlition S](https://www.coalition-s.org/) (JCT), which is the
-most comprehensive source for journals and institutions covered by
+For example, the open [cOAlition S Public Transformative Agreement Data
+dump](https://journalcheckertool.org/transformative-agreements/)
+powering the [Journal Checker
+Tool](https://journalcheckertool.org/)(JCT), which is the most
+comprehensive source for journals and institutions covered by
 transformative agreements, provides data only for current agreements;
 information about expired agreements is not available, limiting
 longitudinal studies.
@@ -41,7 +41,8 @@ longitudinal studies.
 To address this data gap, this dataset combines open data from different
 sources to improve the transparency of transformative agreements and to
 allow estimates about articles published under these agreements. It uses
-JCT transformative agreement data for information on journal portfolios
+transformative agreement data obtained from the cOAlition S Public
+Transformative Agreement Data dump for information on journal portfolios
 and participating institutions. The data were normalised using ISSN-L
 for journals (as provided by the ISSN Agency) and associated ROR-IDs (as
 provided by OpenAlex). Due to limited public invoicing data, articles
@@ -100,7 +101,11 @@ BigQuery](https://console.cloud.google.com/bigquery?ws=!1m7!1m6!12m5!1m3!1ssubug
 for performance reasons.
 
 The compilation of the datasets was carried out in April 2025 using the
-most recent datasets.
+most recent datasets. Data file scan be individually downloaded from
+Zenodo: <https://zenodo.org/records/15308680>. Programmatic access is
+possible via the [Open Scholarly Data warehouse based on Google Big
+Query](https://subugoe.github.io/scholcomm_analytics/data.html) as
+provided by the SUB Göttingen (dataset openbib).
 
 ## Data files
 
@@ -283,7 +288,7 @@ list of articles enabled by transformative agreements represents only
 estimates. These estimates are based on first-author affiliations
 according to OpenAlex. Note that, transformative agreement guidelines
 require data about corresponding authors, an information, which is still
-not fully avaialble in OpenAlex. However, a [strong alignment between
+not fully available in OpenAlex. However, a [strong alignment between
 first and corresponding authorship can be
 observed](https://arxiv.org/abs/2504.15038v1).
 
