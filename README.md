@@ -86,7 +86,7 @@ you can access the data snapshot via the KB data infrastructure hosted by FIZ Ka
 [Open Scholarly Data Warehouse](https://subugoe.github.io/scholcomm_analytics/data.html)
 maintained by the SUB Göttingen.
 
-- Alternatively, you can download the snapshot from Zenodo: https://zenodo.org. 
+- Alternatively, you can download the snapshot from Zenodo: <https://zenodo.org/records/15308680>. 
 
 ## Technical Documentation
 
@@ -131,7 +131,7 @@ Data is made available under the [CC0 license](LICENSE.txt).
 
 ## Citation
 
-Haupka, N., Culbert, J., Donner, P., Jahn, N., Lenke, C., Mayr, P., Meier, A., Mittermaier, B., Scheidt, B., Stahlschmidt, S., & Taubert, N. (2025). OPENBIB: Selected curated open metadata based on OpenAlex (0.1) [Data set]. Zenodo.
+Haupka, N., Culbert, J., Donner, P., Jahn, N., Lenke, C., Mayr, P., Meier, A., Mittermaier, B., Scheidt, B., Stahlschmidt, S., & Taubert, N. (2025). OPENBIB: Selected curated open metadata based on OpenAlex (0.1) [Data set]. Kompetenznetzwerk Bibliometrie. https://doi.org/10.5281/zenodo.15308680
 
 ## Contact
 
