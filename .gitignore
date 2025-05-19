@@ -7,3 +7,4 @@ coverage.svg
 .Rproj.user
 openbib_export_csv/
 openbib_export_jsonl/
+data-overview-zenodo.md
