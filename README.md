@@ -21,7 +21,7 @@ Curated data is provided for following entities:
 Annual snapshots from the OPENBIB project are openly available to users of the 
 [Kompetenznetzwerk Bibliometrie](https://bibliometrie.info), via the 
 [Open Scholarly Data Warehouse of the SUB Göttingen](https://subugoe.github.io/scholcomm_analytics/data.html)
-and [Zenodo](https://zenodo.org).
+and [Zenodo](https://zenodo.org/records/15308680).
 
 The current release is based on the August 2024 snapshot of OpenAlex. The OPENBIB snapshot 
 is offered in both CSV and JSONL format.
@@ -135,5 +135,5 @@ Haupka, N., Culbert, J., Donner, P., Jahn, N., Lenke, C., Mayr, P., Meier, A., M
 
 ## Contact
 
-
+Nick Haupka, SUB Göttingen. nick.haupka@sub.uni-goettingen.de
 
