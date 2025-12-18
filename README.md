@@ -39,7 +39,7 @@ only displays institutions that are present in both OpenAlex and OPENBIB and can
 assigned a unique Research Organisation Registry (ROR) ID. 
 
 <figure>
-    <img src="examples/kb_institution_disambiguation.png" width="80%" />
+    <img src="examples/kb_institution_disambiguation_20250711.png" width="80%" />
     <figcaption>
         <b>Fig.1:</b> Publications assigned to German institutions in OpenAlex and OPENBIB based on ROR-Matching. Only publications published between 2014 and 2024 are considered.
     </figcaption>
@@ -54,7 +54,7 @@ classifying research contributions. Articles and reviews are assigned to German
 institutions exclusively via OPENBIB address information. 
 
 <figure>
-    <img src="examples/document_types_sectors.png" width="80%" />
+    <img src="examples/document_types_sectors_20250711.png" width="80%" />
     <figcaption>
         <b>Fig.2:</b> Classification of article and reviews in journals for German institutions in OpenAlex and by OPENBIB. Only publications published between 2014 and 2024 are considered.
     </figcaption>
@@ -71,7 +71,7 @@ via OPENBIB address information. No restrictions were placed on the type of docu
 publications, however most of the records are journal articles.
 
 <figure>
-    <img src="examples/funding_information_sectors.png" width="80%" />
+    <img src="examples/funding_information_sectors_20250711.png" width="80%" />
     <figcaption>
         <b>Fig.3:</b> Publications containing funding information of the German Research Foundation per German institution in OpenAlex and by OPENBIB. Only publications published between 2020 and 2024 are considered. 
     </figcaption>

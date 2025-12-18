@@ -252,7 +252,7 @@ class OpenBibDataRelease:
                                            FROM kb_project_openbib.add_document_types_20250711 AS dt 
                                            JOIN oal_rep_20250711.works AS oal
                                                 ON dt.openalex_id = oal.id
-                                           WHERE oal.publication_year BETWEEN 2015 AND 2025
+                                           WHERE oal.publication_year BETWEEN 2014 AND 2025
                                            LIMIT {limit}
                                            """,
                                            con=self.engine)

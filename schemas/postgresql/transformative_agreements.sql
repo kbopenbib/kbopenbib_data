@@ -12,19 +12,18 @@ create table kb_project_openbib.jct_esac (
 )
 
 create table kb_project_openbib.jct_institutions (
-    id text,
     esac_id text,
+    inst_name text,
     ror_id text,
     time_last_seen timestamp,
-    commit text
+    commit_hash text
 )
 
 create table kb_project_openbib.jct_journals (
-    id text,
     esac_id text,
     issn_l text,
     time_last_seen timestamp,
-    commit text
+    commit_hash text
 )
 
 create table kb_project_openbib.jct_articles (
