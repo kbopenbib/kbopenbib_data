@@ -9,11 +9,10 @@ from models.funding_information import funding_information_schema_nested
 from models.publisher import publisher_schema, publisher_relation_schema
 from models.address_information import (kb_a_addr_inst_sec_schema_nested,
                                         kb_s_addr_inst_sec_schema_nested,
-                                        kb_a_inst_sec_schema,
-                                        kb_s_inst_sec_schema,
-                                        kb_sectors_schema,
-                                        kb_inst_schema,
-                                        kb_inst_trans_schema)
+                                        kb_inst_name_lookup_schema,
+                                        kb_sector_name_lookup_schema,
+                                        kb_inst_lookup_schema_nested,
+                                        kb_sector_lookup_schema)
 from models.transformative_agreements import (jct_institutions_schema,
                                               jct_journals_schema,
                                               jct_articles_schema,
@@ -93,7 +92,7 @@ class OpenBibDataRelease:
 
     def export_publishers(self, limit: str | int='NULL', export_format: str='csv') -> None:
 
-        logging.info('Query table: add_publishers_20240831')
+        logging.info('Query table: add_publishers_20250711')
 
         publishers_export = pd.read_sql(sql=
                                            f"""
@@ -114,12 +113,15 @@ class OpenBibDataRelease:
                                                     ELSE NULL
                                                   END AS ror,
                                                   url
-                                           FROM kb_project_openbib.add_publishers_20240831
+                                           FROM kb_project_openbib.add_publishers_20250711
                                            LIMIT {limit}
                                            """,
                                            con=self.engine)
 
         logging.info('Query completed.')
+
+        publishers_export['publisher_id'] = publishers_export['publisher_id'].fillna('-1')
+        publishers_export['publisher_id'] = publishers_export['publisher_id'].astype('int')
 
         publisher_schema.validate(publishers_export)
 
@@ -137,7 +139,7 @@ class OpenBibDataRelease:
 
     def export_publishers_relations(self, limit: str | int='NULL', export_format: str='csv') -> None:
 
-        logging.info('Query table: add_publishers_relations_20240831')
+        logging.info('Query table: add_publishers_relations_20250711')
 
         publishers_relation_export = pd.read_sql(sql=
                                            f"""
@@ -156,7 +158,7 @@ class OpenBibDataRelease:
                                                   parent_unit, 
                                                   first_date, 
                                                   last_date
-                                           FROM kb_project_openbib.add_publishers_relations_20240831
+                                           FROM kb_project_openbib.add_publishers_relations_20250711
                                            LIMIT {limit}
                                            """,
                                            con=self.engine)
@@ -188,7 +190,7 @@ class OpenBibDataRelease:
 
     def export_funding_information(self, limit: str | int='NULL', export_format: str='csv') -> None:
 
-        logging.info('Query table: add_funding_information_20240831')
+        logging.info('Query table: add_funding_information_20251211')
 
         funding_information_export = pd.read_sql(sql=
                                                  f"""
@@ -199,7 +201,7 @@ class OpenBibDataRelease:
                                                     END AS openalex_id, 
                                                     doi, 
                                                     funding_id
-                                                 FROM kb_project_openbib.add_funding_information_20240831
+                                                 FROM kb_project_openbib.add_funding_information_20251211
                                                  LIMIT {limit}
                                                  """,
                                                  con=self.engine)
@@ -235,7 +237,7 @@ class OpenBibDataRelease:
 
     def export_document_types(self, limit: str | int='NULL', export_format: str='csv') -> None:
 
-        logging.info('Query table: add_document_types_20240831')
+        logging.info('Query table: add_document_types_20250711')
 
         document_type_export = pd.read_sql(sql=
                                            f"""
@@ -244,10 +246,13 @@ class OpenBibDataRelease:
                                                 WHEN openalex_id IS NOT NULL THEN CONCAT('https://openalex.org/', openalex_id)
                                                 ELSE NULL
                                             END AS openalex_id, 
-                                            doi, 
+                                            dt.doi, 
                                             is_research, 
                                             proba
-                                           FROM kb_project_openbib.add_document_types_20240831
+                                           FROM kb_project_openbib.add_document_types_20250711 AS dt 
+                                           JOIN oal_rep_20250711.works AS oal
+                                                ON dt.openalex_id = oal.id
+                                           WHERE oal.publication_year BETWEEN 2015 AND 2025
                                            LIMIT {limit}
                                            """,
                                            con=self.engine)
@@ -270,20 +275,20 @@ class OpenBibDataRelease:
 
     def export_address_information_a(self, limit: str | int='NULL', export_format: str='csv') -> None:
 
-        logging.info('Query table: add_address_information_a_addr_inst_sec_20240831')
+        logging.info('Query table: add_institution_kb_a_oal_b_20250711')
 
         kb_a_addr_inst_export = pd.read_sql(sql=
                                             f"""
-                                            SELECT kb_inst_id, 
+                                            SELECT inst_id_top, 
                                                    CASE
                                                     WHEN item_id IS NOT NULL THEN CONCAT('https://openalex.org/', item_id)
                                                     ELSE NULL
                                                    END AS openalex_id,
                                                    address_full, 
-                                                   kb_sector_id, 
+                                                   sector_id, 
                                                    doi,
                                                    identifier
-                                            FROM kb_project_openbib.add_address_information_a_addr_inst_sec_20240831
+                                            FROM kb_project_openbib.add_institution_kb_a_oal_b_20250711
                                             LIMIT {limit}
                                             """,
                                             con=self.engine)
@@ -304,18 +309,18 @@ class OpenBibDataRelease:
 
             normalized_kb_a_addr_inst_export = pd.json_normalize(
                 kb_a_addr_inst_export.to_dict(orient='records'),
-                record_path='kb_sector_id',
-                meta=['kb_inst_id', 'openalex_id', 'address_full', 'doi', 'identifier'])
-            normalized_kb_a_addr_inst_export.columns = ['kb_sector_id',
-                                                        'kb_inst_id',
+                record_path='sector_id',
+                meta=['inst_id_top', 'openalex_id', 'address_full', 'doi', 'identifier'])
+            normalized_kb_a_addr_inst_export.columns = ['sector_id',
+                                                        'inst_id_top',
                                                         'openalex_id',
                                                         'address_full',
                                                         'doi',
                                                         'identifier']
-            normalized_kb_a_addr_inst_export = normalized_kb_a_addr_inst_export[['kb_inst_id',
+            normalized_kb_a_addr_inst_export = normalized_kb_a_addr_inst_export[['inst_id_top',
                                                                                  'openalex_id',
                                                                                  'address_full',
-                                                                                 'kb_sector_id',
+                                                                                 'sector_id',
                                                                                  'doi',
                                                                                  'identifier']]
 
@@ -324,50 +329,22 @@ class OpenBibDataRelease:
 
             logging.info('Finish exporting: CSV')
 
-    def export_address_information_a_sec(self, limit: str | int='NULL', export_format: str='csv') -> None:
-
-        logging.info('Query table: add_address_information_a_inst_sec_20240831')
-
-        kb_a_inst_export = pd.read_sql(sql=
-                                        f"""
-                                        SELECT kb_inst_id,
-                                               kb_sector_id
-                                        FROM kb_project_openbib.add_address_information_a_inst_sec_20240831
-                                        LIMIT {limit}
-                                        """,
-                                        con=self.engine)
-
-        logging.info('Query completed.')
-
-        kb_a_inst_sec_schema.validate(kb_a_inst_export)
-
-        if export_format == 'jsonl':
-
-            OpenBibDataRelease.export_to_jsonl(export_directory=self.export_directory,
-                                               export_file_name='kb_a_inst.jsonl',
-                                               dataframe=kb_a_inst_export)
-
-        if export_format == 'csv':
-            OpenBibDataRelease.export_to_csv(export_directory=self.export_directory,
-                                             export_file_name='kb_a_inst.csv',
-                                             dataframe=kb_a_inst_export)
-
     def export_address_information_s(self, limit: str | int='NULL', export_format: str='csv') -> None:
 
-        logging.info('Query table: add_address_information_s_addr_inst_sec_20240831')
+        logging.info('Query table: add_institution_kb_s_oal_b_20250711')
 
         kb_s_addr_inst_export = pd.read_sql(sql=
                                             f"""
-                                            SELECT kb_inst_id,
+                                            SELECT inst_id_top,
                                                    CASE
                                                     WHEN item_id IS NOT NULL THEN CONCAT('https://openalex.org/', item_id)
                                                     ELSE NULL
                                                    END AS openalex_id,
                                                    address_full, 
-                                                   kb_sector_id, 
+                                                   sector_id, 
                                                    doi,
                                                    identifier
-                                            FROM kb_project_openbib.add_address_information_s_addr_inst_sec_20240831
+                                            FROM kb_project_openbib.add_institution_kb_s_oal_b_20250711
                                             LIMIT {limit}
                                             """,
                                             con=self.engine)
@@ -388,18 +365,18 @@ class OpenBibDataRelease:
 
             normalized_kb_s_addr_inst_export = pd.json_normalize(
                 kb_s_addr_inst_export.to_dict(orient='records'),
-                record_path='kb_sector_id',
-                meta=['kb_inst_id', 'openalex_id', 'address_full', 'doi', 'identifier'])
-            normalized_kb_s_addr_inst_export.columns = ['kb_sector_id',
-                                                        'kb_inst_id',
+                record_path='sector_id',
+                meta=['inst_id_top', 'openalex_id', 'address_full', 'doi', 'identifier'])
+            normalized_kb_s_addr_inst_export.columns = ['sector_id',
+                                                        'inst_id_top',
                                                         'openalex_id',
                                                         'address_full',
                                                         'doi',
                                                         'identifier']
-            normalized_kb_s_addr_inst_export = normalized_kb_s_addr_inst_export[['kb_inst_id',
+            normalized_kb_s_addr_inst_export = normalized_kb_s_addr_inst_export[['inst_id_top',
                                                                                  'openalex_id',
                                                                                  'address_full',
-                                                                                 'kb_sector_id',
+                                                                                 'sector_id',
                                                                                  'doi',
                                                                                  'identifier']]
 
@@ -408,139 +385,160 @@ class OpenBibDataRelease:
 
             logging.info('Finish exporting: CSV')
 
-    def export_address_information_s_sec(self, limit: str | int='NULL', export_format: str='csv') -> None:
+    def export_kb_inst_name_lookup(self, limit: str | int='NULL', export_format: str='csv') -> None:
 
-        logging.info('Query table: add_address_information_s_inst_sec_20240831')
+        logging.info('Query table: add_institution_lookup_kb_oal_b_20250711')
 
-        kb_s_inst_export = pd.read_sql(sql=
+        kb_inst_name_lookup_export = pd.read_sql(sql=
                                         f"""
-                                        SELECT kb_inst_id,
-                                               kb_sector_id,
-                                               first_year,
-                                               last_year
-                                        FROM kb_project_openbib.add_address_information_s_inst_sec_20240831
+                                        SELECT inst_id,
+                                               name
+                                        FROM kb_project_openbib.add_institution_lookup_kb_oal_b_20250711
                                         LIMIT {limit}
                                         """,
                                         con=self.engine)
 
         logging.info('Query completed.')
 
-        kb_s_inst_sec_schema.validate(kb_s_inst_export)
+        kb_inst_name_lookup_schema.validate(kb_inst_name_lookup_export)
 
         if export_format == 'jsonl':
 
             OpenBibDataRelease.export_to_jsonl(export_directory=self.export_directory,
-                                               export_file_name='kb_s_inst.jsonl',
-                                               dataframe=kb_s_inst_export)
+                                               export_file_name='kb_inst_name_lookup.jsonl',
+                                               dataframe=kb_inst_name_lookup_export)
 
         if export_format == 'csv':
             OpenBibDataRelease.export_to_csv(export_directory=self.export_directory,
-                                             export_file_name='kb_s_inst.csv',
-                                             dataframe=kb_s_inst_export)
+                                             export_file_name='kb_inst_name_lookup.csv',
+                                             dataframe=kb_inst_name_lookup_export)
 
-    def export_kb_sectors(self, limit: str | int='NULL', export_format: str='csv') -> None:
+    def export_kb_sector_name_lookup(self, limit: str | int='NULL', export_format: str='csv') -> None:
 
-        logging.info('Query table: add_address_information_sectors_20240831')
+        logging.info('Query table: add_sector_lookup_kb_oal_b_20250711')
 
-        kb_sectors_export = pd.read_sql(sql=
+        kb_sector_name_lookup_export = pd.read_sql(sql=
                                         f"""
-                                        SELECT kb_sectorgroup_id,
-                                               kb_sector_id,
+                                        SELECT sector_id,
+                                               name
+                                        FROM kb_project_openbib.add_sector_lookup_kb_oal_b_20250711
+                                        LIMIT {limit}
+                                        """,
+                                        con=self.engine)
+
+        logging.info('Query completed.')
+
+        kb_sector_name_lookup_schema.validate(kb_sector_name_lookup_export)
+
+        if export_format == 'jsonl':
+
+            OpenBibDataRelease.export_to_jsonl(export_directory=self.export_directory,
+                                               export_file_name='kb_sector_name_lookup.jsonl',
+                                               dataframe=kb_sector_name_lookup_export)
+
+        if export_format == 'csv':
+            OpenBibDataRelease.export_to_csv(export_directory=self.export_directory,
+                                             export_file_name='kb_sector_name_lookup.csv',
+                                             dataframe=kb_sector_name_lookup_export)
+
+    def export_kb_sector_lookup(self, limit: str | int='NULL', export_format: str='csv') -> None:
+
+        logging.info('Query table: add_sector_lookup_kb_suppl_oal_b_20250711')
+
+        kb_sector_lookup_export = pd.read_sql(sql=
+                                        f"""
+                                        SELECT sector_id,
+                                               sectorgroup_id,
                                                sectorgroup_name,
-                                               sector_name,
                                                remarks
-                                        FROM kb_project_openbib.add_address_information_sectors_20240831
+                                        FROM kb_project_openbib.add_sector_lookup_kb_suppl_oal_b_20250711
                                         LIMIT {limit}
                                         """,
                                         con=self.engine)
 
         logging.info('Query completed.')
 
-        kb_sectors_schema.validate(kb_sectors_export)
+        kb_sector_lookup_schema.validate(kb_sector_lookup_export)
 
         if export_format == 'jsonl':
 
             OpenBibDataRelease.export_to_jsonl(export_directory=self.export_directory,
-                                               export_file_name='kb_sectors.jsonl',
-                                               dataframe=kb_sectors_export)
+                                               export_file_name='kb_sector_lookup.jsonl',
+                                               dataframe=kb_sector_lookup_export)
 
         if export_format == 'csv':
             OpenBibDataRelease.export_to_csv(export_directory=self.export_directory,
-                                             export_file_name='kb_sectors.csv',
-                                             dataframe=kb_sectors_export)
+                                             export_file_name='kb_sector_lookup.csv',
+                                             dataframe=kb_sector_lookup_export)
 
-    def export_kb_inst(self, limit: str | int='NULL', export_format: str='csv') -> None:
+    def export_kb_inst_lookup(self, limit: str | int='NULL', export_format: str='csv') -> None:
 
-        logging.info('Query table: add_address_information_inst_20240831')
+        logging.info('Query table: add_institution_lookup_kb_suppl_oal_b_20250711')
 
-        kb_inst_export = pd.read_sql(sql=
+        kb_inst_lookup_export = pd.read_sql(sql=
                                         f"""
-                                        SELECT kb_inst_id,
-                                               name,
+                                        SELECT inst_id,
                                                first_year,
                                                last_year,
                                                CASE 
                                                 WHEN ror = '' THEN NULL
                                                 ELSE ror
                                                END AS ror,
-                                               dfg_instituts_id
-                                        FROM kb_project_openbib.add_address_information_inst_20240831
+                                               dfg_instituts_id,
+                                               current_sectors
+                                        FROM kb_project_openbib.add_institution_lookup_kb_suppl_oal_b_20250711
                                         LIMIT {limit}
                                         """,
                                         con=self.engine)
 
         logging.info('Query completed.')
 
-        kb_inst_export['dfg_instituts_id'] = kb_inst_export['dfg_instituts_id'].fillna('0')
+        kb_inst_lookup_export['dfg_instituts_id'] = kb_inst_lookup_export['dfg_instituts_id'].fillna('0')
 
-        kb_inst_export['dfg_instituts_id'] = kb_inst_export['dfg_instituts_id'].astype('int')
+        kb_inst_lookup_export['dfg_instituts_id'] = kb_inst_lookup_export['dfg_instituts_id'].astype('int')
 
-        kb_inst_schema.validate(kb_inst_export)
+        kb_inst_lookup_export['first_year'] = kb_inst_lookup_export['first_year'].astype('int')
 
-        if export_format == 'jsonl':
+        kb_inst_lookup_export['last_year'] = kb_inst_lookup_export['last_year'].astype('int')
 
-            OpenBibDataRelease.export_to_jsonl(export_directory=self.export_directory,
-                                               export_file_name='kb_inst.jsonl',
-                                               dataframe=kb_inst_export)
-
-        if export_format == 'csv':
-            OpenBibDataRelease.export_to_csv(export_directory=self.export_directory,
-                                             export_file_name='kb_inst.csv',
-                                             dataframe=kb_inst_export)
-
-    def export_kb_inst_trans(self, limit: str | int='NULL', export_format: str='csv') -> None:
-
-        logging.info('Query table: add_address_information_inst_trans_20240831')
-
-        kb_inst_trans_export = pd.read_sql(sql=
-                                            f"""
-                                            SELECT inst_ante, 
-                                                   transition_date, 
-                                                   inst_post, 
-                                                   type
-                                            FROM kb_project_openbib.add_address_information_inst_trans_20240831
-                                            LIMIT {limit}
-                                            """,
-                                            con=self.engine)
-
-        logging.info('Query completed.')
-
-        kb_inst_trans_schema.validate(kb_inst_trans_export)
+        kb_inst_lookup_schema_nested.validate(kb_inst_lookup_export)
 
         if export_format == 'jsonl':
 
             OpenBibDataRelease.export_to_jsonl(export_directory=self.export_directory,
-                                               export_file_name='kb_inst_trans.jsonl',
-                                               dataframe=kb_inst_trans_export)
+                                               export_file_name='kb_inst_lookup.jsonl',
+                                               dataframe=kb_inst_lookup_export)
 
         if export_format == 'csv':
-            OpenBibDataRelease.export_to_csv(export_directory=self.export_directory,
-                                             export_file_name='kb_inst_trans.csv',
-                                             dataframe=kb_inst_trans_export)
+
+            logging.info('Start exporting: CSV')
+
+            normalized_kb_inst_lookup_export = pd.json_normalize(
+                kb_inst_lookup_export.to_dict(orient='records'),
+                record_path='current_sectors',
+                meta=['inst_id', 'first_year', 'last_year', 'ror', 'dfg_instituts_id'])
+            normalized_kb_inst_lookup_export.columns = ['current_sectors',
+                                                        'inst_id',
+                                                        'first_year',
+                                                        'last_year',
+                                                        'ror',
+                                                        'dfg_instituts_id']
+
+            normalized_kb_inst_lookup_export = normalized_kb_inst_lookup_export[['inst_id',
+                                                                                 'first_year',
+                                                                                 'last_year',
+                                                                                 'ror',
+                                                                                 'dfg_instituts_id',
+                                                                                 'current_sectors']]
+
+            normalized_kb_inst_lookup_export.to_csv(path_or_buf=os.path.join(
+                self.export_directory, 'kb_inst_lookup.csv'), index=False)
+
+            logging.info('Finish exporting: CSV')
 
     def export_jct_articles(self, limit: str | int='NULL', export_format: str='csv') -> None:
 
-        logging.info('Query table: add_jct_articles')
+        logging.info('Query table: add_jct_articles_20250711')
 
         jct_articles_export = pd.read_sql(sql=
                                         f"""
@@ -557,12 +555,16 @@ class OpenBibDataRelease:
                                             start_date, 
                                             end_date, 
                                             publication_date
-                                        FROM kb_project_openbib.add_jct_articles
+                                        FROM kb_project_openbib.add_jct_articles_20250711
                                         LIMIT {limit}
                                         """,
                                         con=self.engine)
 
         logging.info('Query completed.')
+
+        jct_articles_export['start_date'] = jct_articles_export['start_date'].astype('str')
+        jct_articles_export['end_date'] = jct_articles_export['end_date'].astype('str')
+        jct_articles_export['publication_date'] = jct_articles_export['publication_date'].astype('str')
 
         jct_articles_schema.validate(jct_articles_export)
 
@@ -620,14 +622,11 @@ class OpenBibDataRelease:
         jct_institutions_export = pd.read_sql(sql=
                                                 f"""
                                                 SELECT 
-                                                    CASE
-                                                        WHEN id IS NOT NULL THEN CONCAT('https://openalex.org/', id)
-                                                        ELSE NULL
-                                                    END AS id,  
                                                     esac_id, 
+                                                    inst_name,
                                                     ror_id, 
                                                     time_last_seen, 
-                                                    commit
+                                                    commit_hash
                                                 FROM kb_project_openbib.add_jct_institutions
                                                 LIMIT {limit}
                                                 """,
@@ -655,14 +654,10 @@ class OpenBibDataRelease:
         jct_journals_export = pd.read_sql(sql=
                                             f"""
                                             SELECT 
-                                                CASE
-                                                    WHEN id IS NOT NULL THEN CONCAT('https://openalex.org/', id)
-                                                    ELSE NULL
-                                                END AS id,  
                                                 esac_id, 
                                                 issn_l, 
                                                 time_last_seen, 
-                                                commit
+                                                commit_hash
                                             FROM kb_project_openbib.add_jct_journals
                                             LIMIT {limit}
                                             """,
@@ -690,12 +685,11 @@ class OpenBibDataRelease:
         self.export_funding_information(limit=limit, export_format=export_format)
         self.export_document_types(limit=limit, export_format=export_format)
         self.export_address_information_a(limit=limit, export_format=export_format)
-        self.export_address_information_a_sec(limit=limit, export_format=export_format)
         self.export_address_information_s(limit=limit, export_format=export_format)
-        self.export_address_information_s_sec(limit=limit, export_format=export_format)
-        self.export_kb_sectors(limit=limit, export_format=export_format)
-        self.export_kb_inst(limit=limit, export_format=export_format)
-        self.export_kb_inst_trans(limit=limit, export_format=export_format)
+        self.export_kb_inst_lookup(limit=limit, export_format=export_format)
+        self.export_kb_inst_name_lookup(limit=limit, export_format=export_format)
+        self.export_kb_sector_lookup(limit=limit, export_format=export_format)
+        self.export_kb_sector_name_lookup(limit=limit, export_format=export_format)
         self.export_jct_articles(limit=limit, export_format=export_format)
         self.export_jct_esac(limit=limit, export_format=export_format)
         self.export_jct_institutions(limit=limit, export_format=export_format)

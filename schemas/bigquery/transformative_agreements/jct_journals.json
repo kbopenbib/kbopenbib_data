@@ -1,22 +1,22 @@
 [
   {
     "mode": "NULLABLE",
-    "name": "inst_ante",
-    "type": "INTEGER"
-  },
-  {
-    "mode": "NULLABLE",
-    "name": "transition_date",
+    "name": "esac_id",
     "type": "STRING"
   },
   {
     "mode": "NULLABLE",
-    "name": "inst_post",
-    "type": "INTEGER"
+    "name": "issn_l",
+    "type": "STRING"
   },
   {
     "mode": "NULLABLE",
-    "name": "type",
+    "name": "time_last_seen",
+    "type": "TIMESTAMP"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "commit_hash",
     "type": "STRING"
   }
 ]

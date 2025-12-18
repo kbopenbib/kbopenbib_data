@@ -1,27 +1,22 @@
 [
   {
     "mode": "NULLABLE",
-    "name": "id",
+    "name": "sector_id",
     "type": "STRING"
   },
   {
     "mode": "NULLABLE",
-    "name": "esac_id",
+    "name": "sectorgroup_id",
     "type": "STRING"
   },
   {
     "mode": "NULLABLE",
-    "name": "issn_l",
+    "name": "sectorgroup_name",
     "type": "STRING"
   },
   {
     "mode": "NULLABLE",
-    "name": "time_last_seen",
-    "type": "TIMESTAMP"
-  },
-  {
-    "mode": "NULLABLE",
-    "name": "commit",
+    "name": "remarks",
     "type": "STRING"
   }
 ]

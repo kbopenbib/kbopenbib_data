@@ -30,36 +30,21 @@ Data File: <i>kb_a_addr_inst.csv</i>
 
 | Field | Type | Description |
 |-------|------|-------------|
-| kb_inst_id | INTEGER | The institution id associated with this publication |
+| inst_id_top | INTEGER | The institution id associated with this publication |
 | openalex_id | STRING | The OpenAlex id associated with this publication |
 | address_full | TEXT | The address string found for this publication in OpenAlex |
-| kb_sector_id | STRING | The sector id(s) associated with this publication |
+| sector_id | STRING | The sector id(s) associated with this publication |
 | doi | STRING | The DOI associated with this publication |
 | identifier | STRING | The internal identifier for this publication |
 
 #### Example Record
 ```
-kb_inst_id: 5617
+inst_id_top: 5617
 openalex_id: "https://openalex.org/W2074596230"
 address_full: "Max-Plank-Institut für Biophysikalische Chemie, Göttingen, Germany, DE"
-kb_sector_id: ["mpg"]
+sector_id: ["mpg"]
 doi: "10.1007/s004310050674"
 identifier: "10.1007/s004310050674§5617"
-```
-
-#### Allocation of institutions to sectors (Mode A)
-
-Data File: <i>kb_a_inst.csv</i>
-
-| Field | Type | Description |
-|-------|------|-------------|
-| kb_inst_id | INTEGER | The identifier for this institution |
-| kb_sector_id | STRING | The sector id for this institution |
-
-#### Example Record
-```
-kb_inst_id: 5617
-kb_sector_id: "mpg"
 ```
 
 ### Mode S (Historic mode)
@@ -73,103 +58,93 @@ Data File: <i>kb_s_addr_inst.csv</i>
 
 | Field | Type | Description |
 |-------|------|-------------|
-| kb_inst_id | INTEGER | The institution id associated with this publication |
+| inst_id_top | INTEGER | The institution id associated with this publication |
 | openalex_id | STRING | The OpenAlex id associated with this publication |
 | address_full | TEXT | The address string found for this publication in OpenAlex |
-| kb_sector_id | STRING | The sector id(s) associated with this publication |
+| sector_id | STRING | The sector id(s) associated with this publication |
 | doi | STRING | The DOI associated with this publication |
 | identifier | STRING | The internal identifier for this publication |
 
 #### Example Record
 ```
-kb_inst_id: 1073
+inst_id_top: 1073
 openalex_id: "https://openalex.org/W3031617943"
 address_full: "Department of Molecular Neurobiology, Max Planck Institute of Experimental Medicine, Göttingen 37075, Germany"
-kb_sector_id: ["mpg"]
+sector_id: ["mpg"]
 doi: "10.1016/j.isci.2020.101203"
 identifier: "10.1016/j.isci.2020.101203§1073"
 ```
 
-#### Allocation of institutions to sectors (Mode S)
-
-Data File: <i>kb_s_inst.csv</i>
-
-| Field | Type | Description |
-|-------|------|-------------|
-| kb_inst_id | INTEGER | The identifier for this institution |
-| kb_sector_id | STRING | The sector id for this institution | 
-| first_year | INTEGER | Date of the foundation of this institution (if available) |
-| last_year | INTEGER | Year of closure of this institution (9999 if currently existing) |
-
-#### Example Record
-```
-kb_inst_id: 1073
-kb_sector_id: "mpg"
-first_year: 1000
-last_year: 9999
-```
-
 ### Institutions
 
-Data File: <i>kb_inst.csv</i>
+Data File: <i>kb_inst_lookup.csv</i>
 
-| Field | Type | Description |
-|-------|------|-------------|
-| kb_inst_id | INTEGER | The id of this institution |
-| name | STRING | The name of this institution |
-| first_year | INTEGER | Date of the foundation of this institution (if available) |
-| last_year | INTEGER | Year of closure of this institution (9999 if currently existing) |
-| ror | STRING | The ROR-id of this institution |
+| Field            | Type    | Description                                                                   |
+|------------------|---------|-------------------------------------------------------------------------------|
+| inst_id          | INTEGER | The id of this institution                                                    |
+| first_year       | INTEGER | Date of the foundation of this institution (if available)                     |
+| last_year        | INTEGER | Year of closure of this institution (9999 if currently existing)              |
+| ror              | STRING  | The ROR-id of this institution                                                |
 | dfg_instituts_id | INTEGER | The identifier assigned to this institution by the German Research Foundation |
+| current_sectors  | STRING  | The sector id(s) associated with this institution                             |
 
 #### Example Record
 ```
-kb_inst_id: 137
-name: "Universität Hamburg"
+inst_id: 137
 first_year: 1000
 last_year: 9999
 ror: "https://ror.org/00g30e956"
 dfg_instituts_id: 10192
+current_sectors: ["uni"]
+```
+
+#### Institutions name lookup
+
+Data File: <i>kb_inst_name_lookup.csv</i>
+
+| Field   | Type    | Description                                      |
+|---------|---------|--------------------------------------------------|
+| inst_id | INTEGER | The id of this institution                       |
+| name    | STRING  | The name of this institution                     |
+
+#### Example Record
+```
+inst_id: 137
+name: "Universität Hamburg"
 ```
 
 ### Sectors
 
-Data File: <i>kb_sectors.csv</i>
+Data File: <i>kb_sector_lookup.csv</i>
 
 | Field | Type | Description |
 |-------|------|-------------|
-| kb_sectorgroup_id | STRING | The abbreviation for this sector group |
-| kb_sector_id | STRING | The id for this sector group |
+| sector_id | STRING | The id for this sector group |
+| sectorgroup_id | STRING | The abbreviation for this sector group |
 | sectorgroup_name | STRING | The name of this sector group |
-| sector_name | STRING | The name of this sector |
 | remarks | STRING | A description of this sector |
 
 #### Example Record
 ```
-kb_sectorgroup_id: "FHG"
-kb_sector_id: "fhg"
+sector_id: "fhg"
+sectorgroup_id: "FHG"
 sectorgroup_name: "Fraunhofer-Gesellschaft"
-sector_name: "Fraunhofer-Gesellschaft"
 remarks: ""
 ```
 
-###  Institutional changes
+#### Sector name lookup
 
-Data File: <i>kb_inst_trans.csv</i>
+Data File: <i>kb_sector_name_lookup.csv</i>
 
-| Field | Type | Description |
-|-------|------|-------------|
-| inst_ante | INTEGER | The institution id before the transition |
-| transition_date | DATE | The date of the merger, inclusion or exclusion |
-| inst_post | INTEGER | The institution id after the transition |
-| type | STRING | The type of structural change (merger, inclusion, exclusion) |
+| Field     | Type   | Description                                       |
+|-----------|--------|---------------------------------------------------|
+| sector_id | STRING | The id for this sector group                      |
+| name      | STRING | The name of this sector group                     |
 
 #### Example Record
 ```
-inst_ante: 1073
-transition_date: "2022-01-01"
-inst_post: 5617
-type: "inclusion"
+sector_id: "fh"
+name: "Fachhochschulen"
 ```
 
 ## 📚 Publishers
@@ -270,7 +245,7 @@ contributions and other types of works.
 Data File: <i>document_types.csv</i>
 <br>
 Limitations: Only includes articles and reviews from OpenAlex with the 
-source type journal and the publication year 2014 to 2024.
+source type journal and the publication year 2015 to 2025.
 <br>
 
 | Field | Type | Description |
@@ -319,42 +294,40 @@ The dataset consists of four primary tables:
 
 This table contains journals covered by transformative agreements. Journal ISSN variants are disambiguated using ISSN-L according to the ISSN agency.
 
-| Field | Type | Description |
-|-------|------|-------------|
-| id | STRING | OpenAlex journal identifier |
-| esac_id | STRING | Identifier for the transformative agreement |
-| issn_l | STRING | ISSN-L identifying the journal |
+| Field          | Type | Description |
+|----------------|------|-------------|
+| esac_id        | STRING | Identifier for the transformative agreement |
+| issn_l         | STRING | ISSN-L identifying the journal |
 | time_last_seen | TIMESTAMP | Last time this data was available in the Journal Checker Tool |
-| commit | STRING | Data snapshot Git commit ID |
+| commit_hash    | STRING | Data snapshot Git commit ID |
 
 #### Example Record
 ```
-id: "https://openalex.org/S2764691006"
 esac_id: "acm2020delft"
 issn_l: "2153-2184"
 time_last_seen: "2024-04-01 09:23:06 UTC"
-commit: "a689426e782c5f42b850b327a1a89d9ad9d19a16"
+commit_hash: "a689426e782c5f42b850b327a1a89d9ad9d19a16"
 ```
 
 #### Institutions (`jct_institutions.csv`)
 
 This table maps institutions to transformative agreements they participate in. The institution data is enriched with associated ROR-IDs according to OpenAlex.
 
-| Field | Type | Description |
-|-------|------|-------------|
-| id | STRING | OpenAlex institution identifier |
-| esac_id | STRING | Identifier for the transformative agreement |
-| ror_id | STRING | ROR-ID of the participating institution |
+| Field          | Type | Description                                                   |
+|----------------|------|---------------------------------------------------------------|
+| esac_id        | STRING | Identifier for the transformative agreement                   |
+| inst_name      | STRING | The institution name                                          |
+| ror_id         | STRING | ROR-ID of the participating institution                       |
 | time_last_seen | TIMESTAMP | Last time this data was available in the Journal Checker Tool |
-| commit | STRING | Data snapshot Git commit ID |
+| commit_hash    | STRING | Data snapshot Git commit ID                                   |
 
 #### Example Record
 ```
-id: "https://openalex.org/I42934936"
 esac_id: "acm2020ie"
+inst_name: "Dublin City University"
 ror_id: "https://ror.org/04a1a1e81"
 time_last_seen: "2023-01-02 02:19:56 UTC"
-commit: "fd749477fbe5e0d58040bdaa4466e63886e9fb17"
+commit_hash: "fd749477fbe5e0d58040bdaa4466e63886e9fb17"
 ```
 
 #### Articles (`jct_articles.csv`)

@@ -1,13 +1,8 @@
 [
   {
     "mode": "NULLABLE",
-    "name": "kb_inst_id",
+    "name": "inst_id",
     "type": "INTEGER"
-  },
-  {
-    "mode": "NULLABLE",
-    "name": "name",
-    "type": "STRING"
   },
   {
     "mode": "NULLABLE",
@@ -28,5 +23,10 @@
     "mode": "NULLABLE",
     "name": "dfg_instituts_id",
     "type": "INTEGER"
+  },
+  {
+    "mode": "REPEATED",
+    "name": "current_sectors",
+    "type": "STRING"
   }
 ]

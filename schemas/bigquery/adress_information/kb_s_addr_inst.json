@@ -1,7 +1,7 @@
 [
   {
     "mode": "NULLABLE",
-    "name": "kb_inst_id",
+    "name": "inst_id_top",
     "type": "INTEGER"
   },
   {
@@ -16,7 +16,7 @@
   },
   {
     "mode": "REPEATED",
-    "name": "kb_sector_id",
+    "name": "sector_id",
     "type": "STRING"
   },
   {

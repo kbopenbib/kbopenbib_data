@@ -18,24 +18,21 @@ jct_esac_schema = pa.DataFrameSchema(
 
 jct_institutions_schema = pa.DataFrameSchema(
     columns={
-        'id': pa.Column(str, nullable=True, required=True,
-                        checks=pa.Check(lambda s: s.str.startswith('https://openalex.org/'))),
         'esac_id': pa.Column(str, nullable=True, required=True),
+        'inst_name': pa.Column(str, nullable=True, required=True),
         'ror_id': pa.Column(str, nullable=True, required=True),
         'time_last_seen': pa.Column(str, nullable=True, required=True),
-        'commit': pa.Column(str, nullable=True, required=True)
+        'commit_hash': pa.Column(str, nullable=True, required=True)
     },
     index=pa.Index(int),
 )
 
 jct_journals_schema = pa.DataFrameSchema(
     columns={
-        'id': pa.Column(str, nullable=True, required=True,
-                        checks=pa.Check(lambda s: s.str.startswith('https://openalex.org/'))),
         'esac_id': pa.Column(str, nullable=True, required=True),
         'issn_l': pa.Column(str, nullable=True, required=True),
         'time_last_seen': pa.Column(str, nullable=True, required=True),
-        'commit': pa.Column(str, nullable=True, required=True)
+        'commit_hash': pa.Column(str, nullable=True, required=True)
     },
     index=pa.Index(int),
 )

@@ -1,12 +1,12 @@
 [
   {
     "mode": "NULLABLE",
-    "name": "kb_inst_id",
-    "type": "INTEGER"
+    "name": "sector_id",
+    "type": "STRING"
   },
   {
     "mode": "NULLABLE",
-    "name": "kb_sector_id",
+    "name": "name",
     "type": "STRING"
   }
 ]

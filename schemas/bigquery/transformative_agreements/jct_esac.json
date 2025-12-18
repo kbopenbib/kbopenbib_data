@@ -42,11 +42,11 @@
   {
     "mode": "NULLABLE",
     "name": "jct_jn",
-    "type": "BOOL"
+    "type": "BOOLEAN"
   },
   {
     "mode": "NULLABLE",
     "name": "jct_inst",
-    "type": "BOOL"
+    "type": "BOOLEAN"
   }
 ]

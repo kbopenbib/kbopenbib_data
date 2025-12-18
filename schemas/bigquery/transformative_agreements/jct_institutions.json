@@ -1,12 +1,12 @@
 [
   {
     "mode": "NULLABLE",
-    "name": "id",
+    "name": "esac_id",
     "type": "STRING"
   },
   {
     "mode": "NULLABLE",
-    "name": "esac_id",
+    "name": "inst_name",
     "type": "STRING"
   },
   {
@@ -21,7 +21,7 @@
   },
   {
     "mode": "NULLABLE",
-    "name": "commit",
+    "name": "commit_hash",
     "type": "STRING"
   }
 ]

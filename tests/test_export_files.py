@@ -12,11 +12,11 @@ from models.address_information import (kb_a_addr_inst_sec_schema_unnested,
                                         kb_a_addr_inst_sec_schema_nested,
                                         kb_s_addr_inst_sec_schema_unnested,
                                         kb_s_addr_inst_sec_schema_nested,
-                                        kb_a_inst_sec_schema,
-                                        kb_s_inst_sec_schema,
-                                        kb_sectors_schema,
-                                        kb_inst_schema,
-                                        kb_inst_trans_schema)
+                                        kb_sector_lookup_schema,
+                                        kb_inst_name_lookup_schema,
+                                        kb_sector_name_lookup_schema,
+                                        kb_inst_lookup_schema_unnested,
+                                        kb_inst_lookup_schema_nested)
 from models.transformative_agreements import (jct_institutions_schema,
                                               jct_journals_schema,
                                               jct_articles_schema,
@@ -186,33 +186,6 @@ class TestOpenBibDataRelease:
 
         kb_a_addr_inst_sec_schema_nested.validate(kb_a_addr_inst_sec_export)
 
-    def test_export_address_information_a_sec_to_csv(self, openbib_snapshot: OpenBibDataRelease) -> None:
-
-        openbib_snapshot.export_address_information_a_sec(limit=10, export_format='csv')
-
-        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/kb_a_inst.csv'))
-
-        kb_a_inst_sec_export = pd.read_csv(
-            filepath_or_buffer=os.path.join(self.test_dir, 'openbib_export/kb_a_inst.csv'),
-            sep=',',
-            quotechar='"',
-            header=0
-        )
-
-        kb_a_inst_sec_schema.validate(kb_a_inst_sec_export)
-
-    def test_export_address_information_a_sec_to_jsonl(self, openbib_snapshot: OpenBibDataRelease) -> None:
-
-        openbib_snapshot.export_address_information_a_sec(limit=10, export_format='jsonl')
-
-        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/kb_a_inst.jsonl'))
-
-        kb_a_inst_sec_export = pd.read_json(path_or_buf=os.path.join(self.test_dir,
-                                                                     'openbib_export/kb_a_inst.jsonl'),
-                                            lines=True)
-
-        kb_a_inst_sec_schema.validate(kb_a_inst_sec_export)
-
     def test_export_address_information_s_to_csv(self, openbib_snapshot: OpenBibDataRelease) -> None:
 
         openbib_snapshot.export_address_information_s(limit=10, export_format='csv')
@@ -240,113 +213,113 @@ class TestOpenBibDataRelease:
 
         kb_s_addr_inst_sec_schema_nested.validate(kb_s_addr_inst_sec_open_alex_export)
 
-    def test_export_address_information_s_sec_to_csv(self, openbib_snapshot: OpenBibDataRelease) -> None:
+    def test_export_kb_inst_name_lookup_to_csv(self, openbib_snapshot: OpenBibDataRelease) -> None:
 
-        openbib_snapshot.export_address_information_s_sec(limit=10, export_format='csv')
+        openbib_snapshot.export_kb_inst_name_lookup(limit=10, export_format='csv')
 
-        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/kb_s_inst.csv'))
+        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/kb_inst_name_lookup.csv'))
 
-        kb_s_inst_sec_export = pd.read_csv(
-            filepath_or_buffer=os.path.join(self.test_dir, 'openbib_export/kb_s_inst.csv'),
+        kb_inst_name_lookup_export = pd.read_csv(
+            filepath_or_buffer=os.path.join(self.test_dir, 'openbib_export/kb_inst_name_lookup.csv'),
             sep=',',
             quotechar='"',
             header=0
         )
 
-        kb_s_inst_sec_schema.validate(kb_s_inst_sec_export)
+        kb_inst_name_lookup_schema.validate(kb_inst_name_lookup_export)
 
-    def test_export_address_information_s_sec_to_jsonl(self, openbib_snapshot: OpenBibDataRelease) -> None:
+    def test_export_kb_inst_name_lookup_to_jsonl(self, openbib_snapshot: OpenBibDataRelease) -> None:
 
-        openbib_snapshot.export_address_information_s_sec(limit=10, export_format='jsonl')
+        openbib_snapshot.export_kb_inst_name_lookup(limit=10, export_format='jsonl')
 
-        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/kb_s_inst.jsonl'))
+        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/kb_inst_name_lookup.jsonl'))
 
-        kb_s_inst_sec_export = pd.read_json(path_or_buf=os.path.join(self.test_dir,
-                                                                     'openbib_export/kb_s_inst.jsonl'),
+        kb_inst_name_lookup_export = pd.read_json(path_or_buf=os.path.join(self.test_dir,
+                                                                     'openbib_export/kb_inst_name_lookup.jsonl'),
                                             lines=True)
 
-        kb_s_inst_sec_schema.validate(kb_s_inst_sec_export)
+        kb_inst_name_lookup_schema.validate(kb_inst_name_lookup_export)
 
-    def test_export_sectors_to_csv(self, openbib_snapshot: OpenBibDataRelease) -> None:
+    def test_export_kb_sector_name_lookup_to_csv(self, openbib_snapshot: OpenBibDataRelease) -> None:
 
-        openbib_snapshot.export_kb_sectors(limit=10, export_format='csv')
+        openbib_snapshot.export_kb_sector_name_lookup(limit=10, export_format='csv')
 
-        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/kb_sectors.csv'))
+        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/kb_sector_name_lookup.csv'))
+
+        kb_sector_name_lookup_export = pd.read_csv(
+            filepath_or_buffer=os.path.join(self.test_dir, 'openbib_export/kb_sector_name_lookup.csv'),
+            sep=',',
+            quotechar='"',
+            header=0
+        )
+
+        kb_sector_name_lookup_schema.validate(kb_sector_name_lookup_export)
+
+    def test_export_kb_sector_name_lookup_to_jsonl(self, openbib_snapshot: OpenBibDataRelease) -> None:
+
+        openbib_snapshot.export_kb_sector_name_lookup(limit=10, export_format='jsonl')
+
+        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/kb_sector_name_lookup.jsonl'))
+
+        kb_sector_name_lookup_export = pd.read_json(path_or_buf=os.path.join(self.test_dir,
+                                                                     'openbib_export/kb_sector_name_lookup.jsonl'),
+                                            lines=True)
+
+        kb_sector_name_lookup_schema.validate(kb_sector_name_lookup_export)
+
+    def test_export_kb_inst_lookup_to_csv(self, openbib_snapshot: OpenBibDataRelease) -> None:
+
+        openbib_snapshot.export_kb_inst_lookup(limit=10, export_format='csv')
+
+        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/kb_inst_lookup.csv'))
+
+        kb_inst_lookup_export = pd.read_csv(
+            filepath_or_buffer=os.path.join(self.test_dir, 'openbib_export/kb_inst_lookup.csv'),
+            sep=',',
+            quotechar='"',
+            header=0
+        )
+
+        kb_inst_lookup_schema_unnested.validate(kb_inst_lookup_export)
+
+    def test_export_kb_inst_lookup_to_jsonl(self, openbib_snapshot: OpenBibDataRelease) -> None:
+
+        openbib_snapshot.export_kb_inst_lookup(limit=10, export_format='jsonl')
+
+        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/kb_inst_lookup.jsonl'))
+
+        kb_inst_lookup_export = pd.read_json(path_or_buf=os.path.join(self.test_dir,
+                                                                     'openbib_export/kb_inst_lookup.jsonl'),
+                                            lines=True)
+
+        kb_inst_lookup_schema_nested.validate(kb_inst_lookup_export)
+
+    def test_export_sector_lookup_to_csv(self, openbib_snapshot: OpenBibDataRelease) -> None:
+
+        openbib_snapshot.export_kb_sector_lookup(limit=10, export_format='csv')
+
+        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/kb_sector_lookup.csv'))
 
         kb_sectors_export = pd.read_csv(
-            filepath_or_buffer=os.path.join(self.test_dir, 'openbib_export/kb_sectors.csv'),
+            filepath_or_buffer=os.path.join(self.test_dir, 'openbib_export/kb_sector_lookup.csv'),
             sep=',',
             quotechar='"',
             header=0
         )
 
-        kb_sectors_schema.validate(kb_sectors_export)
+        kb_sector_lookup_schema.validate(kb_sectors_export)
 
-    def test_export_kb_sectors_to_jsonl(self, openbib_snapshot: OpenBibDataRelease) -> None:
+    def test_export_kb_sector_lookup_to_jsonl(self, openbib_snapshot: OpenBibDataRelease) -> None:
 
-        openbib_snapshot.export_kb_sectors(limit=10, export_format='jsonl')
+        openbib_snapshot.export_kb_sector_lookup(limit=10, export_format='jsonl')
 
-        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/kb_sectors.jsonl'))
+        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/kb_sector_lookup.jsonl'))
 
         kb_sectors_export = pd.read_json(path_or_buf=os.path.join(self.test_dir,
-                                                                  'openbib_export/kb_sectors.jsonl'),
+                                                                  'openbib_export/kb_sector_lookup.jsonl'),
                                          lines=True)
 
-        kb_sectors_schema.validate(kb_sectors_export)
-
-    def test_export_kb_inst_to_csv(self, openbib_snapshot: OpenBibDataRelease) -> None:
-
-        openbib_snapshot.export_kb_inst(limit=10, export_format='csv')
-
-        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/kb_inst.csv'))
-
-        kb_inst_export = pd.read_csv(
-            filepath_or_buffer=os.path.join(self.test_dir, 'openbib_export/kb_inst.csv'),
-            sep=',',
-            quotechar='"',
-            header=0
-        )
-
-        kb_inst_schema.validate(kb_inst_export)
-
-    def test_export_kb_inst_to_jsonl(self, openbib_snapshot: OpenBibDataRelease) -> None:
-
-        openbib_snapshot.export_kb_inst(limit=10, export_format='jsonl')
-
-        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/kb_inst.jsonl'))
-
-        kb_inst_export = pd.read_json(path_or_buf=os.path.join(self.test_dir,
-                                                               'openbib_export/kb_inst.jsonl'),
-                                      lines=True)
-
-        kb_inst_schema.validate(kb_inst_export)
-
-    def test_export_kb_inst_trans_to_csv(self, openbib_snapshot: OpenBibDataRelease) -> None:
-
-        openbib_snapshot.export_kb_inst_trans(limit=10, export_format='csv')
-
-        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/kb_inst_trans.csv'))
-
-        kb_inst_trans_export = pd.read_csv(
-            filepath_or_buffer=os.path.join(self.test_dir, 'openbib_export/kb_inst_trans.csv'),
-            sep=',',
-            quotechar='"',
-            header=0
-        )
-
-        kb_inst_trans_schema.validate(kb_inst_trans_export)
-
-    def test_export_kb_inst_trans_to_jsonl(self, openbib_snapshot: OpenBibDataRelease) -> None:
-
-        openbib_snapshot.export_kb_inst_trans(limit=10, export_format='jsonl')
-
-        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/kb_inst_trans.jsonl'))
-
-        kb_inst_trans_export = pd.read_json(path_or_buf=os.path.join(self.test_dir,
-                                                                     'openbib_export/kb_inst_trans.jsonl'),
-                                            lines=True)
-
-        kb_inst_trans_schema.validate(kb_inst_trans_export)
+        kb_sector_lookup_schema.validate(kb_sectors_export)
 
     def test_export_jct_articles_to_csv(self, openbib_snapshot: OpenBibDataRelease) -> None:
 
