@@ -14,7 +14,7 @@ If you want detailed information about an individual entity, take a look at the 
 ## 🏛 Address information
 
 Disambiguation of address information is provided by the [Institute for Interdisciplinary Studies of
-Science](https://www.uni-bielefeld.de/einrichtungen/i2sos/) in Bielefeld. 
+Science](https://www.uni-bielefeld.de/zwe/isos/) in Bielefeld. 
 
 Limitations: Only includes publications that are assigned to German institutions 
 by the algorithm.
