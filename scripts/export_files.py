@@ -98,18 +98,18 @@ class OpenBibDataRelease:
                                            f"""
                                            SELECT publisher_id, 
                                                   CASE
-                                                    WHEN publisher_id_orig IS NOT NULL THEN CONCAT('https://openalex.org/', publisher_id_orig)
+                                                    WHEN publisher_id_orig != '' THEN CONCAT('https://openalex.org/', publisher_id_orig)
                                                     ELSE NULL
                                                   END AS publisher_id_orig, 
                                                   publisher_name,
                                                   standard_name, 
                                                   unit_pk, 
                                                   CASE 
-                                                    WHEN wikidata IS NOT NULL THEN CONCAT('https://wikidata.org/wiki/', wikidata)
+                                                    WHEN wikidata != '' THEN CONCAT('https://wikidata.org/wiki/', wikidata)
                                                     ELSE NULL
                                                   END AS wikidata,
                                                   CASE 
-                                                    WHEN ror IS NOT NULL THEN CONCAT('https://ror.org/', ror)
+                                                    WHEN ror != '' THEN CONCAT('https://ror.org/', ror)
                                                     ELSE NULL
                                                   END AS ror,
                                                   url
@@ -146,13 +146,13 @@ class OpenBibDataRelease:
                                            SELECT p_relation_id, 
                                                   child_name, 
                                                   CASE
-                                                    WHEN child_id IS NOT NULL THEN CONCAT('https://openalex.org/', child_id)
+                                                    WHEN child_id != '' THEN CONCAT('https://openalex.org/', child_id)
                                                     ELSE NULL
                                                   END AS child_id, 
                                                   child_unit, 
                                                   parent_name, 
                                                   CASE
-                                                    WHEN parent_id IS NOT NULL THEN CONCAT('https://openalex.org/', parent_id)
+                                                    WHEN parent_id != '' THEN CONCAT('https://openalex.org/', parent_id)
                                                     ELSE NULL
                                                   END AS parent_id, 
                                                   parent_unit, 
