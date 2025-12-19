@@ -24,7 +24,7 @@ Annual snapshots from the OPENBIB project are openly available to users of the
 and [Zenodo](https://zenodo.org/records/15308680).
 
 The current release is based on the July 2025 snapshot of OpenAlex. The OPENBIB snapshot 
-is offered in CSV format.   
+is offered in both CSV and JSONL format. 
 
 ## Usage
 

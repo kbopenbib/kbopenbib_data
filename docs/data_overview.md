@@ -218,7 +218,7 @@ German [Open-Access-Publikationskosten](https://www.dfg.de/en/research-funding/f
 
 Data File: <i>funding_information.csv</i>
 <br>
-Limitations: Only includes publications from 2020 to 2024
+Limitations: Only includes publications from 2020 to 2025
 <br>
 
 | Field | Type | Description |
@@ -245,7 +245,7 @@ contributions and other types of works.
 Data File: <i>document_types.csv</i>
 <br>
 Limitations: Only includes articles and reviews from OpenAlex with the 
-source type journal and the publication year 2015 to 2025.
+source type journal and the publication year 2014 to 2025.
 <br>
 
 | Field | Type | Description |
@@ -277,7 +277,7 @@ This dataset comprises historic snapshots from the [cOAlitionS Transformative Ag
 dump underlying the cOAlition S Journal Checker Tool (JCT). The data files were safeguarded 
 on a weekly basis using a [bot](https://github.com/njahn82/jct_data).
 
-Note that this data release is based on data from April 2025, including OpenAlex.
+Note that this data release is based on data from July 2025, including OpenAlex.
 
 ### Dataset Components
 
