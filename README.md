@@ -21,7 +21,7 @@ Curated data is provided for following entities:
 Annual snapshots from the OPENBIB project are openly available to users of the 
 [Kompetenznetzwerk Bibliometrie](https://bibliometrie.info), via the 
 [Open Scholarly Data Warehouse of the SUB Göttingen](https://subugoe.github.io/scholcomm_analytics/data.html)
-and [Zenodo](https://zenodo.org/records/15308680).
+and [Zenodo](https://zenodo.org/records/17985050).
 
 The current release is based on the July 2025 snapshot of OpenAlex. The OPENBIB snapshot 
 is offered in both CSV and JSONL format. 
@@ -131,7 +131,7 @@ Data is made available under the [CC0 license](LICENSE.txt).
 
 ## Citation
 
-Haupka, N., Culbert, J., Donner, P., Jahn, N., Lenke, C., Mayr, P., Meier, A., Mittermaier, B., Scheidt, B., Stahlschmidt, S., & Taubert, N. (2025). OPENBIB: Selected curated open metadata based on OpenAlex (0.1) [Data set]. Kompetenznetzwerk Bibliometrie. https://doi.org/10.5281/zenodo.15308680
+Haupka, N., Culbert, J., Donner, P., Jahn, N., Lenke, C., Mayr, P., Meier, A., Mittermaier, B., Scheidt, B., Stahlschmidt, S., & Taubert, N. (2025). OPENBIB: Selected curated open metadata based on OpenAlex (0.2) [Data set]. Kompetenznetzwerk Bibliometrie. https://doi.org/10.5281/zenodo.17985050
 
 ## Contact
 
