@@ -10,25 +10,25 @@ Relationships between publishers are shown in another table. These can be helpfu
 
 ## Procedure 
 
-From OpenAlex (OpenBib version with data as of 31.08.2024), all publishers with the number of publications from the publications from the publication year 2014 onwards have been compiled in a table. They are supplemented (if available) with the publisher, Wikidata and ROR IDs as well as an URL from OpenAlex. 
-The table was reduced to publishers in Latin spelling. 
+From OpenAlex, all publishers with the number of publications from the publications from the year 2014 onwards have been compiled in a table. They are supplemented (if available) with the publisher, Wikidata and ROR IDs as well as an URL from OpenAlex. The table was reduced to publishers in Latin spelling. 
+The data release from December 2025 is an update of the May 2025 release, taking into account the more recent data from July 2025. With a view to fundamental adjustments to publisher curation together with standardized and curated journal information in the near future, only minor changes were made.
 
 The Wikidata IDs, ROR IDs and URLs were used to merge the actual publisher names with the standard names. The given names and standard names were also compared as substrings and the result was manually checked for correctness.
 
-Tabelle **add_publishers_20240831** 
+Tabelle **add_publishers_202507** 
 
 | table field       | data                                    |
 |-------------------|-----------------------------------------|
-| publisher_id      | 34297                                   |
+| publisher_id      | 36471                                   |
 | publisher_id_orig | P4366736682                             |
 | publisher_name    | Nature Publishing Group                 |
 | standard_name     | Nature Portfolio                        |
 | unit_pk           | 182                                     |
-| wikidata          | Q180419                                 |
-| ror               | 03dsk4d59                               |
+| wikidata          | https://wikidata.org/wiki/Q180419       |
+| ror               | https://ror.org/03dsk4d59               |
 | url               | https://www.nature.com/nature-portfolio |
 
-Tabelle **add_publishers_relations_20240831** 
+Tabelle **add_publishers_relations_202507** 
 
 | table field       | data                              |
 |-------------------|-----------------------------------|
@@ -52,6 +52,6 @@ Information about the relationships between publishers sometimes includes detail
 
 ## Application scenarios
 
-For example, to query the publications of the Nomos publishing house, all publisher IDs or publisher names found in the **add_publishers_20240831** table under the standard **Nomos** are determined. When querying the publications in the items table, they are specified as a where condition.
+For example, to query the publications of the Nomos publishing house, all publisher IDs or publisher names found in the **add_publishers_202507** table under the standard **Nomos** are determined. When querying the publications in the items table, they are specified as a where condition.
 
-The **add_publishers_relations_20240831** table indicates that Nomos-Verlag is part of C.H. Beck-Verlag. This can be taken into account in an overall query for the publisher C.H. Beck by additionally selecting the Publisher_ID of the Nomos-Verlag in a query.
+The **add_publishers_relations_202507** table indicates that Nomos-Verlag is part of C.H. Beck-Verlag. This can be taken into account in an overall query for the publisher C.H. Beck by additionally selecting the Publisher_ID of the Nomos-Verlag in a query.
