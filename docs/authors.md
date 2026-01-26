@@ -81,7 +81,7 @@ To compare our predictions against known ORCIDs (validation):
 SELECT
     CASE WHEN orcid IS NOT NULL THEN 'Has ORCID' ELSE 'No ORCID' END AS orcid_status,
     COUNT(*) AS n,
-    ROUND(AVG(certainty), 3) AS avg_certainty
+    AVG(certainty) AS avg_certainty
 FROM kb_project_openbib.add_author_disambig_author_level
 GROUP BY 1;
 ```
@@ -143,4 +143,5 @@ The disambiguation pipeline processes German-affiliated publications from OpenAl
 8. **Certainty Scoring** — Calculate confidence scores for each author by averaging match probabilities from connected edges.
 
 9. **Output Generation** — Format results into author-level and work-level prediction tables with final disambiguated identifiers and certainty scores.
+
 
