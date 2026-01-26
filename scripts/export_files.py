@@ -17,6 +17,8 @@ from models.transformative_agreements import (jct_institutions_schema,
                                               jct_journals_schema,
                                               jct_articles_schema,
                                               jct_esac_schema)
+from models.author_disambiguation import (author_disambiguation_author_level_schema,
+                                          author_disambiguation_work_level_schema_nested)
 import logging
 import sys
 
@@ -678,6 +680,92 @@ class OpenBibDataRelease:
                                              export_file_name='jct_journals.csv',
                                              dataframe=jct_journals_export)
 
+    def export_author_disambiguation_work_level(self, limit: str | int='NULL', export_format: str='csv') -> None:
+
+        logging.info('Query table: add_author_disambig_work_level')
+
+        author_disambiguation_work_level_export = pd.read_sql(sql=
+                                                              f"""
+                                                              SELECT 
+                                                                  CASE
+                                                                    WHEN work_id IS NOT NULL THEN CONCAT('https://openalex.org/', work_id)
+                                                                    ELSE NULL
+                                                                  END AS work_id, 
+                                                                  final_predicted_authors
+                                                              FROM kb_project_openbib.add_author_disambig_work_level
+                                                              LIMIT {limit}
+                                                              """,
+                                                              con=self.engine)
+
+        logging.info('Query completed.')
+
+        author_disambiguation_work_level_schema_nested.validate(author_disambiguation_work_level_export)
+
+        if export_format == 'jsonl':
+
+            OpenBibDataRelease.export_to_jsonl(export_directory=self.export_directory,
+                                               export_file_name='author_disambiguation_work_level.jsonl',
+                                               dataframe=author_disambiguation_work_level_export)
+
+        if export_format == 'csv':
+
+            logging.info('Start exporting: CSV')
+
+            normalized_author_disambiguation_work_level_export = pd.json_normalize(
+                author_disambiguation_work_level_export.to_dict(orient='records'),
+                record_path='final_predicted_authors',
+                meta=['work_id'])
+            normalized_author_disambiguation_work_level_export.columns = ['final_predicted_authors',
+                                                                          'work_id']
+
+            normalized_author_disambiguation_work_level_export = normalized_author_disambiguation_work_level_export[[
+                                                                        'work_id',
+                                                                        'final_predicted_authors']]
+
+            normalized_author_disambiguation_work_level_export.to_csv(path_or_buf=os.path.join(
+                self.export_directory, 'author_disambiguation_work_level.csv'), index=False)
+
+            logging.info('Finish exporting: CSV')
+
+    def export_author_disambiguation_author_level(self, limit: str | int='NULL', export_format: str='csv') -> None:
+
+        logging.info('Query table: add_author_disambig_author_level')
+
+        author_disambiguation_author_level_export = pd.read_sql(sql=
+                                                              f"""
+                                                              SELECT 
+                                                                  CASE
+                                                                    WHEN work_id IS NOT NULL THEN CONCAT('https://openalex.org/', work_id)
+                                                                    ELSE NULL
+                                                                  END AS work_id, 
+                                                                  CASE
+                                                                    WHEN author_id IS NOT NULL THEN CONCAT('https://openalex.org/', author_id)
+                                                                    ELSE NULL
+                                                                  END AS author_id, 
+                                                                  predicted_author_id,
+                                                                  orcid,
+                                                                  final_author_prediction,
+                                                                  certainty
+                                                              FROM kb_project_openbib.add_author_disambig_author_level
+                                                              LIMIT {limit}
+                                                              """,
+                                                              con=self.engine)
+
+        logging.info('Query completed.')
+
+        author_disambiguation_author_level_schema.validate(author_disambiguation_author_level_export)
+
+        if export_format == 'jsonl':
+
+            OpenBibDataRelease.export_to_jsonl(export_directory=self.export_directory,
+                                               export_file_name='author_disambiguation_author_level.jsonl',
+                                               dataframe=author_disambiguation_author_level_export)
+
+        if export_format == 'csv':
+            OpenBibDataRelease.export_to_csv(export_directory=self.export_directory,
+                                             export_file_name='author_disambiguation_author_level.csv',
+                                             dataframe=author_disambiguation_author_level_export)
+
     def make_archive(self, limit: str | int='NULL', export_format: str='csv') -> None:
 
         self.export_publishers(limit=limit, export_format=export_format)
@@ -694,6 +782,8 @@ class OpenBibDataRelease:
         self.export_jct_esac(limit=limit, export_format=export_format)
         self.export_jct_institutions(limit=limit, export_format=export_format)
         self.export_jct_journals(limit=limit, export_format=export_format)
+        self.export_author_disambiguation_work_level(limit=limit, export_format=export_format)
+        self.export_author_disambiguation_author_level(limit=limit, export_format=export_format)
 
         logging.info('Start compressing archive.')
 

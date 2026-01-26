@@ -1,0 +1,12 @@
+[
+  {
+    "mode": "NULLABLE",
+    "name": "work_id",
+    "type": "STRING"
+  },
+  {
+    "mode": "REPEATED",
+    "name": "final_predicted_authors",
+    "type": "STRING"
+  }
+]

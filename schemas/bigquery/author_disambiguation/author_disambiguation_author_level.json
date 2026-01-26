@@ -1,0 +1,32 @@
+[
+  {
+    "mode": "NULLABLE",
+    "name": "work_id",
+    "type": "STRING"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "author_id",
+    "type": "STRING"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "predicted_author_id",
+    "type": "STRING"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "orcid",
+    "type": "STRING"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "final_author_prediction",
+    "type": "STRING"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "certainty",
+    "type": "FLOAT"
+  }
+]

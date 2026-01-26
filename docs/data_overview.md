@@ -404,6 +404,9 @@ The disambiguation approach uses Last Name First Initial (LNFI) blocking, genera
 
 ### Author-level predictions
 
+Data File: <i>author_disambiguation_author_level.csv</i>
+<br>
+
 | Field | Type | Description |
 |-------|------|-------------|
 | work_id | STRING | The OpenAlex work identifier |
@@ -425,7 +428,7 @@ certainty: 0.9456
 
 ### Work-level predictions
 
-Data File: <i>odr_work_level_predictions.parquet</i>
+Data File: <i>author_disambiguation_work_level.csv</i>
 <br>
 
 | Field | Type | Description |

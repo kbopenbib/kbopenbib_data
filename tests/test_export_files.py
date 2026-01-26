@@ -21,6 +21,9 @@ from models.transformative_agreements import (jct_institutions_schema,
                                               jct_journals_schema,
                                               jct_articles_schema,
                                               jct_esac_schema)
+from models.author_disambiguation import (author_disambiguation_author_level_schema,
+                                          author_disambiguation_work_level_schema_nested,
+                                          author_disambiguation_work_level_schema_unnested,)
 
 
 class TestOpenBibDataRelease:
@@ -429,6 +432,62 @@ class TestOpenBibDataRelease:
 
         jct_journals_schema.validate(jct_journals_export)
 
+    def test_export_author_disambiguation_work_level_to_csv(self, openbib_snapshot: OpenBibDataRelease) -> None:
+
+        openbib_snapshot.export_author_disambiguation_work_level(limit=10, export_format='csv')
+
+        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/author_disambiguation_work_level.csv'))
+
+        author_disambiguation_work_level_export = pd.read_csv(
+            filepath_or_buffer=os.path.join(self.test_dir, 'openbib_export/author_disambiguation_work_level.csv'),
+            sep=',',
+            quotechar='"',
+            header=0
+        )
+
+        author_disambiguation_work_level_schema_unnested.validate(author_disambiguation_work_level_export)
+
+    def test_export_author_disambiguation_work_level_to_jsonl(self, openbib_snapshot: OpenBibDataRelease) -> None:
+
+        openbib_snapshot.export_author_disambiguation_work_level(limit=10, export_format='jsonl')
+
+        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/author_disambiguation_work_level.jsonl'))
+
+        author_disambiguation_work_level_export = pd.read_json(path_or_buf=os.path.join(
+                                                        self.test_dir,
+                                                        'openbib_export/author_disambiguation_work_level.jsonl'),
+                                                               lines=True)
+
+        author_disambiguation_work_level_schema_nested.validate(author_disambiguation_work_level_export)
+
+    def test_export_author_disambiguation_author_level_to_csv(self, openbib_snapshot: OpenBibDataRelease) -> None:
+
+        openbib_snapshot.export_author_disambiguation_author_level(limit=10, export_format='csv')
+
+        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/author_disambiguation_author_level.csv'))
+
+        author_disambiguation_author_level_export = pd.read_csv(
+            filepath_or_buffer=os.path.join(self.test_dir, 'openbib_export/author_disambiguation_author_level.csv'),
+            sep=',',
+            quotechar='"',
+            header=0
+        )
+
+        author_disambiguation_author_level_schema.validate(author_disambiguation_author_level_export)
+
+    def test_export_author_disambiguation_author_level_to_jsonl(self, openbib_snapshot: OpenBibDataRelease) -> None:
+
+        openbib_snapshot.export_author_disambiguation_author_level(limit=10, export_format='jsonl')
+
+        assert os.path.exists(os.path.join(self.test_dir, 'openbib_export/author_disambiguation_author_level.jsonl'))
+
+        author_disambiguation_author_level_export = pd.read_json(path_or_buf=os.path.join(
+                                                        self.test_dir,
+                                                        'openbib_export/author_disambiguation_author_level.jsonl'),
+                                                               lines=True)
+
+        author_disambiguation_author_level_schema.validate(author_disambiguation_author_level_export)
+
     def test_make_archive_to_csv(self, openbib_snapshot: OpenBibDataRelease) -> None:
 
         openbib_snapshot.make_archive(limit=10, export_format='csv')
@@ -437,7 +496,7 @@ class TestOpenBibDataRelease:
 
         archive = zipfile.ZipFile(file=os.path.join(self.test_dir, 'kbopenbib_release.zip'), mode='r')
 
-        assert len(archive.infolist()) == 15
+        assert len(archive.infolist()) == 16
 
         os.remove(os.path.join(self.test_dir, 'kbopenbib_release.zip'))
 
@@ -449,6 +508,6 @@ class TestOpenBibDataRelease:
 
         archive = zipfile.ZipFile(file=os.path.join(self.test_dir, 'kbopenbib_release.zip'), mode='r')
 
-        assert len(archive.infolist()) == 15
+        assert len(archive.infolist()) == 16
 
         os.remove(os.path.join(self.test_dir, 'kbopenbib_release.zip'))
