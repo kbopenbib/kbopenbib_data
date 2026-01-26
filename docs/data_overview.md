@@ -9,7 +9,7 @@ If you want detailed information about an individual entity, take a look at the 
 - [Funding information](#-funding-information)
 - [Document Types](#-document-types)
 - [Transformative Agreements](#-transformative-agreements)
-- [Authors (tba)](#-authors-tba)
+- [Authors](#-authors)
 
 ## 🏛 Address information
 
@@ -396,15 +396,46 @@ jct_inst: false
 - **Articles to Institutions**: Articles are linked to institutions via the `matching_ror` field
 - **Agreements**: All tables are linked via the `esac_id` field representing specific transformative agreements
 
-## 👩‍🎓 Authors (tba)
+## Authors
 
-In the Authors section, we focus on improving author name disambiguation (AND) for German authors by developing a machine learning pipeline that links authorships to individual authors, using metadata from OpenAlex filtered by affiliation, publication date, etc. Key attributes from both authorships and works (e.g., raw author names, DOIs, topics) are used, with blocking strategies like Last Name First Initial (LNFI) employed to reduce comparison complexity. Future enhancements include progressive blocking and graph embedding models to further refine the disambiguation process.
+Authors are disambiguated using a machine learning classifier trained on ORCID matches, specifically authors in German-affiliated publications from OpenAlex.
+
+The disambiguation approach uses Last Name First Initial (LNFI) blocking, generating approximately 869 million author pairs from 9.2 million authorship records. The logistic regression model achieved 96.94% accuracy on the withheld testing dataset.
+
+### Author-level predictions
 
 | Field | Type | Description |
 |-------|------|-------------|
-| kb_author_disambig | STRING | Internal id for author |
-| work_ids | ARRAY[STRING] | Associated OpenAlex work IDs for the author |
-| author_name_arr | ARRAY[STRING] | Representations of raw author name in OpenAlex |
-| author_id_arr | ARRAY[STRING] | OpenAlex Author IDs (if present) |
-| orcid | STRING | Orcid (if present) |
+| work_id | STRING | The OpenAlex work identifier |
+| author_id | STRING | The OpenAlex author identifier for this authorship |
+| predicted_author_id | STRING | The disambiguated cluster ID (ORCID URL or generated ID) |
+| orcid | STRING | The known ORCID if present in the source data |
+| final_author_prediction | STRING | Final ID (prefers known ORCID, falls back to predicted) |
+| certainty | FLOAT | Confidence score between 0 and 1 |
+
+#### Example Record
+```
+work_id: "W2594467221"
+author_id: "A5009094497"
+predicted_author_id: "https://orcid.org/0000-0001-7063-9334"
+orcid: "https://orcid.org/0000-0001-7063-9334"
+final_author_prediction: "https://orcid.org/0000-0001-7063-9334"
+certainty: 0.9456
+```
+
+### Work-level predictions
+
+Data File: <i>odr_work_level_predictions.parquet</i>
+<br>
+
+| Field | Type | Description |
+|-------|------|-------------|
+| work_id | STRING | The OpenAlex work identifier |
+| final_predicted_authors | ARRAY[STRING] | List of disambiguated author identifiers for this work |
+
+#### Example Record
+```
+work_id: "W1000051478"
+final_predicted_authors: ["CLUSTER_00348118"]
+```
 
