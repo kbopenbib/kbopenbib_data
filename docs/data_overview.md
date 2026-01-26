@@ -9,7 +9,7 @@ If you want detailed information about an individual entity, take a look at the 
 - [Funding information](#-funding-information)
 - [Document Types](#-document-types)
 - [Transformative Agreements](#-transformative-agreements)
-- [Authors](#authors)
+- [Authors](#-authors)
 
 ## 🏛 Address information
 
@@ -396,7 +396,7 @@ jct_inst: false
 - **Articles to Institutions**: Articles are linked to institutions via the `matching_ror` field
 - **Agreements**: All tables are linked via the `esac_id` field representing specific transformative agreements
 
-## Authors
+## 👩‍🎓 Authors
 
 Authors are disambiguated using a machine learning classifier trained on ORCID matches, specifically authors in German-affiliated publications from OpenAlex.
 
