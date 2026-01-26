@@ -98,20 +98,6 @@ WHERE array_length(w.final_predicted_authors, 1) > 5
 LIMIT 10;
 ```
 
-To find cases where our prediction differs from the OpenAlex author_id:
-
-```sql
-SELECT
-    work_id,
-    author_id AS openalex_author_id,
-    final_author_prediction,
-    certainty
-FROM kb_project_openbib.add_author_disambig_author_level
-WHERE final_author_prediction != author_id
-    AND certainty > 0.9
-LIMIT 20;
-```
-
 ## Interpretation
 
 The `final_author_prediction` column contains two types of values:
@@ -143,5 +129,6 @@ The disambiguation pipeline processes German-affiliated publications from OpenAl
 8. **Certainty Scoring** — Calculate confidence scores for each author by averaging match probabilities from connected edges.
 
 9. **Output Generation** — Format results into author-level and work-level prediction tables with final disambiguated identifiers and certainty scores.
+
 
 
