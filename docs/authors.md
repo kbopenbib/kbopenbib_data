@@ -12,7 +12,7 @@ The approach uses Last Name First Initial (LNFI) blocking to reduce the comparis
 
 The results are uploaded to the KB relational database in two tables:
 
-**Author-level predictions** in `odr_author_level_predictions`:
+**Author-level predictions** in `add_author_disambig_author_level`:
 
 ```sql
 work_id                   TEXT NOT NULL
@@ -27,7 +27,7 @@ Column `work_id` contains the OpenAlex work identifier. `author_id` is the OpenA
 
 This table contains 9,165,443 authorship records.
 
-**Work-level predictions** in `odr_work_level_predictions`:
+**Work-level predictions** in `add_author_disambig_work_level`:
 
 ```sql
 work_id                   TEXT NOT NULL
@@ -42,7 +42,7 @@ To expand the author array into individual rows, use the `unnest()` function:
 
 ```sql
 SELECT work_id, unnest(final_predicted_authors) AS author
-FROM gesisjculbert.odr_work_level_predictions
+FROM kb_project_openbib.add_author_disambig_work_level
 LIMIT 10;
 ```
 
@@ -60,7 +60,7 @@ SELECT
     END AS confidence_band,
     COUNT(*) AS n,
     ROUND(100.0 * COUNT(*) / SUM(COUNT(*)) OVER (), 2) AS pct
-FROM gesisjculbert.odr_author_level_predictions
+FROM kb_project_openbib.add_author_disambig_author_level
 GROUP BY 1
 ORDER BY 1 DESC;
 ```
@@ -69,7 +69,7 @@ To find authors with the most publications in the disambiguated dataset:
 
 ```sql
 SELECT final_author_prediction, COUNT(*) AS n_authorships
-FROM gesisjculbert.odr_author_level_predictions
+FROM kb_project_openbib.add_author_disambig_author_level
 GROUP BY final_author_prediction
 ORDER BY n_authorships DESC
 LIMIT 20;
@@ -82,7 +82,7 @@ SELECT
     CASE WHEN orcid IS NOT NULL THEN 'Has ORCID' ELSE 'No ORCID' END AS orcid_status,
     COUNT(*) AS n,
     ROUND(AVG(certainty), 3) AS avg_certainty
-FROM gesisjculbert.odr_author_level_predictions
+FROM kb_project_openbib.add_author_disambig_author_level
 GROUP BY 1;
 ```
 
@@ -93,7 +93,7 @@ SELECT
     w.work_id,
     array_length(w.final_predicted_authors, 1) AS n_authors,
     w.final_predicted_authors
-FROM gesisjculbert.odr_work_level_predictions w
+FROM kb_project_openbib.add_author_disambig_work_level w
 WHERE array_length(w.final_predicted_authors, 1) > 5
 LIMIT 10;
 ```
@@ -106,7 +106,7 @@ SELECT
     author_id AS openalex_author_id,
     final_author_prediction,
     certainty
-FROM gesisjculbert.odr_author_level_predictions
+FROM kb_project_openbib.add_author_disambig_author_level
 WHERE final_author_prediction != author_id
     AND certainty > 0.9
 LIMIT 20;
@@ -143,3 +143,4 @@ The disambiguation pipeline processes German-affiliated publications from OpenAl
 8. **Certainty Scoring** — Calculate confidence scores for each author by averaging match probabilities from connected edges.
 
 9. **Output Generation** — Format results into author-level and work-level prediction tables with final disambiguated identifiers and certainty scores.
+
