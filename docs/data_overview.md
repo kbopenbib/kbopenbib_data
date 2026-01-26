@@ -9,7 +9,7 @@ If you want detailed information about an individual entity, take a look at the 
 - [Funding information](#-funding-information)
 - [Document Types](#-document-types)
 - [Transformative Agreements](#-transformative-agreements)
-- [Authors](#-authors)
+- [Authors](#authors)
 
 ## 🏛 Address information
 
