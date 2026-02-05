@@ -100,10 +100,10 @@ The matching was carried out on [Google
 BigQuery](https://console.cloud.google.com/bigquery?ws=!1m7!1m6!12m5!1m3!1ssubugoe-collaborative!2sus-central1!3s601a1298-c49c-47cd-a6c1-754e32c405eb!2e1)
 for performance reasons.
 
-The compilation of the datasets was carried out in April 2025 using the
-most recent datasets. Data file scan be individually downloaded from
-Zenodo: <https://zenodo.org/records/15308680>. Programmatic access is
-possible via the [Open Scholarly Data warehouse based on Google Big
+The compilation of the datasets was carried out in February 2026. Data
+file scan be individually downloaded from Zenodo:
+<https://zenodo.org/records/18429476>. Programmatic access is possible
+via the [Open Scholarly Data warehouse based on Google Big
 Query](https://subugoe.github.io/scholcomm_analytics/data.html) as
 provided by the SUB Göttingen (dataset openbib).
 

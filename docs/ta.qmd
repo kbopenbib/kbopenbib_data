@@ -82,7 +82,7 @@ To estimate articles enabled by transformative agreements, article metadata were
 
 The matching was carried out on [Google BigQuery](https://console.cloud.google.com/bigquery?ws=!1m7!1m6!12m5!1m3!1ssubugoe-collaborative!2sus-central1!3s601a1298-c49c-47cd-a6c1-754e32c405eb!2e1) for performance reasons.
 
-The compilation of the datasets was carried out in April 2025 using the most recent datasets. Data file scan be individually downloaded from Zenodo: <https://zenodo.org/records/15308680>. Programmatic access is possible via the [Open Scholarly Data warehouse based on Google Big Query](https://subugoe.github.io/scholcomm_analytics/data.html) as provided by the SUB Göttingen (dataset openbib). 
+The compilation of the datasets was carried out in February 2026. Data file scan be individually downloaded from Zenodo: <https://zenodo.org/records/18429476>. Programmatic access is possible via the [Open Scholarly Data warehouse based on Google Big Query](https://subugoe.github.io/scholcomm_analytics/data.html) as provided by the SUB Göttingen (dataset openbib). 
 
 ## Data files
 
@@ -159,7 +159,7 @@ pub_by_year_df |>
   scale_y_continuous(labels =  scales::number_format(big.mark = ",")) +
   labs(x = "Publication year", y = "First-author articles", title = "Growth of Transformative Agreements",
        subtitle = "Annual first-author articles from participating institutions",
-       caption = "KBOPENBIB | April 2025 | CC0") +
+       caption = "KBOPENBIB | February 2026 | CC0") +
  theme_minimal() +
   theme(plot.margin = margin(30, 30, 30, 30)) +
   theme(panel.grid.minor = element_blank()) +
@@ -236,7 +236,7 @@ oa_df |>
   facet_grid(~ oa_status) +
   labs(x = "Publication year", y = "First-author articles", title = "Growth of Transformative Agreements",
        subtitle = "Annual first-author articles from participating institutions, by open access status",
-       caption = "KBOPENBIB | April 2025 | CC0") +
+       caption = "KBOPENBIB | February 2026 | CC0") +
  theme_minimal() +
   theme(plot.margin = margin(30, 30, 30, 30)) +
   theme(panel.grid.minor = element_blank()) +
