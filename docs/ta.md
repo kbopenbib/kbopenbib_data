@@ -15,9 +15,9 @@ analyses on transformative agreements over time.
 
 Overall, this dataset comprises:
 
-- 1,043 transformative agreements with data about 17,199 eligible
-  journals and 5,355 participating institutions.
-- 1,362,221 eligible articles published by first authors affiliated with
+- 1,227 transformative agreements with data about 17,441 eligible
+  journals and 5,888 participating institutions.
+- 1,298,376 eligible articles published by first authors affiliated with
   participating institutions.
 
 ## Motivation
@@ -100,10 +100,10 @@ The matching was carried out on [Google
 BigQuery](https://console.cloud.google.com/bigquery?ws=!1m7!1m6!12m5!1m3!1ssubugoe-collaborative!2sus-central1!3s601a1298-c49c-47cd-a6c1-754e32c405eb!2e1)
 for performance reasons.
 
-The compilation of the datasets was carried out in April 2025 using the
-most recent datasets. Data file scan be individually downloaded from
-Zenodo: <https://zenodo.org/records/15308680>. Programmatic access is
-possible via the [Open Scholarly Data warehouse based on Google Big
+The compilation of the datasets was carried out in February 2026. Data
+file scan be individually downloaded from Zenodo:
+<https://zenodo.org/records/18429476>. Programmatic access is possible
+via the [Open Scholarly Data warehouse based on Google Big
 Query](https://subugoe.github.io/scholcomm_analytics/data.html) as
 provided by the SUB Göttingen (dataset openbib).
 
@@ -169,20 +169,20 @@ ORDER BY
 
 ``` r
 bq_df
-#> # A tibble: 292 × 3
+#> # A tibble: 288 × 3
 #>    publication_year publisher                      n
 #>               <int> <chr>                      <int>
-#>  1             2025 Wiley                      13741
-#>  2             2025 Elsevier                   11194
-#>  3             2025 Springer Nature             7930
-#>  4             2025 Taylor & Francis            6035
-#>  5             2025 Sage                        3194
-#>  6             2025 Oxford University Press     2700
-#>  7             2025 American Chemical Society   1202
-#>  8             2025 Royal Society of Chemistry   697
-#>  9             2025 American Physical Society    581
-#> 10             2025 Cambridge University Press   548
-#> # ℹ 282 more rows
+#>  1             2025 Wiley                      33964
+#>  2             2025 Elsevier                   25572
+#>  3             2025 IEEE                       20474
+#>  4             2025 Springer Nature            15920
+#>  5             2025 Taylor & Francis           13621
+#>  6             2025 Oxford University Press     7411
+#>  7             2025 Sage                        6952
+#>  8             2025 American Chemical Society   3382
+#>  9             2025 Emerald                     1966
+#> 10             2025 Cambridge University Press  1579
+#> # ℹ 278 more rows
 ```
 
 <div id="fig-all">
@@ -241,20 +241,20 @@ ORDER BY
 
 ``` r
 bq_oa_df
-#> # A tibble: 1,243 × 4
-#>    publication_year publisher        oa_status     n
-#>               <int> <chr>            <chr>     <int>
-#>  1             2025 Wiley            hybrid     7761
-#>  2             2025 Elsevier         hybrid     5417
-#>  3             2025 Springer Nature  hybrid     4682
-#>  4             2025 Elsevier         closed     4491
-#>  5             2025 Taylor & Francis hybrid     3597
-#>  6             2025 Wiley            closed     3326
-#>  7             2025 Sage             closed     2495
-#>  8             2025 Wiley            gold       2188
-#>  9             2025 Taylor & Francis closed     2110
-#> 10             2025 Springer Nature  gold       1562
-#> # ℹ 1,233 more rows
+#> # A tibble: 1,219 × 4
+#>    publication_year publisher               oa_status     n
+#>               <int> <chr>                   <chr>     <int>
+#>  1             2025 Wiley                   hybrid    20205
+#>  2             2025 IEEE                    closed    18258
+#>  3             2025 Elsevier                hybrid    12279
+#>  4             2025 Elsevier                closed    10603
+#>  5             2025 Springer Nature         hybrid     9785
+#>  6             2025 Taylor & Francis        hybrid     9161
+#>  7             2025 Wiley                   closed     7536
+#>  8             2025 Sage                    closed     5543
+#>  9             2025 Wiley                   gold       5348
+#> 10             2025 Oxford University Press closed     4137
+#> # ℹ 1,209 more rows
 ```
 
 <div id="fig-oa">
