@@ -131,7 +131,7 @@ Data is made available under the [CC0 license](LICENSE.txt).
 
 ## Citation
 
-Haupka, N., Culbert, J., Donner, P., Jahn, N., Lenke, C., Mayr, P., Meier, A., Mittermaier, B., Scheidt, B., Stahlschmidt, S., & Taubert, N. (2025). OPENBIB: Selected curated open metadata based on OpenAlex (0.2) [Data set]. Kompetenznetzwerk Bibliometrie. https://doi.org/10.5281/zenodo.17985050
+Haupka, N., Culbert, J., Donner, P., Jahn, N., Lenke, C., Mayr, P., Meier, A., Mittermaier, B., Scheidt, B., Stahlschmidt, S., & Taubert, N. (2026). OPENBIB: Selected curated open metadata based on OpenAlex (0.3) [Data set]. Kompetenznetzwerk Bibliometrie. https://doi.org/10.5281/zenodo.18429476
 
 ## Contact
 
