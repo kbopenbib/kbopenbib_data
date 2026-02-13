@@ -21,7 +21,7 @@ Curated data is provided for following entities:
 Annual snapshots from the OPENBIB project are openly available to users of the 
 [Kompetenznetzwerk Bibliometrie](https://bibliometrie.info), via the 
 [Open Scholarly Data Warehouse of the SUB Göttingen](https://subugoe.github.io/scholcomm_analytics/data.html)
-and [Zenodo](https://zenodo.org/records/17985050).
+and [Zenodo](https://zenodo.org/records/18429476).
 
 The current release is based on the July 2025 snapshot of OpenAlex. The OPENBIB snapshot 
 is offered in both CSV and JSONL format. 
@@ -86,7 +86,7 @@ you can access the data snapshot via the KB data infrastructure hosted by FIZ Ka
 [Open Scholarly Data Warehouse](https://subugoe.github.io/scholcomm_analytics/data.html)
 maintained by the SUB Göttingen.
 
-- Alternatively, you can download the snapshot from Zenodo: <https://zenodo.org/records/15308680>. 
+- Alternatively, you can download the snapshot from Zenodo: <https://zenodo.org/records/18429476>. 
 
 ## Technical Documentation
 
